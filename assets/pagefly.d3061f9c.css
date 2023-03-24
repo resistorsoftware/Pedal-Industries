@@ -1,0 +1,6 @@
+/* PageFly Element Styles */
+						.eUCjfm::before, .eUCjfm::after { clear: both; display: block; content: ""; }
+						/* PageFly Styles */
+						
+						/* Extra CSS for lazy loading background image */
+						.pf-bg-lazy { background-image: none !important; }

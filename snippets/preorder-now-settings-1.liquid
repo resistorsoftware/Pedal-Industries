@@ -1,0 +1,68 @@
+<script type="text/javascript">
+  {% if cart %}
+    window.pn.cart = {};
+  	window.pn.cart = {{cart | json}}
+    window.pn.cart.items = [];
+
+    {% for item in cart.items %}
+      var cart_item = {{item | json}};
+      cart_item["collection_ids"] = [];
+      {% for c in item.product.collections %}
+        cart_item["collection_ids"].push({{c.id}})
+        {% endfor %}
+      window.pn.cart.items.push(cart_item);
+    {% endfor %}
+
+    if (typeof window.pn.cart.items == "object") {
+      for (var i=0; i<window.pn.cart.items.length; i++) {
+        ["sku", "vendor", "url", "image", "handle", "product_type", "product_description"].map(function(a) {
+          delete window.pn.cart.items[i][a]
+        })
+      }
+    }
+  {% endif %}
+</script>
+
+{% raw %}
+<script>
+if(typeof pn === "undefined"){
+  pn = {};
+}
+if(typeof pn.settings === "undefined"){
+  pn.settings = {};
+}
+pn.settings.defaultSetting={"id":20871117,"a":"Click To Pre-Order","b":true,"c":null,"d":"Out of stock","e":false,"f":"Only {{qty}} remaining","g":"Check Other sizes/colors (ships in 3-4 weeks, maybe sooner we are constantly making new inventory)","h":"below","i":true,"j":"Pre-Order","k":null,"l":null,"m":"default","n":null,"o":true,"handle":null,"p":null,"y":null,"q":true,"r":true,"s":null,"t":null,"u":2,"v":false,"w":"ribbon","tag":null,"x":null,"z":"no_discount","aa":"0.0","ab":0,"price":"0.0","compare_at_price":"0.0","partial_payment_z":"no_partial_discount","partial_payment_aa":"0.0","partial_payment_ab":0};
+pn.settings.singleProductSettings=[{"id":20871142,"a":"Click To Pre-Order","b":true,"c":null,"d":"Out of stock","e":false,"f":"Only {{qty}} remaining","g":"Check Other sizes/colors (ships in 3-4 weeks, maybe sooner we are constantly making new inventory)","h":"below","i":true,"j":"Pre-Order","k":null,"l":null,"m":"variant","n":"40229933449377","o":true,"handle":"pedal-tmwc-raceday-bag™","p":"4583362166916","y":"https://cdn.shopify.com/s/files/1/2489/7792/products/royalracer_1800x1800_1800x1800_21f2019d-2c0c-4cba-98c3-d7c637bb2845.png?v=1665164270","q":true,"r":true,"s":2,"t":null,"u":2,"v":true,"w":"ribbon","tag":null,"x":null,"z":"no_discount","aa":"0.0","ab":0,"price":"0.0","compare_at_price":"0.0","partial_payment_z":"no_partial_discount","partial_payment_aa":"0.0","partial_payment_ab":0},{"id":20871144,"a":"Click To Pre-Order","b":true,"c":null,"d":"Out of stock","e":false,"f":"Only {{qty}} remaining","g":"Check Other sizes/colors (ships in 3-4 weeks, maybe sooner we are constantly making new inventory)","h":"below","i":true,"j":"Pre-Order","k":null,"l":null,"m":"variant","n":"40229933449377","o":true,"handle":"pedal-tmwc-raceday-bag™","p":"4583362166916","y":"https://cdn.shopify.com/s/files/1/2489/7792/products/royalracer_1800x1800_1800x1800_21f2019d-2c0c-4cba-98c3-d7c637bb2845.png?v=1665164270","q":true,"r":true,"s":2,"t":null,"u":2,"v":true,"w":"ribbon","tag":null,"x":null,"z":"no_discount","aa":"0.0","ab":0,"price":"0.0","compare_at_price":"0.0","partial_payment_z":"no_partial_discount","partial_payment_aa":"0.0","partial_payment_ab":0},{"id":20871137,"a":"Click To Pre-Order","b":false,"c":null,"d":"Out of stock","e":false,"f":"Only {{qty}} remaining","g":"Check Other sizes/colors (ships in 3-4 weeks, maybe sooner we are constantly making new inventory)","h":"below","i":true,"j":"Pre-Order","k":null,"l":null,"m":"variant","n":"40229933449377","o":true,"handle":"pedal-tmwc-raceday-bag™","p":"4583362166916","y":"https://cdn.shopify.com/s/files/1/2489/7792/products/royalracer_1800x1800_1800x1800_21f2019d-2c0c-4cba-98c3-d7c637bb2845.png?v=1665164270","q":true,"r":true,"s":2,"t":null,"u":2,"v":true,"w":"ribbon","tag":null,"x":null,"z":"no_discount","aa":"0.0","ab":0,"price":"0.0","compare_at_price":"0.0","partial_payment_z":"no_partial_discount","partial_payment_aa":"0.0","partial_payment_ab":0},{"id":20871134,"a":"Click To Pre-Order","b":true,"c":null,"d":"Out of stock","e":false,"f":"Only {{qty}} remaining","g":"Check Other sizes/colors (ships in 3-4 weeks, maybe sooner we are constantly making new inventory)","h":"below","i":true,"j":"Pre-Order","k":null,"l":null,"m":"variant","n":"32313323225220","o":true,"handle":"pedal-tmwc-raceday-bag™","p":"4583362166916","y":"https://cdn.shopify.com/s/files/1/2489/7792/products/royalracer_1800x1800_1800x1800_21f2019d-2c0c-4cba-98c3-d7c637bb2845.png?v=1665164270","q":true,"r":true,"s":0,"t":null,"u":2,"v":true,"w":"ribbon","tag":null,"x":null,"z":"no_discount","aa":"0.0","ab":0,"price":"0.0","compare_at_price":"0.0","partial_payment_z":"no_partial_discount","partial_payment_aa":"0.0","partial_payment_ab":0},{"id":20871135,"a":"Click To Pre-Order","b":true,"c":null,"d":"Out of stock","e":false,"f":"Only {{qty}} remaining","g":"Check Other sizes/colors (ships in 3-4 weeks, maybe sooner we are constantly making new inventory)","h":"below","i":true,"j":"Pre-Order","k":null,"l":null,"m":"variant","n":"32313323225220","o":true,"handle":"pedal-tmwc-raceday-bag™","p":"4583362166916","y":"https://cdn.shopify.com/s/files/1/2489/7792/products/royalracer_1800x1800_1800x1800_21f2019d-2c0c-4cba-98c3-d7c637bb2845.png?v=1665164270","q":true,"r":true,"s":0,"t":null,"u":2,"v":true,"w":"ribbon","tag":null,"x":null,"z":"no_discount","aa":"0.0","ab":0,"price":"0.0","compare_at_price":"0.0","partial_payment_z":"no_partial_discount","partial_payment_aa":"0.0","partial_payment_ab":0},{"id":21860466,"a":"Click To Pre-Order","b":false,"c":null,"d":"Out of stock","e":false,"f":"Only {{qty}} remaining","g":"Check Other sizes/colors (ships in 3-4 weeks, maybe sooner we are constantly making new inventory)","h":"below","i":true,"j":"Pre-Order","k":null,"l":null,"m":"variant","n":"42918332956907","o":true,"handle":"raceday-ready-checklists","p":"7717780226283","y":"https://cdn.shopify.com/s/files/1/2489/7792/products/all4.png?v=1654797332","q":true,"r":true,"s":-87,"t":null,"u":2,"v":true,"w":"ribbon","tag":null,"x":"","z":"no_discount","aa":"0.0","ab":0,"price":"0.0","compare_at_price":"0.0","partial_payment_z":"no_partial_discount","partial_payment_aa":"0.0","partial_payment_ab":0},{"id":21997656,"a":"Click To Pre-Order","b":false,"c":null,"d":"Out of stock","e":false,"f":"Only {{qty}} remaining","g":"Check Other sizes/colors (ships in 3-4 weeks, maybe sooner we are constantly making new inventory)","h":"below","i":true,"j":"Pre-Order","k":null,"l":null,"m":"variant","n":"42933833564395","o":true,"handle":"raceday-ready™-10-week-challenge","p":"7721012461803","y":"https://cdn.shopify.com/s/files/1/2489/7792/products/RACEDAYREADY10-WEEKCHALLENGEpdf.png?v=1661453130","q":true,"r":true,"s":-146,"t":null,"u":2,"v":true,"w":"ribbon","tag":null,"x":"","z":"no_discount","aa":"0.0","ab":0,"price":"0.0","compare_at_price":"0.0","partial_payment_z":"no_partial_discount","partial_payment_aa":"0.0","partial_payment_ab":0}];
+pn.settings.tagSettings=[];
+</script>
+<style type="text/css">
+  .pn-original-subtotal{
+    text-decoration: line-through;
+    display:inline-block;
+  }
+  .pn-discounted-subtotal{
+    font-weight:bold;
+    margin-left:20px;
+    display:inline-block;
+    font-size: 1.3em;
+  }
+
+  .pn-line-item-original-price {
+    text-decoration: line-through;
+  }
+
+  .pn-line-item-discounted-price {
+    font-size: 1.2em;
+    margin-left: 8px;
+  }
+</style>
+{% endraw %}
+
+
+<div id="pn-mixed-cart-warning" class="pn-modal">
+  <div id="pn-mixed-cart-warning-content">
+    <span id="pn-modal-close-btn">x</span>
+    <p class="pn-mixed-cart-heading" id="pn-mixed-cart-warning-title"></p>
+    <div id="pn-mixed-cart-warning-text"></div>
+  </div>
+</div>

@@ -1,0 +1,54 @@
+{%- liquid
+  unless grid_item_width
+    assign grid_item_width = 'small--one-half medium-up--one-third'
+  endunless
+
+  unless background_position
+    assign background_position = 'top center'
+  endunless
+
+  if collection.empty?
+    assign collection_title = 'home_page.onboarding.collection_title' | t
+  else
+    assign collection_title = collection.title | escape
+  endif
+
+  if collection.image
+    assign collection_image = collection.image
+  else
+    assign collection_image = collection.products.first.featured_media.preview_image
+  endif
+-%}
+
+<div class="grid__item {{ grid_item_width }} skrim__item" data-aos="skrim__animation" {{ block.shopify_attributes }}>
+  <a href="{{ collection.url }}" class="skrim__link skrim__item-content">
+    {%- if collection.empty? -%}
+      {% capture placeholder %}collection-{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+      <div class="skrim__overlay grid__image">{{ placeholder | placeholder_svg_tag: 'placeholder-svg' }}</div>
+    {%- else -%}
+      <div class="skrim__overlay grid__image">
+        {% style %}
+          .grid__image--{{ forloop_index }}{
+            object-position: {{ background_position }};
+          }
+        {% endstyle %}
+
+        {% assign classes = 'image-fit grid__image--' | append: forloop_index %}
+        {% render 'image-element'
+          img: collection_image,
+          img_width: 2400,
+          classes: classes,
+          alt: collection_image.alt,
+          preload: true,
+          loading: 'eager'
+        %}
+      </div>
+    {%- endif -%}
+
+    <div class="skrim__title">
+      <div class="skrim__underline-me">
+        {{ collection_title }}
+      </div>
+    </div>
+  </a>
+</div>

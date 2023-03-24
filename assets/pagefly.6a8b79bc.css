@@ -1,0 +1,121 @@
+/* PageFly Element Styles */
+						.jVnAvG__parallax { position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; overflow: hidden; pointer-events: none; }
+.jVnAvG { padding: 15px 0px; position: relative; }
+.jVnAvG .sc-kasBVs { position: relative; }
+.jVnAvG[data-container="true"] .sc-kasBVs { padding: 0px 15px; width: 100%; margin: auto; }
+.jVnAvG .pf-parallax__img { text-indent: -10000px; position: absolute; object-fit: cover; top: 0px; left: 0px; width: 100%; height: 100%; }
+.dkUwJH { margin: 0 calc(-1 * var(--pf-s-lg)); }
+@media (max-width: 1199px) and (min-width: 992px) {
+  .dkUwJH { margin: 0 calc(-1 * var(--pf-s-md)); }
+}
+@media (max-width: 991px) and (min-width: 768px) {
+  .dkUwJH { margin: 0 calc(-1 * var(--pf-s-sm)); }
+}
+@media (max-width: 767px) {
+  .dkUwJH { margin: 0 calc(-1 * var(--pf-s-xs)); }
+}
+.kIIPjn { padding: var(--pf-s-lg); }
+@media (max-width: 1199px) and (min-width: 992px) {
+  .kIIPjn { padding: var(--pf-s-md); }
+}
+@media (max-width: 991px) and (min-width: 768px) {
+  .kIIPjn { padding: var(--pf-s-sm); }
+}
+@media (max-width: 767px) {
+  .kIIPjn { padding: var(--pf-s-xs); }
+}
+.jKhRhm { position: relative; }
+.iRsbFn { word-break: break-word; }
+.iRsbFn span { font-weight: inherit; }
+.iRsbFn i { margin-right: 0.3em; }
+.gVvrSi { display: inline-block; }
+.gVvrSi[contenteditable="true"] { user-select: text; }
+.gVvrSi { vertical-align: baseline; word-break: break-word; }
+.gVvrSi:focus { outline: none; }
+.gVvrSi::after { display: inline; }
+.bJKELe > span:last-child { line-height: inherit; display: block; }
+#editor-dnd-wrapper .bJKELe[class*="dropcap--"]:not(.dropcap--none) > span:last-child[contenteditable] { display: block; }
+#editor-dnd-wrapper .bJKELe[class*="dropcap--"]:not(.dropcap--none) > span:last-child[contenteditable]:empty::after { display: inline; }
+.bJKELe[class*="dropcap--"] > span:first-child { display: block; margin-right: 10px; float: left; width: 50px; height: 50px; line-height: 50px; }
+.bJKELe[class*="dropcap--"]:not(.dropcap--none) > span:first-child { margin-right: 20px; text-align: center; }
+.bJKELe.dropcap--none > span:first-child { text-align: inherit; border-radius: 0px; line-height: 1 !important; width: auto !important; height: auto !important; background: none !important; }
+.bJKELe.dropcap--circle > span:first-child { border-radius: 100%; }
+.bJKELe:not([class*="dropcap--"]) > span { margin-right: 0px !important; }
+.bJKELe ol, .bJKELe ul { list-style-position: inside; }
+.bJKELe blockquote { font-size: inherit; }
+.jKykgB { margin: 0px -15px; }
+.jKykgB .pf-blm { margin: 30px auto 0px; flex-basis: 100%; text-align: center; }
+.jKykgB .pf-bpa { flex-basis: 100%; text-align: center; display: flex; -webkit-box-pack: center; justify-content: center; margin-top: 30px; }
+.jKykgB .pf-bpa a { cursor: pointer; padding: 2px 10px; margin: 2px; border: 1px solid transparent; border-radius: 2px; position: relative; }
+.jKykgB .pf-bpa a.currentPage { border-color: rgba(0, 0, 0, 0.1); pointer-events: none; }
+.jKykgB .pf__shopify-product { width: 100%; text-align: center; }
+.jKykgB .pf-c { padding: 15px; display: flex; }
+.jKykgB .product__thumbnail { display: -webkit-flex; -webkit-box-pack: center; justify-content: center; -webkit-box-align: center; align-items: center; max-width: 100%; position: relative; }
+.jKykgB .product__thumbnail img { vertical-align: middle; max-width: 100%; height: auto; }
+.jKykgB .product__thumbnail .pf-placeholder-svg { fill: rgb(166, 166, 166); background-color: rgb(245, 245, 245); width: 100%; max-width: 100%; max-height: 100%; border-radius: inherit; }
+.jKykgB .product__button > a { display: block; padding: 0px 20px; line-height: 36px; height: 36px; background: rgb(85, 193, 72); margin-top: 10px; color: rgb(255, 255, 255); text-align: center; text-decoration: none; }
+.jKykgB .product__button > a:hover { opacity: 0.7; color: rgb(255, 255, 255); }
+.jKykgB .product__button span { pointer-events: none; }
+.jKykgB .product__info-price { margin-top: 10px; font-size: 13px; color: rgb(208, 2, 27); }
+.jKykgB .product__sale-price { margin-left: 10px; color: rgb(54, 54, 54); font-size: 0.8em; }
+.jKykgB .product__info-title { margin: 10px 0px 0px; font-size: 16px; font-weight: 500; line-height: 1.5; text-transform: none; font-family: inherit; color: rgb(45, 45, 45); }
+.jKykgB .product__info-title a { color: rgb(27, 28, 29); text-decoration: none; }
+.jKykgB .shopify__product-vertical, .jKykgB .shopify__product-vertical .product__info { display: flex; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-flow: column; }
+.jKykgB .shopify__product-vertical .product__info, .jKykgB .shopify__product-vertical .product__info-title { flex: 1 0 auto; }
+.jKykgB .shopify__product-horizontal { display: -webkit-flex; }
+.jKykgB .shopify__product-horizontal .product__thumbnail { flex: 1 1 0%; height: auto !important; }
+.jKykgB .shopify__product-horizontal .product__info { text-align: left; flex: 3 1 0%; padding-left: 15px; }
+.jKykgB .shopify__product-horizontal .product__info-title { margin-top: 0px; }
+.jKykgB .shopify__product-horizontal .product__button > a { width: auto; display: inline-block; }
+						/* PageFly Styles */
+						
+@media all {
+	.__pf .pf-6aa025a3 {
+		font-size: 40px;
+		 line-height: 50px;
+		 margin: 0px;
+		 color: rgb(255, 255, 255);
+		 text-transform: uppercase;
+		 font-family: Roboto;
+		 text-align: center;
+	}
+	.__pf .pf-d734ef9b {
+		text-align: center;
+	}
+	.__pf .pf-7c2ea1ac {
+		margin: 0px;
+	}
+	.__pf .pf-ba1a4d80 {
+		background-color: rgb(247, 181, 18);
+		 text-align: center;
+		 font-family: Roboto;
+		 font-size: 21px;
+		 color: white;
+		 text-transform: capitalize;
+	}
+	.__pf .pf-1f51cf2a {
+		text-align: center;
+		 font-family: Roboto;
+		 font-size: 21px;
+	}
+	.__pf .pf-94147b56 {
+		text-align: center;
+	}
+	.__pf .pf-5fc15b2e > .pf-c > div > div > div > .product__button {
+		background-color: black;
+	}
+	.__pf .pf-e77e3ca0 > .pf-c > div > div > div > .product__button {
+		background-color: black;
+	}
+	.__pf .pf-5b6464b1 > .pf-c > div > div > div > .product__button {
+		background-color: black;
+	}
+	.__pf .pf-bee1eba3 > .pf-c > div > div > div > .product__button {
+		background-color: black;
+	}
+	.__pf .pf-70aac0f3 > .pf-c > div > div > div > .product__button {
+		background-color: black;
+	}
+}
+						/* Extra CSS for lazy loading background image */
+						.pf-bg-lazy { background-image: none !important; }

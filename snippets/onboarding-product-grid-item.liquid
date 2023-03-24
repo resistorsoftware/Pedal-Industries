@@ -1,0 +1,17 @@
+<div class="grid-item grid-product {{ classes }}">
+  <div class="grid-item__content">
+    <a href="{{ product.url | within: collection }}" class="grid-item__link">
+      <div class="grid-product__image-wrap">
+        {{ 'product-' | append: i | placeholder_svg_tag: 'placeholder-svg' }}
+      </div>
+      <div class="grid-item__meta">
+        <div class="grid-item__meta-main">
+          <div class="grid-product__title">{{ 'home_page.onboarding.product_title' | t }}</div>
+        </div>
+        <div class="grid-item__meta-secondary">
+          <div class="grid-product__price">$29</div>
+        </div>
+      </div>
+    </a>
+  </div>
+</div>

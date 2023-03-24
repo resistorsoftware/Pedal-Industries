@@ -1,0 +1,305 @@
+{%- if section.settings.divider -%}<div class="section--divider">{%- endif -%}
+
+<div
+  class="text-with-icons"
+  data-section-id="{{ section.id }}"
+  data-section-type="text-with-icons"
+>
+  <div class="page-width">
+    {%- if section.settings.title != blank -%}
+      <div
+        class="
+          text-with-icons__title
+          section-header"
+      >
+        <h2 class="text-{{ section.settings.align_text }}">{{ section.settings.title }}</h2>
+      </div>
+    {%- endif -%}
+    <div
+      class="
+        text-with-icons__blocks
+        has-{{ section.settings.desktop_columns_per_row }}-per-row"
+      data-block-count="{{ section.blocks.size }}"
+      >
+      {% for block in section.blocks %}
+        <div class="text-with-icons__block text-{{ section.settings.align_text }}" {{ block.shopify_attributes }}>
+          <div class="text-with-icons__block-icon">
+            {% case block.settings.icon %}
+              {% when 'bills'%}
+                <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-tcwi-bills" viewBox="0 0 100 100"><defs><style>.a{fill:none;stroke:#000;stroke-width:2px}</style></defs><path class="a" d="M16.96 11.72h66.08v70.76l-6.62 5.8-6.61-5.8-6.61 5.8-6.61-5.8-6.61 5.8-6.6-5.8-6.61 5.8-6.61-5.8-6.6 5.8-6.6-5.8V11.72zM23.97 34.6h49.36M23.97 46.28h49.01M23.97 57.96h28.57M23.97 69.64h28.57"/><path class="a" d="M61.63 66.87c0 2.69 4.18 2.51 4.18 2.51s4.19.27 4.19-3.23c0-2.27-4.16-2.25-4.16-2.25-4.85 0-4.16-3.33-4.16-3.33 0-3.74 4.22-3.43 4.22-3.43 4.51 0 4.08 3.43 4.08 3.43M65.8 53.03v20.46M23.97 23.41h49.36"/></svg>
+              {% when 'calendar'%}
+                <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-tcwi-calendar" viewBox="0 0 100 100"><defs><style>.a{fill:none;stroke:#000;stroke-width:2px}</style></defs><path class="a" d="M21.3 17.08v10.14M35.52 17.08v10.14M49.74 17.08v10.14M63.97 17.08v10.14M78.19 17.08v10.14M12.63 32.23h74.74M12.63 22.15h74.74v60.77H12.63z"/><path class="a" d="M21.05 38.72h14.47v12.77H21.05zM35.53 38.72H50v12.77H35.53zM50 38.72h14.47v12.77H50zM64.47 38.72h14.47v12.77H64.47z"/><path class="a" d="M21.05 51.48h14.47v12.77H21.05zM35.53 51.48H50v12.77H35.53zM50 51.48h14.47v12.77H50zM64.47 51.48h14.47v12.77H64.47zM21.05 64.25h14.47v12.77H21.05zM35.53 64.25H50v12.77H35.53zM50 64.25h14.47v12.77H50zM64.47 64.25h14.47v12.77H64.47z"/></svg>
+              {% when 'cart'%}
+                <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-tcwi-cart" viewBox="0 0 100 100"><defs><style>.a{fill:none;stroke:#000;stroke-width:2px}</style></defs><path class="a" d="M26.81 71.11h-.05"/><circle class="a" cx="42.66" cy="76.95" r="6.73"/><circle class="a" cx="72.7" cy="76.95" r="6.73"/><path class="a" d="M38.99 59.17L23.7 16.32H11.36"/><path class="a" d="M27.26 26.3h61.38L77 59.17H39a5.53 5.53 0 0 0-5.53 5.53A5.53 5.53 0 0 0 39 70.22h43.87M57.95 59.17V26.3M48.83 59.17L42.61 26.3M67.07 59.17L73.3 26.3M85.08 36.34H30.84M80.68 48.73H35.27"/></svg>
+              {% when 'charity'%}
+                <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-tcwi-charity" viewBox="0 0 100 100"><defs><style>.a{fill:none;stroke:#000;stroke-width:2px}</style></defs><path class="a" d="M63.41 68l21-10.58a4.16 4.16 0 0 1 5.67 2 4.17 4.17 0 0 1-1.93 5.39L54 82a3.35 3.35 0 0 1-2.16.25L39 75.82l-7.31 3.06M22.76 86.67L9.6 55.92l10.24-4.64 13.17 30.75-10.25 4.64z"/><path class="a" d="M23.17 58.17l8.79-4a9.51 9.51 0 0 1 6.88-.37l22.25 7.31A4.52 4.52 0 0 1 63.41 68a4.51 4.51 0 0 1-5 1.77L43.8 65.32M79.37 16.94a12.34 12.34 0 0 0-17.44 0l-.79.79-.78-.79a12.34 12.34 0 1 0-17.44 17.45l.78.78 17.44 17.45 17.45-17.45.78-.78a12.34 12.34 0 0 0 0-17.45z"/></svg>
+              {% when 'chat'%}
+                <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-tcwi-chat" viewBox="0 0 100 100"><defs><style>.a{fill:none;stroke:#000;stroke-width:2px}</style></defs><path class="a" d="M88.78 28.25v47.18h-9.42v10.58L62.91 75.43H32.55V28.25h56.23zM41.85 42.53h37.51M41.85 51.83h37.51M41.85 61.14h26.58"/><path class="a" d="M67.45 13.99v14.26h-34.9v35.83l-11.91 7.67V61.16h-9.42V13.99h56.23z"/></svg>
+              {% when 'envelope'%}
+                <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-tcwi-open-envelope" viewBox="0 0 100 100"><defs><style>.a{fill:none;stroke:#000;stroke-width:2px}</style></defs><path class="a" d="M78.33 51.24V13H21.59v38.22M31.93 24.59h36.26M31.93 34.4h36.26M31.93 44.2h36.26"/><path class="a" d="M78.41 39.02l8.93 6.88v41.06H12.66V45.9l8.93-6.88"/><path class="a" d="M87.26 45.9l-37.3 22.79-37.3-22.79M12.66 86.96l29.82-22.84M87.34 86.96L57.52 64.12"/></svg>
+              {% when 'gears'%}
+                <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-tcwi-gears" viewBox="0 0 100 100"><defs><style>.a{fill:none;stroke:#000;stroke-width:2px}</style></defs><path class="a" d="M51.11 53a18.75 18.75 0 0 0 .67-3.35l6.37-1.51L55.27 36l-6.37 1.56a18.51 18.51 0 0 0-4.68-5l1.87-6.28-11.9-3.55L32.32 29a18.68 18.68 0 0 0-6.62 1.59l-4.5-4.76-9 8.53 4.5 4.76a18.36 18.36 0 0 0-2 6.52l-6.35 1.57 2.88 12.08 6.37-1.51a18.62 18.62 0 0 0 4.67 4.95L20.4 69l11.91 3.55 1.87-6.27a18.67 18.67 0 0 0 6.62-1.58l4.5 4.76 9-8.53-4.5-4.76A19.38 19.38 0 0 0 51.11 53z"/><circle class="a" cx="33.25" cy="47.67" r="9.13"/><path class="a" d="M84.49 35.6a11.31 11.31 0 0 0 .88-1.91h4v-7.63h-4a11.44 11.44 0 0 0-2.09-3.62l2-3.48-6.61-3.81-2 3.48a11.3 11.3 0 0 0-4.18 0l-2-3.48L63.86 19l2 3.49a11.22 11.22 0 0 0-1.22 1.71 12.09 12.09 0 0 0-.87 1.91h-4v7.63h4a11.63 11.63 0 0 0 2.09 3.62l-2 3.48 6.61 3.81 2-3.48a11.3 11.3 0 0 0 4.18 0l2 3.48 6.6-3.81-2-3.49a11.17 11.17 0 0 0 1.24-1.75z"/><circle class="a" cx="74.58" cy="29.89" r="5.61"/><path class="a" d="M86.57 70.8a13.56 13.56 0 0 0 .49-2.41l4.59-1.08-2.05-8.7-4.6 1.08a13.3 13.3 0 0 0-3.36-3.58L83 51.6 74.45 49l-1.36 4.51a13.38 13.38 0 0 0-4.77 1.13l-3.23-3.44-6.52 6.13 3.23 3.43a13.19 13.19 0 0 0-.92 2.29 13.56 13.56 0 0 0-.49 2.41l-4.59 1.1 2.05 8.7 4.59-1.08a13.42 13.42 0 0 0 3.35 3.58l-1.35 4.51L73 84.85l1.36-4.51a13.38 13.38 0 0 0 4.77-1.13l3.23 3.44 6.52-6.13-3.23-3.44a12.78 12.78 0 0 0 .92-2.28z"/><circle class="a" cx="73.72" cy="66.93" r="6.58"/></svg>
+              {% when 'gift'%}
+                <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-tcwi-gift" viewBox="0 0 100 100"><defs><style>.a{fill:none;stroke:#000;stroke-width:2px}</style></defs><path class="a" d="M13.35 30.07h73.29v15.11H13.35zM17.88 45.18h64.23V87.5H17.88zM50 30.07V87.5M29.63 15.42a6.59 6.59 0 0 0-.81 4.33 7.75 7.75 0 0 0 1.39 3.94c2.48 2.65 8 5.94 19.88 6.38a21 21 0 0 0-4.26-12.2A13.13 13.13 0 0 0 36 12.51c-2.37-.09-4.89.49-6.37 2.91z"/><path class="a" d="M69.9 14.75a6.55 6.55 0 0 1 1.29 5 8 8 0 0 1-1.39 4c-2.49 2.65-8 5.94-19.89 6.38a20.93 20.93 0 0 1 4.22-12.14A13.12 13.12 0 0 1 64 12.51a6.94 6.94 0 0 1 5.9 2.24z"/></svg>
+              {% when 'globe'%}
+                <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-tcwi-globe" viewBox="0 0 100 100"><defs><style>.a{fill:none;stroke:#000;stroke-width:2px}</style></defs><path class="a" d="M82.19 69.25a13.09 13.09 0 0 1-3.54-3 1.86 1.86 0 0 1 0-2.38c1.29-1.52 3.08-5-4.17-7.52a5.28 5.28 0 0 0-2.24 0 12.36 12.36 0 0 1-5.49 0 9.78 9.78 0 0 1-4.1-2.16c-.23-.2-.44-.41-.65-.63a10.08 10.08 0 0 1-2.17-10l.15-.46a8.09 8.09 0 0 0-3.92-9.55l-1.83-1c-3.54-1.58-5.69-3.88-6.39-6.83-1-4-.14-7.55 4.46-13.15M32 17.1a13 13 0 0 1 3.52 7.23 9.74 9.74 0 0 1-.52 4.76 11.74 11.74 0 0 1-2.16 3.61 10.49 10.49 0 0 0-1.72 2.73c-.62 1.51-1.12 3.44-.61 4.91a4 4 0 0 0 2.75 2.33c.25.08.52.16.8.23a5.11 5.11 0 0 1 4.24 4.65c.13 2-.82 4.29-2.68 6.44a17.84 17.84 0 0 1-6.76 4.78A15.87 15.87 0 0 1 23 59.93a14.39 14.39 0 0 1-3.14-.35c-3.45-.77-3.73-1.39-6.86-3.58M32.12 83c-.18-2.75-2.68-8.09.69-13.4a22.33 22.33 0 0 1 8.36-7.36c3.48-1.79 6.77-2.37 9-1.58a4.61 4.61 0 0 1 3.08 5.12v.83a4 4 0 0 0 1.21 3.3c1.49 1.26 4.42 1.3 6.66.91a2.55 2.55 0 0 0 .59-.18A12.09 12.09 0 0 1 67 69.43a9.74 9.74 0 0 1 4.51 1.2 12.61 12.61 0 0 1 5.41 5.51"/><circle class="a" cx="50" cy="50" r="37.5"/></svg>
+              {% when 'package'%}
+                <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-tcwi-package" viewBox="0 0 100 100"><defs><style>.a{fill:none;stroke:#000;stroke-width:2.16px}</style></defs><path class="a" d="M50 89.87L15.33 69.86V30.08l34.78-19.95 34.56 19.95v39.78L50 89.87z"/><path class="a" d="M67.33 50.78V40.09L32.76 20.14M15.33 30.08L50 50.09"/><path class="a" d="M50 89.87V50.09l34.67-20.01"/></svg>
+              {% when 'phone'%}
+                <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-tcwi-phone" viewBox="0 0 100 100"><defs><style>.a{fill:none;stroke:#000;stroke-width:2px}</style></defs><path class="a" d="M80.63 63.49L67.77 59.9a6.69 6.69 0 0 0-.75-.16h-.33a5.65 5.65 0 0 0-4.43 1.5l-3.95 3.66-.2.2c-.31.32-1.89 1.75-4.34.05l-.22-.15a73.21 73.21 0 0 1-19.1-19.2s-1.35-2 .17-3.56l4.24-4.48.17-.17c.3-.29 1.69-1.87.92-5.22l-3.37-12.71a5.77 5.77 0 0 0-1-2.1 5.31 5.31 0 0 0-3.16-1.95h-.25a22.6 22.6 0 0 0-6.35-.5 5.69 5.69 0 0 0-1.8.55 16.31 16.31 0 0 0-9 14.7 44 44 0 0 0 2 12 54.47 54.47 0 0 0 9.2 16.66s9.33 12.22 21.66 19.57a63.37 63.37 0 0 0 14.8 5.93s7 1.65 12.59-.54c0 0 7-2.43 9.5-8.56a5.37 5.37 0 0 0 .39-1.85 21.32 21.32 0 0 0-.77-5.8s-1.04-3.55-3.76-4.28z"/></svg>
+              {% when 'plant'%}
+                <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-tcwi-plant" viewBox="0 0 100 100"><defs><style>.a{fill:none;stroke:#000;stroke-width:2px}</style></defs><path class="a" d="M15.33 86.58h69.34s-30.67-40.37-69.34 0zM43.15 46.69s9 8.83 9.27 22M82.06 13.43s-27.38-1.32-25.37 25.16c0 0 23 5.54 25.37-25.16zM82.06 13.43L56.69 38.59M63.19 32.17l13.16-.45M70.05 25.35l9.7-.34M63.19 32.17l.45-13.07M70.05 25.35l.34-9.91M50.64 59.11a32.68 32.68 0 0 1 6-20.52M18 21.31S16.67 48.7 43.15 46.69c0 0 5.54-23-25.15-25.38zM17.99 21.31l25.16 25.38M36.73 40.19l-.45-13.16M29.91 33.33l-.34-9.7M36.73 40.19l-13.08-.45M29.91 33.33L20 32.99"/></svg>
+              {% when 'recycle'%}
+                <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-tcwi-recycle" viewBox="0 0 100 100"><defs><style>.a{fill:none;stroke:#000;stroke-width:2px}</style></defs><path class="a" d="M24 63.72h17.6v17.64h-6a12.87 12.87 0 0 1-11.57-7.24"/><path class="a" d="M24 63.72v.07a9.82 9.82 0 0 0-1.2 4.71 12.73 12.73 0 0 0 1.27 5.58l-10.21-20-.62-1.22a9.59 9.59 0 0 1-.58-2 9.27 9.27 0 0 1 1-6.12l2.51-4.58-3.36-1.81 8.07-1.55 8.07-1.54 3.12 7.59 3.13 7.6-3-1.62zM49 19.28l-8 15.66-15.72-8 2.7-5.3a12.87 12.87 0 0 1 11.7-7h.05"/><path class="a" d="M49 19.28v-.07A9.78 9.78 0 0 0 45.32 16a12.78 12.78 0 0 0-5.55-1.4h23.82a9.77 9.77 0 0 1 2 .38 9.24 9.24 0 0 1 5 3.66l2.94 4.31 3.14-2.17-2.27 7.87-2.29 7.9-8.18-.67-8.19-.66 2.8-1.94zM76 63.5L67.6 48l15.53-8.38L86 44.89a12.86 12.86 0 0 1-.87 13.62"/><path class="a" d="M76 63.5a9.82 9.82 0 0 0 4.71-1.18 12.78 12.78 0 0 0 4.3-3.77L72.31 77l-.78 1.12a9 9 0 0 1-1.45 1.44 9.27 9.27 0 0 1-5.85 2L59 81.6v3.82l-5.2-6.36-5.2-6.37 5.21-6.35L59 60v3.41z"/></svg>
+              {% when 'ribbon'%}
+                <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-tcwi-ribbon" viewBox="0 0 100 100"><defs><style>.a{fill:none;stroke:#000;stroke-width:2px}</style></defs><path class="a" d="M44.18 67.51L30 89.72l-4.44-12.19-12.93 1.1 14.19-22.18a28.86 28.86 0 0 0 13.79 10.08 26.93 26.93 0 0 0 3 .85zM87.37 78.63l-12.93-1.1L70 89.72 55.81 67.51l.63-.13a26.76 26.76 0 0 0 2.94-.85 28.8 28.8 0 0 0 13.8-10.08z"/><path class="a" d="M78.92 39.19a28.82 28.82 0 0 1-3.61 14 30 30 0 0 1-1.74 2.73 5 5 0 0 1-.39.52 28.8 28.8 0 0 1-13.79 10.09 26.76 26.76 0 0 1-2.94.85l-.63.13a29 29 0 0 1-11.63 0l-.62-.13a26.93 26.93 0 0 1-3-.85 28.86 28.86 0 0 1-13.75-10.08c-.13-.17-.26-.34-.38-.52q-.93-1.32-1.74-2.73a28.92 28.92 0 1 1 54.22-14z"/><path class="a" d="M56.95 42.84l1.63 9.55L50 47.88l-8.58 4.51 1.64-9.55-6.95-6.77 9.6-1.39 4.29-8.7 4.29 8.7 9.6 1.39-6.94 6.77z"/></svg>
+              {% when 'sales-tag'%}
+                <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-tcwi-sales-tag" viewBox="0 0 100 100"><defs><style>.a{fill:none;stroke:#000;stroke-width:2px}</style></defs><path class="a" d="M69.33 23.02l-16.5.11L12.5 63.46l27.35 27.22 40.33-40.33.04-16.43-10.89-10.9z"/><circle class="a" cx="65.05" cy="38.2" r="5.51"/><path class="a" d="M71 24.67c3.46-6 7.64-11.82 10.22-13.91a4.93 4.93 0 0 1 3.52-1.42 3.38 3.38 0 0 1 2.78 3.14c.21 8.33-17.56 23.19-17.56 23.19M19.09 56.91l27.34 27.22"/></svg>
+              {% when 'shield'%}
+                <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-tcwi-shield" viewBox="0 0 100 100"><defs><style>.a{fill:none;stroke:#000;stroke-width:2px}</style></defs><path class="a" d="M51.18 7.63c5.54 3.1 17.09 8.07 34.33 8.07h1.07v23.72A56.14 56.14 0 0 1 80 66.07C73.58 78 63.89 85.62 51.18 88.83 38.48 85.62 28.79 78 22.36 66.06a56.08 56.08 0 0 1-6.58-26.64V15.7h1.07c17.25 0 28.8-4.97 34.33-8.07z"/><path class="a" d="M66.15 37.87L45.43 58.59l-9.21-9.21"/></svg>
+              {% when 'stopwatch'%}
+                <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-tcwi-stopwatch" viewBox="0 0 100 100"><defs><style>.a{fill:none;stroke:#000;stroke-width:2px}</style></defs><circle class="a" cx="60.82" cy="54.12" r="4.26"/><path class="a" d="M46.92 78.41a28 28 0 1 0-14.08-24.28M32.84 54.13a28 28 0 1 1 14.08 24.28M34.14 69.37H11.19M38.7 62.65H23.4M38.7 76.09H23.4M32.84 54.13a28 28 0 1 1 14.08 24.28M60.82 16.94v14.24M42.84 32.69l3.08 3.99M33.27 49.27l4.96.87M51.25 80.42l1.72-4.73M70.39 80.42l-1.72-4.73M85.06 68.12L80.7 65.6M88.38 49.27l-4.88 1.31M78.81 32.69l-3.08 4.03M60.82 49.87V39.6M54.4 16.94h12.84"/></svg>
+              {% when 'store'%}
+                <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-tcwi-store" viewBox="0 0 100 100"><defs><style>.a{fill:none;stroke:#000;stroke-width:2px}</style></defs><path class="a" d="M83 50.49a6.61 6.61 0 0 1-6.61-6.61 6.61 6.61 0 1 1-13.21 0 6.61 6.61 0 1 1-13.22 0 6.61 6.61 0 1 1-13.21 0 6.61 6.61 0 1 1-13.22 0A6.61 6.61 0 0 1 17 50.49a7.23 7.23 0 0 1-1.4-.15v34.81h6.55V57.57H40v27.58h44.43V50.34a7 7 0 0 1-1.43.15zm-4.31 25.08H46.56v-18h32.13z"/><path class="a" d="M22.11 57.57h17.9v27.58h-17.9zM46.56 57.57H78.7v18H46.56z"/><path class="a" d="M22.11 57.57h17.9v27.58h-17.9zM46.56 57.57H78.7v18H46.56zM27 14.84l-3.43 19.37v9.67A6.61 6.61 0 0 1 17 50.49a7.23 7.23 0 0 1-1.4-.15 6.62 6.62 0 0 1-5.21-6.46v-9.67l5.21-19.37z"/><path class="a" d="M36.78 34.21v9.67a6.61 6.61 0 1 1-13.22 0v-9.67L27 14.84h11.52z"/><path class="a" d="M50 14.84v29a6.61 6.61 0 1 1-13.21 0v-9.63l1.74-19.37z"/><path class="a" d="M63.22 34.21v9.67a6.61 6.61 0 1 1-13.22 0v-29h11.48z"/><path class="a" d="M76.43 34.21v9.67a6.61 6.61 0 1 1-13.21 0v-9.67l-1.74-19.37H73z"/><path class="a" d="M89.65 34.21v9.67a6.62 6.62 0 0 1-5.22 6.46 7 7 0 0 1-1.39.15 6.61 6.61 0 0 1-6.61-6.61v-9.67L73 14.84h11.44z"/><circle class="a" cx="34.86" cy="74.25" r="1.52"/></svg>
+              {% when 'thumbs-up'%}
+                <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-tcwi-thumbs-up" viewBox="0 0 100 100"><defs><style>.a{fill:none;stroke:#000;stroke-width:2px}</style></defs><path class="a" d="M16.01 54.13h20.02v35.22H16.01z"/><path class="a" d="M36 82.72l3.84 2.63a11.53 11.53 0 0 0 6.54 2h13.91M36 58.78l2.07-1.93A10.23 10.23 0 0 0 40.26 54l7.66-15a7.4 7.4 0 0 0 .81-3.36v-8.3a2.93 2.93 0 0 1 2.92-2.94c2.41 0 5.78 1 7.92 6.18a18.63 18.63 0 0 1 1 10.5l-1.29 6.94h19A4.91 4.91 0 0 1 83.16 53a4.91 4.91 0 0 1-4.91 4.92H59.6M62.68 67.72H76a4.91 4.91 0 0 1 4.91 4.92A4.91 4.91 0 0 1 76 77.55H65.65"/><path class="a" d="M65.65 77.55h6.12a4.92 4.92 0 0 1 4.92 4.92 4.93 4.93 0 0 1-4.92 4.92h-12.5M59.6 57.89h19.47A4.92 4.92 0 0 1 84 62.81a4.91 4.91 0 0 1-4.92 4.91h-16.4M53.19 20.06v-9.41M47.33 22.12l-6.05-7.22M44.15 27.46l-9.27-1.64M62.04 27.68l9.27-1.64M59 22.26l6.05-7.21"/></svg>
+              {% when 'trophy'%}
+                <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-tcwi-trophy" viewBox="0 0 100 100"><defs><style>.a{fill:none;stroke:#000;stroke-width:2px}</style></defs><path class="a" d="M33.62 87.94h32.76M71.17 50.08a8.85 8.85 0 0 0 3.21-.93c4.16-2.09 7.12-7.42 7.12-13.65V18.63H73M28.83 50.08a8.85 8.85 0 0 1-3.21-.93c-4.16-2.09-7.12-7.42-7.12-13.65V18.63H27M55.94 38.9l1.4 8.17L50 43.21l-7.34 3.86 1.4-8.17-5.94-5.79 8.21-1.19L50 24.48l3.67 7.44 8.21 1.19-5.94 5.79z"/><path class="a" d="M27 12.06V40a27.76 27.76 0 0 0 .45 5 4.1 4.1 0 0 0 .11.61 27 27 0 0 0 1.26 4.44c3.18 8.38 10.12 14.49 18.43 15.6a19.25 19.25 0 0 0 2.75.19 18.87 18.87 0 0 0 2.73-.19 22 22 0 0 0 13.52-7.38 26.16 26.16 0 0 0 4.91-8.19 27 27 0 0 0 1.26-4.44 4.1 4.1 0 0 0 .11-.61A27.76 27.76 0 0 0 73 40V12.06zM49.97 65.84v22.1"/></svg>
+              {% when 'truck'%}
+                <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-tcwi-truck" viewBox="0 0 100 100"><defs><style>.a{fill:none;stroke:#000;stroke-width:2px}</style></defs><path class="a" d="M44.36 67.09l-2.17.01h20.46V28.83H22.27v3.93M22.27 56.47V67.1h8.78l-2.18-.01"/><path class="a" d="M36.62 59.5a5.83 5.83 0 0 0-5.84 5.83 5.84 5.84 0 0 0 11.68 0 5.84 5.84 0 0 0-5.84-5.83zM78 59.5a5.84 5.84 0 0 0-5.85 5.83 5.84 5.84 0 0 0 11.68 0A5.83 5.83 0 0 0 78 59.5z"/><path class="a" d="M70.26 67.09l2.17.01h-9.78V34.03h12.31l15.06 15.06h4.67V67.1H83.57l2.18-.01"/><path class="a" d="M66.95 49.1V38h5.49l11.04 11.03-16.53.07zM28.26 44.53H5.31M32.81 37.81h-15.3M32.81 51.25h-15.3"/></svg>
+              {% when 'wallet'%}
+                <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-tcwi-wallet" viewBox="0 0 100 100"><defs><style>.a{fill:none;stroke:#000;stroke-width:2px}</style></defs><path class="a" d="M69.36 55.8a2.45 2.45 0 1 1-2.45 2.45 2.45 2.45 0 0 1 2.45-2.45z"/><path class="a" d="M61.77 58.24a7.92 7.92 0 0 0 7.94 7.94H85V85H18.49a6 6 0 0 1-6-6V28a4.64 4.64 0 0 0 4.67 4.66H85v17.65H69.71a7.93 7.93 0 0 0-7.94 7.93z"/><path class="a" d="M86 50.31H69.71a7.94 7.94 0 1 0 0 15.87H86a1.53 1.53 0 0 0 1.53-1.52V51.84A1.54 1.54 0 0 0 86 50.31zM12.5 28a4.66 4.66 0 0 1 4.67-4.66H47M68.65 23.32h10.82v9.33"/><path class="a" d="M72.99 32.65H27l20.01-9.33 17.78-8.28 3.86 8.28 4.34 9.33z"/></svg>
+            {% endcase %}
+          </div>
+          <div class="text-with-icons__block-title">
+            <h3>{{ block.settings.title }}</h3>
+          </div>
+          <div class="text-with-icons__block-text">
+            {{ block.settings.text }}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    {%- if section.settings.button_label != blank -%}
+      <div class="text-with-icons__button">
+        <a href="{{ section.settings.button_link }}" class="btn btn--secondary">
+          {{ section.settings.button_label }}
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{%- if section.settings.divider -%}</div>{%- endif -%}
+
+{% style %}
+  #shopify-section-{{ section.id }} .icon {
+    color: {{ section.settings.icon_color }};
+  }
+
+  #shopify-section-{{ section.id }} .icon path,
+  #shopify-section-{{ section.id }} .icon polygon,
+  #shopify-section-{{ section.id }} .icon rect,
+  #shopify-section-{{ section.id }} .icon circle,
+  #shopify-section-{{ section.id }} .icon ellipse,
+  #shopify-section-{{ section.id }} .icon line,
+  #shopify-section-{{ section.id }} .icon polyline,
+  #shopify-section-{{ section.id }} .icon g {
+    stroke-width: {{ settings.icon_weight | replace: 'px', '' | minus: 1 }}px;
+  }
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "Text columns with icons",
+  "class": "index-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading"
+    },
+    {
+      "type": "select",
+      "id": "align_text",
+      "label": "Text alignment",
+      "default": "center",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "desktop_columns_per_row",
+      "label": "Desktop columns per row",
+      "default": 3,
+      "min": 2,
+      "max": 4,
+      "step": 1
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Icon color",
+      "default": "#000"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "divider",
+      "label": "Show section divider",
+      "default": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "text_block",
+      "name": "Column",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "default": "chat",
+          "options": [
+            {
+              "value": "bills",
+              "label": "Bills"
+            },
+            {
+              "value": "calendar",
+              "label": "Calendar"
+            },
+            {
+              "value": "cart",
+              "label": "Cart"
+            },
+            {
+              "value": "charity",
+              "label": "Charity"
+            },
+            {
+              "value": "chat",
+              "label": "Chat"
+            },
+            {
+              "value": "envelope",
+              "label": "Envelope"
+            },
+            {
+              "value": "gears",
+              "label": "Gears"
+            },
+            {
+              "value": "gift",
+              "label": "Gift"
+            },
+            {
+              "value": "globe",
+              "label": "Globe"
+            },
+            {
+              "value": "package",
+              "label": "Package"
+            },
+            {
+              "value": "phone",
+              "label": "Phone"
+            },
+            {
+              "value": "plant",
+              "label": "Plant"
+            },
+            {
+              "value": "recycle",
+              "label": "Recycle"
+            },
+            {
+              "value": "ribbon",
+              "label": "Ribbon"
+            },
+            {
+              "value": "sales-tag",
+              "label": "Sales tag"
+            },
+            {
+              "value": "shield",
+              "label": "Shield"
+            },
+            {
+              "value": "stopwatch",
+              "label": "Stopwatch"
+            },
+            {
+              "value": "store",
+              "label": "Store"
+            },
+            {
+              "value": "thumbs-up",
+              "label": "Thumbs up"
+            },
+            {
+              "value": "trophy",
+              "label": "Trophy"
+            },
+            {
+              "value": "truck",
+              "label": "Truck"
+            },
+            {
+              "value": "wallet",
+              "label": "Wallet"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "Example title"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Use this section to explain a set of product features, to link to a series of pages, or to answer common questions about your products.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Text columns with icons",
+      "blocks": [
+        {
+          "type": "text_block"
+        },
+        {
+          "type": "text_block"
+        },
+        {
+          "type": "text_block"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+

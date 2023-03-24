@@ -1,0 +1,28 @@
+{% liquid
+  assign classes = classes | escape
+  assign alt = alt | escape
+
+  if loading == nil
+    assign loading = 'lazy'
+  endif
+
+  # Base medium and small size off of original image width/height
+
+  if img_height != blank
+    assign med_size = img_height | divided_by: 1.5 | ceil
+    assign sml_size = med_size | divided_by: 1.5 | ceil
+  else
+    assign med_size = img_width | divided_by: 1.5 | ceil
+    assign sml_size = med_size | divided_by: 1.5 | ceil
+  endif
+
+  if sizes == blank
+    assign sizes = nil
+  endif
+%}
+
+{% if img_height != blank %}
+  {{ img | image_url: height: img_height | image_tag: preload: preload, class: classes, loading: loading, alt: alt, sizes: sizes }}
+{% else %}
+  {{ img | image_url: width: img_width | image_tag: preload: preload, class: classes, loading: loading, alt: alt, sizes: sizes }}
+{% endif %}

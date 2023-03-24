@@ -1,0 +1,11 @@
+{% if content != blank %}
+  <tool-tip-trigger class="tool-tip-trigger" data-tool-tip="{{ context }}">
+    <div class="tool-tip-trigger__title">{{ title }}</div>
+    <span
+      class="tool-tip-trigger__content"
+      data-tool-tip-content=""
+    >
+      {{ content }}
+    </span>
+  </tool-tip-trigger>
+{% endif %}

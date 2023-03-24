@@ -1,0 +1,28 @@
+{%- style -%}
+  .newsletter-{{ block.id }} {
+    background-color: {{ block.settings.color_background }};
+    color: {{ block.settings.color_text }};
+  }
+
+  .newsletter-{{ block.id }} .input-group-btn {
+    background-color: {{ block.settings.color_background }};
+  }
+{%- endstyle -%}
+
+<div class="newsletter-section newsletter-{{ block.id }}{% if block.settings.color_background == settings.color_body_bg %} newsletter-section--with-divider{% endif %}">
+  <div class="page-width text-center">
+    {%- if block.settings.icon_enable -%}
+      <span class="icon icon-email" role="presentation">
+        <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-email" viewBox="0 0 64 64"><path d="M63 52H1V12h62zM1 12l25.68 24h9.72L63 12M21.82 31.68L1.56 51.16m60.78.78L41.27 31.68"/></svg>
+      </span>
+    {%- endif -%}
+    {%- if block.settings.title != blank -%}
+      <h2 class="h3">{{ block.settings.title | escape }}</h2>
+    {% endif %}
+    {% if block.settings.text != blank %}
+      <div class="rte">{{ block.settings.text }}</div>
+    {% endif %}
+
+    {%- render 'newsletter-form', section_id: block.id, snippet_context: 'page-section' -%}
+  </div>
+</div>

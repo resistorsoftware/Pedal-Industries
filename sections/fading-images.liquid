@@ -1,0 +1,408 @@
+<div
+  data-section-id="{{ section.id }}"
+  data-section-type="fading-images"
+  data-interval="{{ section.settings.slide_speed | times: 1000 }}"
+  data-count="{{ section.blocks.size }}">
+
+  {%- style -%}
+    .fading-images--{{ section.id }} .fading-images-overlay__title {
+      background-color: {{ section.settings.title_bg_color }};
+      color: {{ section.settings.title_color }};
+      font-size: {{ section.settings.title_size | times: 0.5 }}px;
+    }
+    @media only screen and (min-width: 769px) {
+      .fading-images--{{ section.id }} .fading-images-overlay__title {
+        font-size: {{ section.settings.title_size }}px;
+      }
+    }
+    .fading-images--{{ section.id }}.fading-images-overlay__overlay::before {
+      background-color: {{ section.settings.color_overlay }};
+      opacity: {{ section.settings.color_overlay_opacity | divided_by: 100.0 }};
+    }
+    .fading-images--{{ section.id }} .active-image {
+      animation-duration: {{ section.settings.slide_speed | times: 1000 }}ms;
+    }
+    .fading-images--{{ section.id }} .active-image.compensation {
+      animation-duration: {{ section.settings.slide_speed | times: 1000 | plus: 400 }}ms;
+    }
+    .fading-images--{{ section.id }} .finished-image {
+      animation-duration: 1000ms;
+    }
+  {%- endstyle -%}
+
+  {%- assign natural_height = false -%}
+  {%- assign natural_mobile_height = false -%}
+  {% if section.settings.desktop_height == 'natural' %}
+    {% comment %}
+      Get first image's aspect ratio
+    {% endcomment %}
+    {%- for block in section.blocks limit: 1 -%}
+      {%- if block.settings.image != blank -%}
+        {%- assign natural_height = true -%}
+        {%- capture natural_height_ratio -%}{{ 100 | divided_by: block.settings.image.aspect_ratio }}%{%- endcapture -%}
+      {%- endif -%}
+      {%- if section.settings.mobile_height == 'auto' -%}
+        {%- assign natural_mobile_height = true -%}
+      {%- endif -%}
+    {%- endfor -%}
+  {%- endif -%}
+
+  {%- if natural_height -%}
+    {%- style -%}
+      .hero-natural--{{ section.id }} {
+        position: relative;
+        height: 0;
+        padding-bottom: {{ natural_height_ratio }};
+      }
+    {%- endstyle -%}
+  {%- endif -%}
+
+  <div class="{% if natural_height %}hero-natural--{{ section.id }}{% endif %}">
+    <div
+      {% if natural_height %}
+        data-natural="true"
+      {% endif %}
+      data-mobile-natural="{{ natural_mobile_height }}"
+      class="hero hero--{{ section.id }} hero--{{ section.settings.desktop_height }} hero--mobile--{{ section.settings.mobile_height }} fading-images fading-images--{{ section.id }} fading-images-overlay__overlay loading"
+      data-aos="hero__animation">
+      {%- if section.settings.link -%}
+        <a href="{{ section.settings.link }}" class="hero__slide-link">
+      {%- endif -%}
+
+      <div class="hero__text-wrap hero__text-wrap--absolute">
+        <div class="page-width text-center">
+          <div class="hero__text-content {{ section.settings.text_align }}">
+            <div class="fading-images-overlay__titles{% if section.settings.title_font == 'heading' %} fading-images-overlay__titles--heading-style{% endif %}">
+              <div class="animation-cropper">
+                <div class="fading-images-overlay__title fading-images-overlay__title--1"></div>
+              </div>
+              {%- if section.settings.title_lines == "2" -%}
+                <div class="animation-cropper">
+                  <div class="fading-images-overlay__title fading-images-overlay__title--2"></div>
+                </div>
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {%- for block in section.blocks -%}
+        {%- if block.settings.image != blank -%}
+          {%- assign img_url = block.settings.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+          <img class="fading-images__item fading-images__item--{{ block.id }} lazyload"
+            src="{{ block.settings.image | img_url: '300x' }}"
+            data-src="{{ img_url }}"
+            data-aspectratio="{{ block.settings.image.aspect_ratio }}"
+            data-sizes="auto"
+            data-slide-index="{{ forloop.index }}"
+            data-slide-title1="{{ block.settings.slide_title1 }}"
+            data-slide-title2="{{ block.settings.slide_title2 }}"
+            alt="{{ block.settings.image.alt | escape }}"
+            style="object-position: {{ block.settings.focal_point }};"
+            {{ block.shopify_attributes }} >
+        {%- else -%}
+          {%- capture placeholder -%}lifestyle-{% cycle 1, 2 %}{%- endcapture -%}
+          <div class="fading-images__item fading-images__item--{{ block.id }} lazyloaded"
+            data-slide-index="{{ forloop.index }}"
+            data-slide-title1="{{ block.settings.slide_title1 }}"
+            data-slide-title2="{{ block.settings.slide_title2 }}"
+            {{ block.shopify_attributes }} >
+              {{ placeholder | placeholder_svg_tag: 'placeholder-svg' }}
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+
+      {%- if section.settings.link -%}
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.fading-images.name",
+  "class": "index-section--hero",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "select",
+      "id": "title_lines",
+      "label": "t:sections.fading-images.settings.title_lines.label",
+      "default": "2",
+      "options": [
+        {
+          "label": "t:sections.fading-images.settings.title_lines.options.1.label",
+          "value": "1"
+        },
+        {
+          "label": "t:sections.fading-images.settings.title_lines.options.2.label",
+          "value": "2"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "title_font",
+      "label": "t:sections.fading-images.settings.title_font.label",
+      "default": "body",
+      "options": [
+        {
+          "value": "body",
+          "label": "t:sections.fading-images.settings.title_font.options.body.label"
+        },
+        {
+          "value": "heading",
+          "label": "t:sections.fading-images.settings.title_font.options.heading.label"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "label": "t:sections.fading-images.settings.title_size.label",
+      "default": 45,
+      "min": 30,
+      "max": 100,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "t:sections.fading-images.settings.title_color.label",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "title_bg_color",
+      "label": "t:sections.fading-images.settings.title_bg_color.label",
+      "default": "rgba(0,0,0,0)"
+    },
+    {
+      "type": "select",
+      "id": "text_align",
+      "label": "t:sections.fading-images.settings.text_align.label",
+      "default": "vertical-center horizontal-center",
+      "options": [
+        {
+          "value": "vertical-center horizontal-left",
+          "label": "t:sections.fading-images.settings.text_align.options.vertical-center_horizontal-left.label"
+        },
+        {
+          "value": "vertical-center horizontal-center",
+          "label": "t:sections.fading-images.settings.text_align.options.vertical-center_horizontal-center.label"
+        },
+        {
+          "value": "vertical-center horizontal-right",
+          "label": "t:sections.fading-images.settings.text_align.options.vertical-center_horizontal-right.label"
+        },
+        {
+          "value": "vertical-bottom horizontal-left",
+          "label": "t:sections.fading-images.settings.text_align.options.vertical-bottom_horizontal-left.label"
+        },
+        {
+          "value": "vertical-bottom horizontal-center",
+          "label": "t:sections.fading-images.settings.text_align.options.vertical-bottom_horizontal-center.label"
+        },
+        {
+          "value": "vertical-bottom horizontal-right",
+          "label": "t:sections.fading-images.settings.text_align.options.vertical-bottom_horizontal-right.label"
+        }
+      ]
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "t:sections.fading-images.settings.link.label"
+    },
+    {
+      "type": "range",
+      "id": "slide_speed",
+      "label": "t:sections.fading-images.settings.slide_speed.label",
+      "default": 5,
+      "min": 3,
+      "max": 10,
+      "step": 1,
+      "unit": "s"
+    },
+    {
+      "type": "color",
+      "id": "color_overlay",
+      "label": "t:sections.fading-images.settings.color_overlay.label",
+      "default": "#000"
+    },
+    {
+      "type": "range",
+      "id": "color_overlay_opacity",
+      "label": "t:sections.fading-images.settings.color_overlay_opacity.label",
+      "default": 30,
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "%"
+    },
+    {
+      "type": "select",
+      "id": "desktop_height",
+      "label": "t:sections.fading-images.settings.desktop_height.label",
+      "default": "650px",
+      "options": [
+        {
+          "label": "t:sections.fading-images.settings.desktop_height.options.natural.label",
+          "value": "natural"
+        },
+        {
+          "label": "t:sections.fading-images.settings.desktop_height.options.450px.label",
+          "value": "450px"
+        },
+        {
+          "label": "t:sections.fading-images.settings.desktop_height.options.550px.label",
+          "value": "550px"
+        },
+        {
+          "label": "t:sections.fading-images.settings.desktop_height.options.650px.label",
+          "value": "650px"
+        },
+        {
+          "label": "t:sections.fading-images.settings.desktop_height.options.750px.label",
+          "value": "750px"
+        },
+        {
+          "label": "t:sections.fading-images.settings.desktop_height.options.100vh.label",
+          "value": "100vh"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "mobile_height",
+      "label": "t:sections.fading-images.settings.mobile_height.label",
+      "default": "auto",
+      "info": "t:sections.fading-images.settings.mobile_height.info",
+      "options": [
+        {
+          "label": "t:sections.fading-images.settings.mobile_height.options.auto.label",
+          "value": "auto"
+        },
+        {
+          "label": "t:sections.fading-images.settings.mobile_height.options.250px.label",
+          "value": "250px"
+        },
+        {
+          "label": "t:sections.fading-images.settings.mobile_height.options.300px.label",
+          "value": "300px"
+        },
+        {
+          "label": "t:sections.fading-images.settings.mobile_height.options.400px.label",
+          "value": "400px"
+        },
+        {
+          "label": "t:sections.fading-images.settings.mobile_height.options.500px.label",
+          "value": "500px"
+        },
+        {
+          "label": "t:sections.fading-images.settings.mobile_height.options.100vh.label",
+          "value": "100vh"
+        }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "t:sections.fading-images.blocks.image.name",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:sections.fading-images.blocks.image.settings.image.label"
+        },
+        {
+          "type": "select",
+          "id": "focal_point",
+          "label": "t:sections.fading-images.blocks.image.settings.focal_point.label",
+          "info": "t:sections.fading-images.blocks.image.settings.focal_point.info",
+          "default": "center center",
+          "options": [
+            {
+              "value": "20% 0",
+              "label": "t:sections.fading-images.blocks.image.settings.focal_point.options.20_0.label"
+            },
+            {
+              "value": "top center",
+              "label": "t:sections.fading-images.blocks.image.settings.focal_point.options.top_center.label"
+            },
+            {
+              "value": "80% 0",
+              "label": "t:sections.fading-images.blocks.image.settings.focal_point.options.80_0.label"
+            },
+            {
+              "value": "20% 50%",
+              "label": "t:sections.fading-images.blocks.image.settings.focal_point.options.20_50.label"
+            },
+            {
+              "value": "center center",
+              "label": "t:sections.fading-images.blocks.image.settings.focal_point.options.center_center.label"
+            },
+            {
+              "value": "80% 50%",
+              "label": "t:sections.fading-images.blocks.image.settings.focal_point.options.80_50.label"
+            },
+            {
+              "value": "20% 100%",
+              "label": "t:sections.fading-images.blocks.image.settings.focal_point.options.20_100.label"
+            },
+            {
+              "value": "bottom center",
+              "label": "t:sections.fading-images.blocks.image.settings.focal_point.options.bottom_center.label"
+            },
+            {
+              "value": "80% 100%",
+              "label": "t:sections.fading-images.blocks.image.settings.focal_point.options.80_100.label"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "slide_title1",
+          "label": "t:sections.fading-images.blocks.image.settings.slide_title1.label"
+        },
+        {
+          "type": "text",
+          "id": "slide_title2",
+          "label": "t:sections.fading-images.blocks.image.settings.slide_title2.label"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.fading-images.presets.fading_image_hero.name",
+      "blocks": [
+        {
+          "type": "image",
+          "settings": {
+            "slide_title1": "Beautifully animated",
+            "slide_title2": "titles and images"
+          }
+        },
+        {
+          "type": "image",
+          "settings": {
+            "slide_title1": "Use this section",
+            "slide_title2": "to impress customers"
+          }
+        },
+        {
+          "type": "image",
+          "settings": {
+            "slide_title1": "And highlight",
+            "slide_title2": "important details"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

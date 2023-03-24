@@ -1,0 +1,32 @@
+{% comment %} Cart helper for Pre Order Now
+(https://apps.shopify.com/preorder-now) {% endcomment %} {% layout none %} {% if
+cart %} { "primary_domain": "{{ shop.domain }}", "enabled_currencies_count":
+{{ shop.enabled_currencies | size }}, "enabled_currencies":[ {% for currency in
+shop.enabled_currencies %} { "iso_code":"{{ currency.iso_code }}", "name":"{{
+  currency.name
+}}", "symbol":"{{ currency.symbol }}" } {% if forloop.last != true %} , {% endif
+%} {% endfor %} ], "current_shop_currency": "{{ cart.currency.iso_code }}",
+"original_total_price": {{ cart.original_total_price }}, "total_discount":
+{{ cart.total_discount }}, "total_price": {{ cart.total_price }},
+"total_weight": {{ cart.total_weight }}, "item_count": {{ cart.item_count }},
+"items":[ {% for item in cart.items %} { "id":{{ item.id }}, "variant_id":{{
+  item.variant_id
+}}, "product_id":{{ item.product_id }}, "key":"{{ item.key }}", "url":"{{
+  item.url
+}}", "image":"{{ item | img_url: 'medium' }}", "quantity":{{ item.quantity }},
+"price":{{ item.price }}, "properties":{ {% for property in item.properties %}
+"{{ property[0] }}": "{{ property[1] }}"{% unless forloop.last %},{% endunless
+%} {% endfor %} }, "original_price":{{ item.original_price }},
+"original_line_price":{{ item.original_line_price }}, "discounted_price":{{
+  item.discounted_price
+}}, "line_price":{{ item.line_price }}, "gift_card":"{{ item.gift_card }}",
+"grams":{{ item.grams }}, "requires_shipping":"{{ item.requires_shipping }}",
+"product_title":"{{ item.product_title }}", "variant_title":"{{
+  item.variant_title
+}}", "variant_options":"{{ item.variant_options }}", "title":"{{ item.title }}",
+"tags":[ {% for tag in item.product.tags %} "{{ tag }}" {% if forloop.last !=
+true %} , {% endif %} {% endfor %} ], "collection_ids":[ {% for c in
+item.product.collections %}
+{{ c.id }}
+{% if forloop.last != true %} , {% endif %} {% endfor %} ]} {% if forloop.last
+!= true %} , {% endif %} {% endfor %} ]} {% endif %}

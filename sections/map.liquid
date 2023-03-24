@@ -1,0 +1,170 @@
+{%- liquid
+  assign display_map = false
+  assign onboarding = false
+  assign bg_image = section.settings.background_image
+
+  if section.settings.api_key == blank and bg_image == blank
+    assign onboarding = true
+  endif
+  if section.settings.api_key != blank and section.settings.map_address
+    assign display_map = true
+  endif
+-%}
+
+<script>
+  theme.strings.addressError = {{ 'sections.map.address_error' | t | json }};
+  theme.strings.addressNoResults = {{ 'sections.map.address_no_results' | t | json }};
+  theme.strings.addressQueryLimit = {{ 'sections.map.address_query_limit_html' | t | json }};
+  theme.strings.authError = {{ 'sections.map.auth_error_html' | t | json }};
+</script>
+
+{%- if bg_image.src != blank -%}
+  {%- unless display_map -%}
+    {%- style -%}
+      .map-{{ section.id }} {
+        background-size: cover;
+        background-position: center;
+        background-image: url("{{ bg_image | img_url: '1800x' }}");
+        background-position: {{ section.settings.background_image_position | default: 'center center' }};
+      }
+
+      @media only screen and (max-width: 750px) {
+        .map-{{ section.id }} {
+          padding-top: {{ 1 | divided_by: bg_image.aspect_ratio | times: 100 }}%;
+        }
+      }
+    {%- endstyle -%}
+  {%- endunless -%}
+{% endif %}
+
+<div class="map-section" data-section-id="{{ section.id }}" data-section-type="map" data-aos="map-section__animation">
+  {%- if section.settings.title != blank or section.settings.address != blank -%}
+    <div class="page-width">
+      <div class="map-section__overlay-wrapper">
+        <div class="animation-cropper">
+          <div class="animation-contents">
+            <div class="map-section__overlay">
+              {%- if section.settings.map_title != blank -%}
+                <h3 class="h4 text-spacing">{{ section.settings.map_title | escape }}</h3>
+              {%- endif -%}
+              {%- if section.settings.address != blank -%}
+                <div class="rte-setting text-spacing">{{ section.settings.address }}</div>
+                {%- if section.settings.show_button -%}
+                  <a href="https://maps.google.com?daddr={{ section.settings.map_address | escape }}" class="btn btn--secondary btn--small" target="_blank" rel="noopener" aria-label="{{ section.settings.map_title | escape }}">{{ 'sections.map.get_directions' | t }}</a>
+                {%- endif -%}
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
+  <a class="map-section__link" href="https://www.google.com/maps/place/{{ section.settings.map_address | escape }}" target="_blank" rel="noopener" aria-label="{{ section.settings.map_address | escape }}"></a>
+  {%- if onboarding -%}
+    <div class="map-onboarding">
+      {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+    </div>
+  {%- endif -%}
+  <div
+    id="Map-{{ section.id }}"
+    data-map
+    class="map-section__container map-{{ section.id }}"
+    data-address-setting="{{ section.settings.map_address | escape }}"
+    data-api-key="{{ section.settings.api_key }}"></div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.map.name",
+  "class": "index-section--flush",
+  "settings": [
+    {
+      "id": "map_title",
+      "type": "text",
+      "label": "t:sections.map.settings.map_title.label",
+      "default": "Our retail store"
+    },
+    {
+      "id": "address",
+      "type": "richtext",
+      "label": "t:sections.map.settings.address.label",
+      "default": "<p>301 Front St W<br>Toronto, Canada</p><p>Mon - Fri, 8:30am - 10:30pm<br>Saturday, 8:30am - 10:30pm<br>Sunday, 8:30am - 10:30pm</p>"
+    },
+    {
+      "id": "map_address",
+      "type": "text",
+      "label": "t:sections.map.settings.map_address.label",
+      "info": "t:sections.map.settings.map_address.info",
+      "default": "301 Front St W, Toronto, ON M5V 2T6"
+    },
+    {
+      "id": "api_key",
+      "type": "text",
+      "label": "t:sections.map.settings.api_key.label",
+      "info": "t:sections.map.settings.api_key.info"
+    },
+    {
+      "id": "show_button",
+      "type": "checkbox",
+      "label": "t:sections.map.settings.show_button.label",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "t:sections.map.settings.background_image.label",
+      "info": "t:sections.map.settings.background_image.info"
+    },
+    {
+      "type": "select",
+      "id": "background_image_position",
+      "label": "t:sections.map.settings.background_image_position.label",
+      "default": "center center",
+      "options": [
+        {
+          "label": "t:sections.map.settings.background_image_position.options.top_left.label",
+          "value": "top left"
+        },
+        {
+          "label": "t:sections.map.settings.background_image_position.options.top_center.label",
+          "value": "top center"
+        },
+        {
+          "label": "t:sections.map.settings.background_image_position.options.top_right.label",
+          "value": "top right"
+        },
+        {
+          "label": "t:sections.map.settings.background_image_position.options.center_left.label",
+          "value": "center left"
+        },
+        {
+          "label": "t:sections.map.settings.background_image_position.options.center_center.label",
+          "value": "center center"
+        },
+        {
+          "label": "t:sections.map.settings.background_image_position.options.center_right.label",
+          "value": "center right"
+        },
+        {
+          "label": "t:sections.map.settings.background_image_position.options.bottom_left.label",
+          "value": "bottom left"
+        },
+        {
+          "label": "t:sections.map.settings.background_image_position.options.bottom_center.label",
+          "value": "bottom center"
+        },
+        {
+          "label": "t:sections.map.settings.background_image_position.options.bottom_right.label",
+          "value": "bottom right"
+        }
+      ],
+      "info": "t:sections.map.settings.background_image_position.info"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.map.presets.map.name"
+    }
+  ]
+}
+{% endschema %}

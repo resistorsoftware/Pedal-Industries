@@ -1,0 +1,225 @@
+{%- liquid
+  assign animation_row = 2
+  assign drawer_position = 'right'
+  if logo_alignment == 'center'
+    assign drawer_position = 'left'
+  endif
+-%}
+
+<div id="NavDrawer" class="drawer drawer--{{ drawer_position }}">
+  <div class="drawer__contents">
+    <div class="drawer__fixed-header">
+      <div class="drawer__header appear-animation appear-delay-{{ animation_row }}">
+        <div class="drawer__title"></div>
+        <div class="drawer__close">
+          <button type="button" class="drawer__close-button js-drawer-close">
+            <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-close" viewBox="0 0 64 64"><path d="M19 17.61l27.12 27.13m0-27.12L19 44.74"/></svg>
+            <span class="icon__fallback-text">{{ 'general.drawers.close_menu' | t }}</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="drawer__scrollable">
+      <ul class="mobile-nav" role="navigation" aria-label="Primary">
+        {%- for link in main_menu.links -%}
+          {%- liquid
+            assign animation_row = animation_row | plus: 1
+            assign child_list_handle = link.url | handleize | append: forloop.index
+            assign has_dropdown = false
+            assign is_megamenu = false
+            if link.links != blank
+              assign has_dropdown = true
+            endif
+
+            if has_dropdown
+              for block in section.blocks
+                if link.title == block.settings.menu_item
+                  assign is_megamenu = true
+
+                  assign promo_image_1 = block.settings.promo_image_1
+                  assign promo_heading_1 = block.settings.promo_heading_1
+                  assign promo_text_1 = block.settings.promo_text_1
+                  assign promo_url_1 = block.settings.promo_url_1
+                  assign promo_image_2 = block.settings.promo_image_2
+                  assign promo_heading_2 = block.settings.promo_heading_2
+                  assign promo_text_2 = block.settings.promo_text_2
+                  assign promo_url_2 = block.settings.promo_url_2
+                  break
+                endif
+              endfor
+            endif
+          -%}
+
+          <li class="mobile-nav__item{% unless template == 'index' %}{% if link.active %} mobile-nav__item--active{% endif %}{% endunless %} appear-animation appear-delay-{{ animation_row }}">
+            {%- if has_dropdown -%}
+              <div class="mobile-nav__has-sublist">
+                {%- assign trigger_link = false -%}
+                {%- if link.url == '#' or link.url == link.links.first.url -%}
+                  {%- assign trigger_link = true -%}
+                {%- endif -%}
+
+                {%- if trigger_link -%}
+                  <button type="button" class="mobile-nav__link--button collapsible-trigger collapsible--auto-height" aria-controls="Linklist-{{ child_list_handle }}">
+                    <span class="mobile-nav__faux-link">{{ link.title }}</span>
+                    <div class="mobile-nav__toggle">
+                      <span>
+                        {%- render 'collapsible-icons' -%}
+                      </span>
+                    </div>
+                  </button>
+                {%- else -%}
+                  <a href="{{ link.url }}" class="mobile-nav__link" id="Label-{{ child_list_handle }}">
+                    {{ link.title }}
+                  </a>
+                  <div class="mobile-nav__toggle">
+                    <button type="button" class="collapsible-trigger collapsible--auto-height" aria-controls="Linklist-{{ child_list_handle }}" aria-labelledby="Label-{{ child_list_handle }}">
+                      {%- render 'collapsible-icons' -%}
+                    </button>
+                  </div>
+                {%- endif -%}
+              </div>
+            {%- else -%}
+              <a href="{{ link.url }}" class="mobile-nav__link">{{ link.title }}</a>
+            {%- endif -%}
+
+            {%- if has_dropdown -%}
+              <div id="Linklist-{{ child_list_handle }}" class="mobile-nav__sublist collapsible-content collapsible-content--all">
+                <div class="collapsible-content__inner">
+                  <ul class="mobile-nav__sublist">
+                    {%- for childlink in link.links -%}
+                      {%- assign has_sub_dropdown = false -%}
+                      {%- assign grand_child_list_handle = childlink.url | handleize | append: forloop.index -%}
+                      {%- if childlink.links != blank -%}
+                        {%- assign has_sub_dropdown = true -%}
+                      {%- endif -%}
+
+                      <li class="mobile-nav__item{% unless template == 'index' %}{% if childlink.active %} mobile-nav__item--active{% endif %}{% endunless %}">
+                        <div class="mobile-nav__child-item">
+                          {%- assign trigger_link = false -%}
+                          {%- if childlink.url == '#' or childlink.url == childlink.links.first.url -%}
+                            {%- assign trigger_link = true -%}
+                          {%- endif -%}
+
+                          {%- if trigger_link and has_sub_dropdown -%}
+                            <button type="button" class="mobile-nav__link--button mobile-nav__link--button-small collapsible-trigger" aria-controls="Sublinklist-{{ child_list_handle }}-{{ grand_child_list_handle }}">
+                              <span class="mobile-nav__faux-link">{{ childlink.title | escape }}</span>
+                              <div class="mobile-nav__toggle">
+                                <span>
+                                  {%- render 'collapsible-icons-alt' -%}
+                                </span>
+                              </div>
+                            </button>
+                          {%- else -%}
+                            <a href="{{ childlink.url }}" class="mobile-nav__link" id="Sublabel-{{ grand_child_list_handle }}">
+                              {{ childlink.title | escape }}
+                            </a>
+                          {%- endif -%}
+                          {%- if trigger_link == false and has_sub_dropdown -%}
+                            <button type="button" class="collapsible-trigger" aria-controls="Sublinklist-{{ child_list_handle }}-{{ grand_child_list_handle }}" aria-labelledby="Sublabel-{{ grand_child_list_handle }}">
+                              {%- render 'collapsible-icons-alt' -%}
+                            </button>
+                          {%- endif -%}
+                        </div>
+
+                        {%- if has_sub_dropdown -%}
+                          <div id="Sublinklist-{{ child_list_handle }}-{{ grand_child_list_handle }}" class="mobile-nav__sublist collapsible-content collapsible-content--all" aria-labelledby="Sublabel-{{ grand_child_list_handle }}">
+                            <div class="collapsible-content__inner">
+                              <ul class="mobile-nav__grandchildlist">
+                                {%- for grandchildlink in childlink.links -%}
+                                  <li class="mobile-nav__item{% unless template == 'index' %}{% if grandchildlink.active %} mobile-nav__item--active{% endif %}{% endunless %}">
+                                    <a href="{{ grandchildlink.url }}" class="mobile-nav__link">
+                                      {{ grandchildlink.title }}
+                                    </a>
+                                  </li>
+                                {%- endfor -%}
+                              </ul>
+                            </div>
+                          </div>
+                        {%- endif -%}
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+
+                  {%- if is_megamenu -%}
+                    {%- if promo_image_1 -%}
+                      <div class="megamenu__promo megamenu__promo--mobile">
+                        {%- if promo_url_1 -%}
+                          <a href="{{ promo_url_1 }}" class="megamenu__promo-link">
+                        {%- endif -%}
+                          <div style="margin: 0 auto; max-width: {{ promo_image_1.width }}px">
+                            <div class="image-wrap aos-animate megamenu__promo-image" style="height: 0; padding-bottom: {{ 100 | divided_by: promo_image_1.aspect_ratio }}%;">
+                              {%- assign img_url = promo_image_1 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+                              <img class="lazyload"
+                                  data-src="{{ img_url }}"
+                                  data-widths="[540, 750, 900]"
+                                  data-aspectratio="{{ promo_image_1.aspect_ratio }}"
+                                  data-sizes="auto"
+                                  alt="{{ promo_image_1.alt }}">
+                            </div>
+                          </div>
+                          {%- if promo_heading_1 -%}
+                            <div><strong>{{ promo_heading_1 }}</strong></div>
+                          {%- endif -%}
+                          {%- if promo_text_1 -%}
+                            <div>{{ promo_text_1 }}</div>
+                          {%- endif -%}
+                        {%- if promo_url_1 -%}
+                          </a>
+                        {%- endif -%}
+                      </div>
+                    {%- endif -%}
+
+                    {%- if promo_image_2 -%}
+                      <div class="megamenu__promo megamenu__promo--mobile">
+                        {%- if promo_url_2 -%}
+                          <a href="{{ promo_url_2 }}" class="megamenu__promo-link">
+                        {%- endif -%}
+                          <div style="margin: 0 auto; max-width: {{ promo_image_2.width }}px">
+                            <div class="image-wrap aos-animate megamenu__promo-image" style="height: 0; padding-bottom: {{ 100 | divided_by: promo_image_2.aspect_ratio }}%;">
+                              {%- assign img_url = promo_image_2 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+                              <img class="lazyload"
+                                  data-src="{{ img_url }}"
+                                  data-widths="[540, 750, 900]"
+                                  data-aspectratio="{{ promo_image_2.aspect_ratio }}"
+                                  data-sizes="auto"
+                                  alt="{{ promo_image_2.alt }}">
+                            </div>
+                          </div>
+                          {%- if promo_heading_2 -%}
+                            <div><strong>{{ promo_heading_2 }}</strong></div>
+                          {%- endif -%}
+                          {%- if promo_text_2 -%}
+                            <div>{{ promo_text_2 }}</div>
+                          {%- endif -%}
+                        {%- if promo_url_2 -%}
+                          </a>
+                        {%- endif -%}
+                      </div>
+                    {%- endif -%}
+                  {%- endif -%}
+                </div>
+              </div>
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+
+        {%- if shop.customer_accounts_enabled -%}
+          {%- assign animation_row = animation_row | plus: 1 -%}
+          {%- if customer -%}
+            <li class="mobile-nav__item{% unless template == 'index' %}{% if link.active %} mobile-nav__item--active{% endif %}{% endunless %} appear-animation appear-delay-{{ animation_row }}">
+              <a href="{{ routes.account_url }}" class="mobile-nav__link">{{ 'layout.customer.account' | t }}</a>
+            </li>
+          {%- else -%}
+            <li class="mobile-nav__item{% unless template == 'index' %}{% if link.active %} mobile-nav__item--active{% endif %}{% endunless %} appear-animation appear-delay-{{ animation_row }}">
+              <a href="{{ routes.account_login_url }}" class="mobile-nav__link">{{ 'layout.customer.log_in' | t }}</a>
+            </li>
+          {%- endif -%}
+        {%- endif -%}
+
+        <li class="mobile-nav__spacer"></li>
+      </ul>
+
+      {% render 'social-icons', additional_classes: 'mobile-nav__social' %}
+    </div>
+  </div>
+</div>

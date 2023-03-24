@@ -1,0 +1,2011 @@
+
+        {% comment %}
+        
+            8888888b.   .d88888b.       888b    888  .d88888b. 88888888888      8888888888 8888888b. 8888888 88888888888 
+            888  "Y88b d88P" "Y88b      8888b   888 d88P" "Y88b    888          888        888  "Y88b  888       888     
+            888    888 888     888      88888b  888 888     888    888          888        888    888  888       888     
+            888    888 888     888      888Y88b 888 888     888    888          8888888    888    888  888       888     
+            888    888 888     888      888 Y88b888 888     888    888          888        888    888  888       888     
+            888    888 888     888      888  Y88888 888     888    888          888        888    888  888       888     
+            888  .d88P Y88b. .d88P      888   Y8888 Y88b. .d88P    888          888        888  .d88P  888       888     
+            8888888P"   "Y88888P"       888    Y888  "Y88888P"     888          8888888888 8888888P" 8888888     888     
+               
+            THIS CODE IS FREQUENTLY UPDATED, YOUR EDITS WILL BE OVERWRITTEN.
+            
+        {% endcomment %}
+        
+        <style>/* REGULAR CSS */
+:root {
+  --sacolor-border: #d9d9d9;
+  --sacolor-background: inherit;
+  --sacolor-modal-background: white;
+  --sacolor-text: inherit;
+  --sacolor-button: black;
+  --sacolor-button-hover: white;
+}
+.sa-PageTitle {
+  text-align: center;
+}
+.sa-Polaris-DataTable__Table,
+.sa-Table {
+  border-width: 0.01rem;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+.sa-Table td {
+  text-align: left;
+  border: 0.01rem solid var(--sacolor-border);
+  padding: 10px 14px;
+}
+.sa-Polaris-DataTable td,
+.sa-Polaris-DataTable th {
+  border: 0.01rem solid var(--sacolor-border);
+}
+#sa-select-stats {
+  background: var(--sacolor-background);
+  font-size: 80%;
+  border: 1px solid var(--sacolor-border);
+}
+#sa-modal-close {
+  text-decoration: none;
+  cursor: pointer;
+  right: 1.6rem;
+  top: 2rem;
+  position: absolute;
+  font-size: 18px;
+  margin-top: 0.2rem;
+  color: inherit;
+}
+.sa-modal-header-inner {
+  margin-bottom: 0;
+  display: inline;
+  text-align: left;
+}
+
+.sa-Polaris-Modal-Dialog__Container,
+.sa-Polaris-Modal-Dialog__Modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  bottom: 0;
+  left: 0;
+  color: var(--sacolor-text);
+}
+.sa-Polaris-TextContainer p,
+.sa-affiliateForm p {
+  color: var(--sacolor-text);
+}
+.sa-Polaris-Modal-CloseButton:focus,
+.sa-Polaris-Modal-Dialog__Modal:focus {
+  outline: 0;
+}
+
+.sa-Polaris-Modal-Dialog__Container,
+.sa-Polaris-Modal-Dialog__Modal,
+.sa-Polaris-Stack--vertical {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+}
+
+.sa-Polaris-Modal-Dialog__Container {
+  z-index: 999999999;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+}
+
+@media (min-width: 48.0625em) {
+  .sa-Polaris-Modal-Dialog__Container {
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
+
+  .sa-Polaris-Modal-Dialog__Modal {
+    position: relative;
+    max-width: 62rem;
+    margin: 0 auto;
+    border-radius: 6px;
+  }
+}
+
+.sa-Polaris-Modal-Dialog__Modal {
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100vw;
+  height: 100%;
+  max-height: calc(100vh - 60px);
+  background: var(--sacolor-modal-background);
+  box-shadow: 0 31px 41px 0 rgba(32, 42, 53, 0.2), 0 2px 16px 0 rgba(32, 42, 54, 0.08);
+}
+
+@media (max-width: 48.0525em) {
+  .sa-Polaris-Modal-Dialog__Modal {
+    top: 25%;
+    max-height: 75%;
+  }
+  .sa-Polaris-Modal-Section,
+  .sa-Polaris-Modal-Header,
+  .sa-Polaris-Modal-Footer {
+    padding: 0.6rem 1rem;
+  }
+  .sa-Polaris-Modal-Footer {
+    max-width: calc(100% - 1.2em);
+  }
+}
+
+@media (min-width: 48.0625em) and (min-height: 660px) {
+  .sa-Polaris-Modal-Dialog__Modal.sa-Polaris-Modal-Dialog--limitHeight {
+    max-height: 600px;
+  }
+}
+
+@media (min-width: 48.0625em) {
+  .sa-Polaris-Modal-Dialog__Modal.sa-Polaris-Modal-Dialog--sizeLarge {
+    max-width: calc(100vw - 6.4rem);
+  }
+}
+
+@media (min-width: 65.25em) {
+  .sa-Polaris-Modal-Dialog__Modal.sa-Polaris-Modal-Dialog--sizeLarge {
+    max-width: 98rem;
+  }
+}
+
+.sa-Polaris-Modal-Dialog--animateFadeUp {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+  opacity: 1;
+  -webkit-transform: translateY(0);
+  transform: translateY(0);
+  transition: opacity cubic-bezier(0.64, 0, 0.35, 1) 0.2s, -webkit-transform cubic-bezier(0.64, 0, 0.35, 1) 0.2s;
+  transition: transform cubic-bezier(0.64, 0, 0.35, 1) 0.2s, opacity cubic-bezier(0.64, 0, 0.35, 1) 0.2s;
+  transition: transform cubic-bezier(0.64, 0, 0.35, 1) 0.2s, opacity cubic-bezier(0.64, 0, 0.35, 1) 0.2s,
+    -webkit-transform cubic-bezier(0.64, 0, 0.35, 1) 0.2s;
+}
+
+.sa-Polaris-Modal-Dialog--animateFadeUp.sa-Polaris-Modal-Dialog--entering,
+.sa-Polaris-Modal-Dialog--animateFadeUp.sa-Polaris-Modal-Dialog--exited,
+.sa-Polaris-Modal-Dialog--animateFadeUp.sa-Polaris-Modal-Dialog--exiting {
+  opacity: 0;
+  -webkit-transform: translateY(20rem);
+  transform: translateY(20rem);
+}
+
+.sa-Polaris-Modal-Dialog--animateFadeUp.sa-Polaris-Modal-Dialog--entered {
+  opacity: 1;
+  -webkit-transform: translateY(0);
+  transform: translateY(0);
+}
+
+.sa-Polaris-Modal-Footer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-item-align: end;
+  align-self: flex-start;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 100%;
+  min-height: 6.4rem;
+  padding: 1.6rem;
+  border-top: 0.01rem solid var(--sacolor-border);
+}
+
+.sa-Polaris-Modal-Footer__FooterContent {
+  width: 100%;
+}
+
+.sa-Polaris-Modal-CloseButton {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0 -0.8rem 0 2rem;
+  background: 0 0;
+  border: none;
+  font-size: inherit;
+  line-height: inherit;
+  cursor: pointer;
+  padding: 0.8rem;
+}
+
+.sa-Polaris-Modal-Header,
+.sa-Polaris-Modal-Section:not(:last-of-type) {
+  border-bottom: 0.01rem solid var(--sacolor-border);
+}
+
+.sa-Polaris-Modal-CloseButton--withoutTitle {
+  position: absolute;
+  right: 0.8rem;
+}
+
+.sa-Polaris-Modal-Header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  padding: 1.6rem 2rem;
+}
+
+.sa-Polaris-Modal-Header__Title {
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 0%;
+  flex: 1 1 0%;
+  margin-top: 0.4rem;
+  word-break: break-word;
+}
+
+@media (min-width: 40em) {
+  .sa-Polaris-Modal-Header__Title {
+    margin-top: 0.2rem;
+  }
+}
+
+.sa-Polaris-Modal-Section {
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+  padding: 1.6rem 2rem;
+}
+
+.sa-Polaris-Modal-Section:first-of-type {
+  padding-top: 2rem;
+}
+
+.sa-Polaris-Modal-Section.sa-Polaris-Modal-Section--subdued {
+  background: #f6f6f7;
+}
+
+.sa-Polaris-Modal-Section.sa-Polaris-Modal-Section--flush {
+  padding: 0;
+}
+
+.sa-Polaris-Modal__BodyWrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  border-radius: 6px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.sa-Polaris-Modal__Body {
+  overflow: visible;
+  width: 100%;
+}
+
+.page-container {
+  overflow: visible;
+}
+
+.sa-Polaris-Modal__IFrame {
+  display: block;
+  width: 62rem;
+  max-width: 100vw;
+  border: none;
+}
+
+@media (min-width: 48.0625em) {
+  .sa-Polaris-Modal__IFrame {
+    max-width: 62rem;
+  }
+}
+
+.sa-Polaris-Tooltip {
+  margin: 0.4rem 1.6rem 1.6rem;
+  opacity: 1;
+  box-shadow: 0 0 0 1px rgba(6, 44, 82, 0.1), 0 2px 16px rgba(33, 43, 54, 0.08);
+  border-radius: 3px;
+  pointer-events: none;
+  font-size: 10px;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  will-change: opacity, left, top;
+  transition: opacity 200ms cubic-bezier(0.36, 0, 1, 1) 100ms;
+}
+
+@media screen and (-ms-high-contrast: active) {
+  .sa-Polaris-Tooltip {
+    border: 0.2rem solid windowText;
+  }
+}
+
+.sa-Polaris-Tooltip--measuring {
+  opacity: 0;
+}
+
+.sa-Polaris-Tooltip--positionedAbove {
+  margin: 1.6rem 1.6rem 0.4rem;
+}
+
+.sa-Polaris-Tooltip--light .sa-Polaris-Tooltip__Wrapper {
+  background: white;
+  color: #212b36;
+}
+
+.sa-Polaris-Tooltip__Wrapper {
+  position: relative;
+  display: flex;
+  background-color: #212b36;
+  border-radius: 3px;
+  color: white;
+  max-height: 10rem;
+}
+
+.sa-Polaris-Tooltip__Content {
+  position: relative;
+  border-radius: 3px;
+  max-width: 20rem;
+  max-height: 10rem;
+}
+
+.sa-Polaris-Tooltip__Label {
+  padding: 0.4rem 0.8rem;
+  word-break: break-word;
+}
+
+.sa-Tooltip__Success,
+.copy-check .sa-Polaris-Tooltip__Wrapper {
+  background: #2ea937;
+}
+
+.sa-Polaris-PositionedOverlay {
+  display: none;
+  position: absolute;
+  z-index: 400;
+}
+
+.sa-copyLink:hover ~ .copy-overlay {
+  display: block;
+}
+
+.sa-deleteLink:hover ~ .delete-overlay {
+  display: block;
+}
+
+.sa-Polaris-Badge:hover ~ .sa-Polaris-PositionedOverlay {
+  display: block;
+}
+
+.sa-Polaris-PositionedOverlay--fixed {
+  position: fixed;
+}
+
+.sa-Polaris-PositionedOverlay--calculating {
+  visibility: hidden;
+}
+
+.sa-Polaris-Modal__Backdrop {
+  position: fixed;
+  z-index: 99999999;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: block !important;
+  background: rgba(33, 43, 54, 0.4);
+  -webkit-animation: sa-Polaris-Modal__fade--in 0.2s 1 forwards;
+  animation: sa-Polaris-Modal__fade--in 0.2s 1 forwards;
+  opacity: 1;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  will-change: opacity;
+}
+
+.sa-Polaris-Modal__Spinner {
+  margin: 1.6rem;
+  text-align: center;
+}
+
+.sa-Polaris-Stack {
+  margin-top: -1.6rem;
+  margin-left: -1.6rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+}
+
+.sa-Polaris-Stack > .sa-Polaris-Stack__Item {
+  margin-top: 1.6rem;
+  margin-left: 1.6rem;
+  max-width: 100%;
+}
+
+.sa-Polaris-Stack--noWrap {
+  flex-wrap: nowrap;
+}
+
+.sa-Polaris-Stack--spacingNone {
+  margin-top: 0;
+  margin-left: 0;
+}
+
+.sa-Polaris-Stack--spacingNone > .sa-Polaris-Stack__Item {
+  margin-top: 0;
+  margin-left: 0;
+  max-width: 100%;
+}
+
+.sa-Polaris-Stack--spacingExtraTight {
+  margin-top: -0.4rem;
+  margin-left: -0.4rem;
+}
+
+.sa-Polaris-Stack--spacingExtraTight > .sa-Polaris-Stack__Item {
+  margin-top: 0.4rem;
+  margin-left: 0.4rem;
+  max-width: 100%;
+}
+
+.sa-Polaris-Stack--spacingTight {
+  margin-top: -0.8rem;
+  margin-left: -0.8rem;
+}
+
+.sa-Polaris-Stack--spacingTight > .sa-Polaris-Stack__Item {
+  margin-top: 0.8rem;
+  margin-left: 0.8rem;
+  max-width: 100%;
+}
+
+.sa-Polaris-Stack--spacingLoose {
+  margin-top: -2rem;
+  margin-left: -2rem;
+}
+
+.sa-Polaris-Stack--spacingLoose > .sa-Polaris-Stack__Item {
+  margin-top: 2rem;
+  margin-left: 2rem;
+  max-width: 100%;
+}
+
+.sa-Polaris-Stack--spacingExtraLoose {
+  margin-top: -3.2rem;
+  margin-left: -3.2rem;
+}
+
+.sa-Polaris-Stack--spacingExtraLoose > .sa-Polaris-Stack__Item {
+  margin-top: 3.2rem;
+  margin-left: 3.2rem;
+  max-width: 100%;
+}
+
+.sa-Polaris-Stack--distributionLeading {
+  justify-content: flex-start;
+}
+
+.sa-Polaris-Stack--distributionTrailing {
+  justify-content: flex-end;
+}
+
+.sa-Polaris-Stack--distributionCenter {
+  justify-content: center;
+}
+
+.sa-Polaris-Stack--distributionEqualSpacing {
+  justify-content: space-between;
+}
+
+.sa-Polaris-Stack--distributionFill > .sa-Polaris-Stack__Item {
+  flex: 1 1 auto;
+}
+
+.sa-Polaris-Stack--distributionFillEvenly > .sa-Polaris-Stack__Item {
+  flex: 1 1 auto;
+}
+
+@supports ((min-width: -webkit-fit-content) or (min-width: fit-content)) {
+  .sa-Polaris-Stack--distributionFillEvenly > .sa-Polaris-Stack__Item {
+    flex: 1 0;
+    min-width: -webkit-fit-content;
+    min-width: fit-content;
+  }
+}
+
+.sa-Polaris-Stack--alignmentLeading {
+  align-items: flex-start;
+}
+
+.sa-Polaris-Stack--alignmentTrailing {
+  align-items: flex-end;
+}
+
+.sa-Polaris-Stack--alignmentCenter {
+  align-items: center;
+}
+
+.sa-Polaris-Stack--alignmentFill {
+  align-items: stretch;
+}
+
+.sa-Polaris-Stack--alignmentBaseline {
+  align-items: baseline;
+}
+
+.sa-Polaris-Stack--vertical {
+  flex-direction: column;
+  margin-left: 0;
+}
+
+.sa-Polaris-Stack--vertical > .sa-Polaris-Stack__Item {
+  margin-left: 0;
+}
+
+.sa-Polaris-Stack__Item {
+  flex: 0 0 auto;
+  min-width: 0;
+}
+
+.sa-Polaris-Stack__Item--fill {
+  flex: 1 1 auto;
+}
+
+.sa-Polaris-ButtonGroup {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-top: -0.8rem;
+  margin-left: -0.8rem;
+}
+
+.sa-Polaris-ButtonGroup__Item {
+  margin-top: 0.8rem;
+  margin-left: 0.8rem;
+}
+
+.sa-Polaris-ButtonGroup__Item--plain:not(:first-child) {
+  margin-left: 1.6rem;
+}
+
+.sa-Polaris-ButtonGroup__Item--plain:not(:last-child) {
+  margin-right: 0.8rem;
+}
+
+.sa-Polaris-ButtonGroup--segmented {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  margin-top: 0;
+  margin-left: 0;
+}
+
+.sa-Polaris-ButtonGroup--segmented .sa-Polaris-ButtonGroup__Item {
+  position: relative;
+  z-index: 10;
+  margin-top: 0;
+  margin-left: 0;
+}
+
+.sa-Polaris-ButtonGroup--segmented .sa-Polaris-ButtonGroup__Item:not(:first-child) {
+  margin-left: -0.1rem;
+}
+
+.sa-Polaris-ButtonGroup--segmented .sa-Polaris-ButtonGroup__Item > * {
+  border-radius: 0;
+}
+
+.sa-Polaris-ButtonGroup--segmented .sa-Polaris-ButtonGroup__Item:first-child > * {
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+
+.sa-Polaris-ButtonGroup--segmented .sa-Polaris-ButtonGroup__Item:last-child > * {
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+.sa-Polaris-ButtonGroup--segmented .sa-Polaris-ButtonGroup__Item--focused {
+  z-index: 20;
+}
+
+.sa-Polaris-ButtonGroup--fullWidth .sa-Polaris-ButtonGroup__Item {
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+}
+
+.sa-Polaris-ButtonGroup--fullWidth .sa-Polaris-ButtonGroup__Item > * {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+}
+
+.sa-Polaris-ButtonGroup--connectedTop .sa-Polaris-ButtonGroup__Item:first-child > * {
+  border-top-left-radius: 0;
+}
+
+.sa-Polaris-ButtonGroup--connectedTop .sa-Polaris-ButtonGroup__Item:last-child > * {
+  border-top-right-radius: 0;
+}
+
+.sa-Polaris-Stack {
+  margin-top: -1.6rem;
+  margin-left: -1.6rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+}
+
+.sa-Polaris-Stack > .sa-Polaris-Stack__Item {
+  margin-top: 1.6rem;
+  margin-left: 1.6rem;
+  max-width: 100%;
+}
+
+.sa-Polaris-Stack--noWrap {
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+}
+
+.sa-Polaris-Stack--vertical {
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.sa-Polaris-Stack--spacingNone {
+  margin-top: 0;
+  margin-left: 0;
+}
+
+.sa-Polaris-Stack--spacingNone > .sa-Polaris-Stack__Item {
+  margin-top: 0;
+  margin-left: 0;
+  max-width: 100%;
+}
+
+.sa-Polaris-Stack--spacingExtraTight {
+  margin-top: -0.4rem;
+  margin-left: -0.4rem;
+}
+
+.sa-Polaris-Stack--spacingExtraTight > .sa-Polaris-Stack__Item {
+  margin-top: 0.4rem;
+  margin-left: 0.4rem;
+  max-width: 100%;
+}
+
+.sa-Polaris-Stack--spacingTight {
+  margin-top: -0.8rem;
+  margin-left: -0.8rem;
+}
+
+.sa-Polaris-Stack--spacingTight > .sa-Polaris-Stack__Item {
+  margin-top: 0.8rem;
+  margin-left: 0.8rem;
+  max-width: 100%;
+}
+
+.sa-Polaris-Stack--spacingLoose {
+  margin-top: -2rem;
+  margin-left: -2rem;
+}
+
+.sa-Polaris-Stack--spacingLoose > .sa-Polaris-Stack__Item {
+  margin-top: 2rem;
+  margin-left: 2rem;
+  max-width: 100%;
+}
+
+.sa-Polaris-Stack--spacingExtraLoose {
+  margin-top: -3.2rem;
+  margin-left: -3.2rem;
+}
+
+.sa-Polaris-Stack--spacingExtraLoose > .sa-Polaris-Stack__Item {
+  margin-top: 3.2rem;
+  margin-left: 3.2rem;
+  max-width: 100%;
+}
+
+.sa-Polaris-Stack--distributionLeading {
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+}
+
+.sa-Polaris-Stack--distributionTrailing {
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+}
+
+.sa-Polaris-Stack--distributionCenter {
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.sa-Polaris-Stack--distributionEqualSpacing {
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+.sa-Polaris-Stack--distributionFill > .sa-Polaris-Stack__Item,
+.sa-Polaris-Stack--distributionFillEvenly > .sa-Polaris-Stack__Item {
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+}
+
+@supports ((min-width: -webkit-fit-content) or (min-width: -moz-fit-content) or (min-width: fit-content)) {
+  .sa-Polaris-Stack--distributionFillEvenly > .sa-Polaris-Stack__Item {
+    -webkit-box-flex: 1;
+    -ms-flex: 1 0 0%;
+    flex: 1 0 0%;
+    min-width: -webkit-fit-content;
+    min-width: -moz-fit-content;
+    min-width: fit-content;
+  }
+}
+
+.sa-Polaris-Stack--alignmentLeading {
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+}
+
+.sa-Polaris-Stack--alignmentTrailing {
+  -webkit-box-align: end;
+  -ms-flex-align: end;
+  align-items: flex-end;
+}
+
+.sa-Polaris-Stack--alignmentCenter {
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.sa-Polaris-Stack--alignmentFill {
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+}
+
+.sa-Polaris-Stack--alignmentBaseline {
+  -webkit-box-align: baseline;
+  -ms-flex-align: baseline;
+  align-items: baseline;
+}
+
+.sa-Polaris-Stack__Item {
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+  min-width: 0;
+}
+
+.sa-Polaris-Stack__Item--fill {
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+}
+
+@keyframes sa-Polaris-Spinner--loading {
+  to {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+.sa-Polaris-Spinner {
+  position: relative;
+  margin-top: -2px;
+  vertical-align: middle;
+  -webkit-animation: sa-Polaris-Spinner--loading 0.5s linear infinite;
+  animation: sa-Polaris-Spinner--loading 0.5s linear infinite;
+  color: transparent;
+}
+
+.sa-Polaris-Spinner--sizeSmall {
+  height: 1.3rem;
+  width: 1.3rem;
+}
+
+.sa-Polaris-Spinner--sizeLarge {
+  height: 1.5rem;
+  width: 1.5rem;
+}
+
+.sa-Polaris-Spinner--colorWhite {
+  fill: #fff;
+}
+
+.sa-Polaris-Spinner--colorTeal {
+  fill: #47c1bf;
+}
+
+.sa-Polaris-Spinner--colorInkLightest {
+  fill: #919eab;
+}
+
+.sa-Polaris-Button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 13px 24px;
+  background: var(--sacolor-button);
+  border: 0.1rem solid var(--sacolor-button);
+  box-shadow: 0 1px 0 0 rgba(22, 29, 37, 0.05);
+  border-radius: 3px;
+  line-height: 1;
+  color: var(--sacolor-button-hover);
+  text-align: center;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  text-decoration: none;
+  transition-property: background, border, box-shadow;
+  transition-duration: 200ms;
+  transition-timing-function: cubic-bezier(0.64, 0, 0.35, 1);
+}
+#sa-btn-stripe-signup {
+  padding: 8px 16px;
+}
+.sa-Polaris-Button svg {
+  fill: #637381;
+}
+
+.sa-Polaris-Button:hover,
+.sa-Polaris-Button:focus,
+.sa-Polaris-Button:active {
+  background: var(--sacolor-button-hover);
+  color: var(--sacolor-button);
+  border-color: var(--sacolor-button);
+}
+
+@media (-ms-high-contrast: active) {
+  .sa-Polaris-Button:focus {
+    outline: 2px dotted;
+  }
+}
+
+.sa-Polaris-Button.sa-Polaris-Button--disabled {
+  transition: none;
+  background: linear-gradient(to bottom, #f6f6f7, #f6f6f7);
+  color: #919eab;
+}
+
+.sa-Polaris-Button.sa-Polaris-Button--disabled svg {
+  fill: #919eab;
+}
+
+.sa-Polaris-Button__Content {
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1.6rem;
+  text-transform: initial;
+  letter-spacing: initial;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 1px;
+  min-height: 1px;
+}
+
+@media (min-width: 40em) {
+  .sa-Polaris-Button__Content {
+    font-size: 1.4rem;
+  }
+}
+
+.sa-Polaris-Button--plain {
+  margin: -0.7rem -0.8rem;
+  padding-left: 0.8rem;
+  padding-right: 0.8rem;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  color: #006fbb;
+}
+.sa-Polaris-Button--plain svg {
+  fill: #006fbb;
+}
+
+.sa-Polaris-Button--plain:hover,
+.sa-Polaris-Button--plain:focus,
+.sa-Polaris-Button--plain:active {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  color: #084e8a;
+  text-decoration: underline;
+}
+
+.sa-Polaris-Button--plain:hover svg,
+.sa-Polaris-Button--plain:focus svg,
+.sa-Polaris-Button--plain:active svg {
+  fill: #084e8a;
+}
+
+@media (-ms-high-contrast: active) {
+  .sa-Polaris-Button--plain:focus {
+    outline: none;
+  }
+}
+
+@media (-ms-high-contrast: active) {
+  .sa-Polaris-Button--plain:focus > .sa-Polaris-Button__Content {
+    outline: 2px dotted;
+  }
+}
+
+.sa-Polaris-Button--plain:focus:not(.sa-Polaris-Button--iconOnly) > .sa-Polaris-Button__Content {
+  padding: 2px 5px;
+  margin: -2px -5px;
+  background: rgba(33, 43, 54, 0.1);
+  border-radius: 3px;
+  transition: opacity 200ms cubic-bezier(0.64, 0, 0.35, 1);
+}
+
+.sa-Polaris-Button--plain.sa-Polaris-Button--fullWidth {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.sa-Polaris-Button--plain.sa-Polaris-Button--destructive {
+  color: #bf0711;
+}
+
+.sa-Polaris-Button--plain.sa-Polaris-Button--destructive:hover {
+  color: #330101;
+}
+
+.sa-Polaris-Button--plain.sa-Polaris-Button--disabled {
+  background: none;
+}
+
+.sa-Polaris-Button--plain.sa-Polaris-Button--sizeSlim {
+  margin-top: -0.4rem;
+  margin-bottom: -0.4rem;
+}
+
+.sa-Polaris-Button--plain.sa-Polaris-Button--sizeLarge {
+  margin: -1.1rem -2rem;
+}
+
+.sa-Polaris-Button--plain.sa-Polaris-Button--iconOnly {
+  margin: -0.8rem;
+}
+
+.sa-Polaris-Button--plain.sa-Polaris-Button--iconOnly svg {
+  fill: #637381;
+}
+
+.sa-Polaris-Button--plain.sa-Polaris-Button--iconOnly:focus,
+.sa-Polaris-Button--plain.sa-Polaris-Button--iconOnly:active {
+  background: rgba(33, 43, 54, 0.1);
+}
+
+.sa-Polaris-Button--plain.sa-Polaris-Button--iconOnly:focus svg,
+.sa-Polaris-Button--plain.sa-Polaris-Button--iconOnly:active svg {
+  fill: #637381;
+}
+
+.sa-Polaris-Button--plain.sa-Polaris-Button--iconOnly:hover svg,
+.sa-Polaris-Button--plain.sa-Polaris-Button--iconOnly:active svg {
+  fill: #212b36;
+}
+
+.sa-Polaris-Button--plain.sa-Polaris-Button--iconOnly > .sa-Polaris-Button__Content::after {
+  display: none;
+}
+
+.sa-Polaris-Button--plain.sa-Polaris-Button--iconOnly.sa-Polaris-Button--disabled svg {
+  fill: #c4cdd5;
+}
+
+.sa-Polaris-Button--plain .sa-Polaris-Button__Icon {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.sa-Polaris-Button__Icon {
+  transition: color 200ms cubic-bezier(0.64, 0, 0.35, 1);
+}
+
+.sa-Polaris-Button__Icon:first-child {
+  margin-left: -0.4rem;
+}
+
+.sa-Polaris-Button__Icon:last-child {
+  margin-right: -0.8rem;
+  margin-left: 0.4rem;
+}
+
+.sa-Polaris-Button__Icon + *:not(.sa-Polaris-Button__Icon) {
+  margin-left: 0.4rem;
+}
+
+.sa-Polaris-Icon {
+  display: block;
+  height: 2rem;
+  width: 2rem;
+  max-height: 100%;
+  max-width: 100%;
+  margin: auto;
+}
+
+.sa-Polaris-Icon__Svg,
+.sa-Polaris-Icon__Img {
+  position: relative;
+  z-index: 2;
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.sa-Polaris-InlineError__Icon {
+  fill: currentColor;
+  margin-left: -0.2rem;
+  margin-right: 0.4rem;
+}
+.sa-Polaris-InlineSuccess__Icon,
+.sa-Polaris-InlineSuccess__Icon svg {
+  fill: green;
+}
+.sa-Polaris-Button--disabled {
+  cursor: default;
+  pointer-events: none;
+}
+
+.sa-Polaris-Badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 0.8rem;
+  font-size: 12px;
+  background-color: #dfe3e8;
+  border: 0.2rem solid transparent;
+  border-radius: 2rem;
+  color: #454f5b;
+}
+
+.sa-Polaris-Badge .sa-Polaris-Badge__Pip {
+  color: #919eab;
+}
+
+.sa-Polaris-Badge--sizeSmall {
+  font-size: 1.2rem;
+  line-height: 1.8rem;
+}
+
+.sa-Polaris-Badge--statusSuccess {
+  background-color: #bbe5b3;
+  color: #414f3e;
+}
+
+.sa-Polaris-Badge--statusSuccess .sa-Polaris-Badge__Pip {
+  color: #108043;
+}
+
+.sa-Polaris-Badge--statusInfo {
+  background-color: #b4e1fa;
+  color: #3e4e57;
+}
+
+.sa-Polaris-Badge--statusInfo .sa-Polaris-Badge__Pip {
+  color: #084e8a;
+}
+
+.sa-Polaris-Badge--statusAttention {
+  background-color: #ffea8a;
+  color: #595130;
+}
+
+.sa-Polaris-Badge--statusAttention .sa-Polaris-Badge__Pip {
+  color: #8a6116;
+}
+
+.sa-Polaris-Badge--statusWarning {
+  background-color: #ffc58b;
+  color: #594430;
+}
+
+.sa-Polaris-Badge--statusWarning .sa-Polaris-Badge__Pip {
+  color: #c05717;
+}
+
+.sa-Polaris-Badge--statusNew {
+  background-color: #dfe3e8;
+  color: #212b36;
+  font-weight: 500;
+  border: none;
+}
+
+.sa-Polaris-Badge__Pip {
+  height: 1rem;
+  width: 1rem;
+  margin: 0 0.4rem 0 -0.3rem;
+  border: 0.2rem solid currentColor;
+  border-radius: 50%;
+}
+
+.sa-Polaris-Badge--progressIncomplete .sa-Polaris-Badge__Pip {
+  background: transparent;
+}
+
+.sa-Polaris-Badge--progressPartiallyComplete .sa-Polaris-Badge__Pip {
+  background: linear-gradient(to top, currentColor, currentColor 50%, transparent 50%, transparent);
+}
+
+.sa-Polaris-Badge--progressComplete .sa-Polaris-Badge__Pip {
+  background: linear-gradient(to top, currentColor, currentColor 50%, currentColor 50%);
+}
+
+.sa-Polaris-DataTable {
+  position: relative;
+  max-width: 100vw;
+}
+
+.sa-Polaris-DataTable--condensed .sa-Polaris-DataTable__Navigation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 1.6rem 0.8rem;
+}
+
+@media (min-width: 48em) {
+  .sa-Polaris-DataTable--condensed .sa-Polaris-DataTable__Navigation {
+    justify-content: flex-end;
+  }
+}
+
+.sa-Polaris-DataTable__Navigation {
+  display: none;
+}
+
+.sa-Polaris-DataTable__Pip {
+  height: 0.6rem;
+  width: 0.6rem;
+  background: #919eab;
+  border-radius: 3px;
+}
+
+.sa-Polaris-DataTable__Pip:not(:last-of-type) {
+  margin-right: 0.4rem;
+}
+
+.sa-Polaris-DataTable__Pip--visible {
+  background: #212b36;
+}
+
+.sa-Polaris-DataTable__ScrollContainer {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.sa-subHeader {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.sa-Polaris-DataTable__Table {
+  margin-bottom: 2rem;
+}
+
+.sa-Polaris-DataTable__Table {
+  table-layout: auto !important;
+  width: 100%;
+  border-spacing: 0;
+}
+
+.sa-linkWrapper input {
+  margin: 0 !important;
+  width: 100%;
+  background-color: #f4f4f4;
+  padding: 10px;
+  border: 1px solid var(--sacolor-border);
+  border-radius: 5px;
+}
+
+#sa-referral-table .sa-affiliateHiddenInput {
+  margin: 0 !important;
+  padding: 0 !important;
+  display: inline !important;
+}
+
+@media (min-width: 48em) {
+  .sa-Polaris-DataTable__TableRow:hover .sa-Polaris-DataTable__Cell {
+    background: var(--sacolor-background);
+  }
+}
+
+.sa-Polaris-DataTable__Cell {
+  padding: 0.9rem;
+  border-bottom: 0.01rem solid var(--sacolor-border);
+  white-space: nowrap;
+  text-align: left;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.sa-Polaris-DataTable__Cell--firstColumn {
+  font-weight: 400;
+  color: var(--sacolor-text);
+  min-width: 250px;
+  text-align: left;
+  white-space: normal;
+}
+
+.sa-Polaris-DataTable__Cell--destinationColumn {
+  min-width: 200px;
+}
+
+.sa-Polaris-DataTable__Cell--numeric {
+  text-align: center;
+}
+
+.sa-Polaris-DataTable__Cell--truncated {
+  white-space: nowrap;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  max-width: 14.5rem;
+}
+
+.sa-groupDescription {
+  text-align: center;
+}
+
+.sa-Polaris-DataTable__Cell--header {
+  font-weight: 400;
+  color: var(--sacolor-text);
+  border-bottom: 0.01rem solid var(--sacolor-border);
+  border-top: 0;
+}
+
+.sa-Polaris-DataTable__Cell--sortable {
+  padding: 0;
+}
+
+.sa-Polaris-DataTable__Cell--verticalAlignTop {
+  vertical-align: top;
+}
+
+.sa-Polaris-DataTable__Cell--verticalAlignBottom {
+  vertical-align: bottom;
+}
+
+.sa-Polaris-DataTable__Cell--verticalAlignMiddle {
+  vertical-align: middle;
+}
+
+.sa-Polaris-DataTable__Cell--verticalAlignBaseline {
+  vertical-align: baseline;
+}
+
+.sa-Polaris-DataTable__Icon {
+  display: flex;
+  align-self: flex-end;
+  opacity: 0;
+  transition: opacity 200ms cubic-bezier(0.64, 0, 0.35, 1), fill 200ms cubic-bezier(0.64, 0, 0.35, 1);
+}
+
+.sa-Polaris-DataTable__Heading {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
+  background: none;
+  border: none;
+  font-size: inherit;
+  line-height: inherit;
+  cursor: pointer;
+  position: relative;
+  display: inline-flex;
+  justify-content: flex-end;
+  align-items: baseline;
+  transition: color 200ms cubic-bezier(0.64, 0, 0.35, 1);
+  padding: 1.6rem;
+  cursor: pointer;
+}
+
+.sa-Polaris-DataTable__Heading:focus {
+  outline: none;
+}
+
+.sa-Polaris-DataTable__Heading--left {
+  justify-content: flex-start;
+  flex-direction: row-reverse;
+}
+
+.sa-Polaris-DataTable__Cell--sorted .sa-Polaris-DataTable__Icon {
+  opacity: 1;
+}
+
+.sa-Polaris-DataTable__Cell--total {
+  font-weight: 600;
+  border-bottom: 0.01rem solid var(--sacolor-border);
+}
+
+.sa-Polaris-DataTable__Footer {
+  padding: 1.6rem;
+  text-align: center;
+}
+
+@keyframes polaris-SkeletonShimmerAnimation {
+  0% {
+    opacity: 0.45;
+  }
+  100% {
+    opacity: 0.9;
+  }
+}
+
+.sa-loadingInput {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  will-change: opacity;
+  position: relative;
+  display: inline-block;
+  margin-bottom: -3px;
+  -webkit-animation: polaris-SkeletonShimmerAnimation 0.8s linear infinite alternate;
+  animation: polaris-SkeletonShimmerAnimation 0.8s linear infinite alternate;
+}
+
+.sa-Polaris-SkeletonDisplayText__DisplayText {
+  max-width: 12rem;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  will-change: opacity;
+  position: relative;
+  display: inline-block;
+  margin-bottom: -3px;
+  -webkit-animation: polaris-SkeletonShimmerAnimation 0.8s linear infinite alternate;
+  animation: polaris-SkeletonShimmerAnimation 0.8s linear infinite alternate;
+}
+
+.sa-Polaris-SkeletonDisplayText__DisplayText::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: block;
+  background-color: #dfe3e8;
+  border-radius: 3px;
+}
+
+.sa-deleteLink,
+.sa-copyLink {
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+}
+
+.sa-linkWrapper {
+  display: flex;
+  position: relative;
+  align-items: center;
+}
+
+.sa-discountCodeContainer {
+  display: flex;
+  align-items: center;
+}
+
+#saCouponIcon {
+  margin-right: 5px;
+}
+
+.sa-subtitle,
+.sa-tableHeader {
+  font-weight: bold;
+}
+
+.sa-affiliateLinkContainer {
+  display: table;
+}
+
+/* The hidden input sets the height of the link containers to match inputs of the current theme */
+.sa-affiliateHiddenInput {
+  width: 0 !important;
+  padding-right: 0 !important;
+  padding-left: 0 !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  visibility: hidden !important;
+}
+
+/* Some themes add a scrollable-table wrapper. Here we are fixing the flickering this causes */
+h2.sa-title + div {
+  overflow: unset;
+}
+
+.sa-noBorder {
+  border: none;
+}
+
+.sa-signupForm {
+  max-width: 430px;
+  margin: 0 auto;
+  text-align: center;
+  transition: opacity 200ms cubic-bezier(0.64, 0, 0.35, 1);
+}
+
+.sa-linkTable {
+  margin-bottom: 2rem;
+}
+
+input {
+}
+
+::-webkit-input-placeholder {
+  /* WebKit browsers */
+  text-transform: lowercase;
+}
+
+:-moz-placeholder {
+  /* Mozilla Firefox 4 to 18 */
+  text-transform: lowercase;
+}
+
+::-moz-placeholder {
+  /* Mozilla Firefox 19+ */
+  text-transform: lowercase;
+}
+
+:-ms-input-placeholder {
+  /* Internet Explorer 10+ */
+  text-transform: lowercase;
+}
+
+::placeholder {
+  /* Recent browsers */
+  text-transform: lowercase;
+}
+
+.sa-rowTitle {
+  width: 25%;
+  font-weight: bold;
+}
+
+.sa-pageContainer {
+  max-width: calc(100% - 2em);
+  float: none;
+  color: var(--sacolor-text);
+  margin: 20px auto 40px;
+}
+
+.bankAddAdress a {
+  text-decoration: underline !important;
+}
+
+@media screen and (max-width: 620px) {
+  .sa-Table td {
+    width: 100%;
+    display: block;
+  }
+
+  .sa-Table td:not(tr:last-child td:last-child) {
+    border-bottom: none;
+  }
+}
+
+.sa-Spinner {
+  display: inline-flex !important;
+}
+
+.sa-Spinner svg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+}
+
+.sa-mainContainer {
+  max-width: 970px;
+  margin: 0 auto;
+  padding: 10px;
+  transition: opacity 0.2s ease;
+}
+
+#sa-btn-edit-payment-email {
+  padding: 7px;
+}
+
+#sa-btn-edit-payment-email svg {
+  margin-bottom: -2px;
+}
+
+#sa-btn-edit-payment-email:hover svg {
+  fill: grey;
+}
+
+.sa-showLoad {
+  display: flex !important;
+}
+
+.sa-Loading {
+  opacity: 0.5;
+}
+
+.sa-formLoading {
+  max-width: 2.5em;
+  margin: 0 auto;
+}
+
+.sa-signupStep {
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: normal;
+  margin: 0 auto;
+  justify-content: center;
+  text-align: center;
+  transition: opacity 200ms cubic-bezier(0.64, 0, 0.35, 1);
+}
+.sa-formRow {
+  display: flex;
+  flex-direction: column;
+}
+.sa-formInput,
+.sa-formLabel {
+  width: 100%;
+  float: none;
+}
+
+.sa-formInput,
+.sa-formDescription,
+.sa-checkboxRow {
+  margin-bottom: 1.3rem;
+}
+.sa-formInput:not(#sa-social-name-input)::-webkit-input-placeholder {
+  color: transparent;
+}
+.sa-formInput:not(#sa-social-name-input):-moz-placeholder {
+  /* Firefox 18- */
+  color: transparent;
+}
+.sa-formInput:not(#sa-social-name-input)::-moz-placeholder {
+  /* Firefox 19+ */
+  color: transparent;
+}
+.sa-formInput:not(#sa-social-name-input):-ms-input-placeholder {
+  color: transparent;
+}
+.sa-formInput:not(#sa-social-name-input)::placeholder {
+  opacity: 0;
+}
+.sa-checkboxRow {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.sa-formInput {
+  order: 2;
+}
+.sa-formLabel {
+  text-align: left;
+  order: 1;
+}
+.sa-formCheckbox {
+  flex-basis: 30px;
+  margin-bottom: 0;
+}
+.sa-affiliateAddLinkBtn {
+  margin-top: 10px;
+}
+.sa-linkError {
+  color: #bf0711;
+  fill: #bf0711;
+}
+.sa-labelHidden {
+  display: none;
+}
+.sa-Polaris-Link {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  display: inline;
+  text-align: inherit;
+  padding: 0;
+  background: none;
+  border: 0;
+  font-size: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+.sa-Polaris-Link:hover {
+  text-decoration: underline;
+}
+.sa-Polaris-Link svg {
+  width: 20px;
+  height: 20px;
+}
+.sa-Polaris-Link .sa-Polaris-Icon {
+  width: 20px;
+  height: 20px;
+}
+.sa-Polaris-Link__IconLockup {
+  display: inline;
+  white-space: nowrap;
+}
+.sa-Polaris-Link__IconLockup::before {
+  content: "\2060";
+}
+.sa-Polaris-Link__IconLayout::before {
+  content: "\2060";
+}
+.sa-Polaris-Link__IconLayout {
+  display: inline-flex;
+}
+/* --------------------------------------------------------- */
+/* credits: https://codepen.io/EastingAndNorthing/pen/aNWrZz */
+
+.sa-loadingspinner {
+  pointer-events: none;
+  width: 2.5em;
+  height: 2.5em;
+  border: 0.4em solid #eee;
+  border-top-color: #888;
+  border-radius: 50%;
+  animation: loadingspin 1s linear infinite;
+}
+
+@keyframes loadingspin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* NEW SA FRAME STYLES */
+.sa-Table {
+  width: 100%;
+}
+.sa-hide {
+  display: none !important;
+}
+.sa-modalItem {
+  margin: 10px 0;
+}
+.sa-flex {
+  display: flex;
+  align-items: center;
+}
+.sa-space-between {
+  justify-content: space-between;
+}
+.sa-space-evenly {
+  justify-content: space-evenly;
+}
+.sa-start {
+  justify-content: flex-start;
+}
+.sa-center {
+  justify-content: center;
+}
+.sa-end {
+  justify-content: flex-end;
+}
+.sa-align-start {
+  align-items: flex-start;
+}
+.sa-align-end {
+  align-items: flex-end;
+}
+.sa-column {
+  flex-direction: column;
+}
+.sa-spread {
+  width: 100%;
+}
+button:disabled,
+button[disabled] {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+.sa-editIcon {
+  width: 15px;
+  height: 15px;
+}
+</style>
+        <style></style>
+        <input id="sa-token" type="hidden" value="{% capture saPayload %}sh_shop=pedalindustries.myshopify.com&customer_id={{ customer.id | url_encode }}&iat={{ "now" | date: "%s" }}{% endcapture %}{{ saPayload }}#{{ saPayload | hmac_sha256: "325799c560666b0a8fd45e1dc03a0bda99ef42c8d1612051eb0ee652d7d12030" }}">
+        <input id="sa-logged-in" type="hidden" value="{% if customer %}yes{% endif %}">
+        <input id="sa-affiliate-status" type="hidden" value="{{ customer.metafields.SimpleAffiliate.affiliate-status-015c1f }}">
+        <input id="sa-payload" type="hidden" value="%7B%22merchantSubset%22%3A%7B%22sh_shop%22%3A%22pedalindustries.myshopify.com%22%2C%22sh_domain%22%3A%22pedalindustries.com%22%2C%22sh_currency%22%3A%22USD%22%2C%22signup_field_social%22%3A%22required%22%2C%22signup_field_phone%22%3A%22required%22%2C%22signup_custom_text%22%3Anull%2C%22signup_custom_text_2%22%3Anull%2C%22signup_field_custom%22%3A%22hidden%22%2C%22signup_field_custom_2%22%3A%22hidden%22%2C%22signup_field_agreement%22%3A%22hidden%22%2C%22signup_field_birth_year%22%3A%22hidden%22%2C%22signup_field_payment%22%3A%22email%22%2C%22signup_agreement_link%22%3Anull%2C%22sh_affiliate_page_slug%22%3A%22affiliate%22%2C%22sh_main_redirect_path%22%3A%22%2Fr%22%2C%22autopay_enabled%22%3Afalse%2C%22minimum_commission_amount%22%3Anull%2C%22is_wizard_complete%22%3Atrue%2C%22last_installed_at%22%3A%222022-01-10T23%3A14%3A06.962Z%22%2C%22option_signup_mode%22%3A%22manual%22%7D%2C%22i18n%22%3A%7B%22popupReqLogInTitle%22%3A%22Log%20in%20required%22%2C%22popupReqLogInText%22%3A%22You%20need%20to%20be%20logged%20in%20to%20access%20your%20affiliate%20dashboard.%20Please%20log%20in%20to%20an%20existing%20account%2C%20or%20register%20a%20new%20one%20to%20continue.%22%2C%22popupReqLogInDisabledText%22%3A%22You%20need%20to%20be%20logged%20in%20to%20access%20your%20affiliate%20dashboard.%20Please%20log%20in%20to%20an%20existing%20affiliate%20account%20to%20continue.%22%2C%22popupLogIn%22%3A%22Log%20in%22%2C%22popupRegister%22%3A%22Register%22%2C%22signupHeader%22%3A%22Signup%20form%22%2C%22signupPaymentEmail%22%3A%22Payment%20email%22%2C%22signupPaymentDetails%22%3A%22Payment%20details%22%2C%22signupDescription%22%3A%22Please%20provide%20the%20following%20information%20to%20get%20started%20as%20an%20affiliate.%20You%20will%20receive%20payouts%20to%20your%20payment%20email.%22%2C%22signupSubmit%22%3A%22Submit%22%2C%22signupFirstNameTitle%22%3A%22First%20name%22%2C%22signupLastNameTitle%22%3A%22Last%20name%22%2C%22signupEmailTitle%22%3A%22Email%22%2C%22signupSocialNameTitle%22%3A%22Social%20name%22%2C%22signupSocialNamePlaceholder%22%3A%22Example%3A%20%40instagram_username%22%2C%22signupPhoneTitle%22%3A%22Phone%20number%22%2C%22signupBirthYearTitle%22%3A%22Year%20of%20birth%22%2C%22signupAgreementTitle%22%3A%22Affiliate%20Agreement%22%2C%22signupAgreementText%22%3A%22I%20agree%20to%20the%20%5BAGREEMENT%5D%22%2C%22signupRegisterCompleteTitle%22%3A%22Affiliate%20registration%20complete%22%2C%22signupRegisterCompleteText%22%3A%22We%20noticed%20you%20already%20have%20an%20account%20on%20our%20store%20with%20the%20email%20%5BEMAIL%5D.%20Please%20log%20in%20to%20your%20existing%20account%20to%20access%20your%20affiliate%20dashboard.%22%2C%22signupStripeAccount%22%3A%22Bank%20account%22%2C%22affDashPendingTitle%22%3A%22Pending%20approval%22%2C%22affDashPendingText%22%3A%22We%20are%20reviewing%20your%20application.%20You%20will%20receive%20an%20email%20as%20soon%20as%20you%20are%20approved.%22%2C%22affDashDisabledTitle%22%3A%22Account%20disabled%22%2C%22affDashDisabledText%22%3A%22Your%20affiliate%20account%20was%20disabled.%20Please%20contact%20support%20if%20you%20need%20any%20help.%22%2C%22affDashTitle%22%3A%22Affiliate%20Dashboard%22%2C%22affDashRefTitle%22%3A%22Referral%20Tools%22%2C%22affDashLink%22%3A%22Link%22%2C%22affDashDest%22%3A%22Destination%22%2C%22affDashType%22%3A%22Type%22%2C%22affDashTool%22%3A%22Tool%22%2C%22affDashSales%22%3A%22Sales%22%2C%22affDashDiscountInst%22%3A%22To%20be%20used%20at%20checkout%22%2C%22affDashTotals%22%3A%22Totals%22%2C%22affDashNewLink%22%3A%22New%20link%22%2C%22affDashNewLinkError%22%3A%22This%20page%20doesn't%20exist%20on%20our%20store.%20Please%20insert%20a%20link%20to%20a%20valid%20page.%22%2C%22affDashCreateLink%22%3A%22Create%20a%20new%20referral%20link%22%2C%22affDashEnterDestination%22%3A%22Which%20URL%20should%20this%20link%20go%20to%20when%20clicked%3F%22%2C%22affDashDeleteLink%22%3A%22Delete%20link%22%2C%22affDashAreYouSureDelete%22%3A%22Are%20you%20sure%20you%20want%20to%20delete%20this%20link%3F%22%2C%22affDashDelete%22%3A%22Delete%22%2C%22affDashSave%22%3A%22Save%22%2C%22affDashDeleteLinkTooltip%22%3A%22Delete%20link%3F%22%2C%22affDashCopyLinkTooltip%22%3A%22Copy%20link%3F%22%2C%22affDashCustomLink%22%3A%22Custom%22%2C%22affDashReferrals%22%3A%22Referrals%22%2C%22affDashRewardTitle%22%3A%22Reward%20Status%22%2C%22affDashRewardComm%22%3A%22Commission%22%2C%22affDashModalEditInfoTitle%22%3A%22Update%20your%20information%22%2C%22affDashRewardCommText%22%3A%22Earn%20%5BCOMM%5D%20when%20you%20make%20a%20sale.%22%2C%22affDashRewardFirstCommText%22%3A%22Earn%20%5BCOMM%5D%20for%20first-time%20customers.%22%2C%22affDashRewardCommMinConditionText%22%3A%22The%20minimum%20purchase%20amount%20is%20%5BCOND%5D.%22%2C%22affDashRewardDiscount%22%3A%22Discount%22%2C%22affDashRewardDiscountText%22%3A%22Orders%20placed%20using%20your%20discount%20code%20%5BCODE%5D%20will%20earn%20you%20commission.%22%2C%22affDashStatsTitle%22%3A%22Statistics%22%2C%22affDashStatsClicks%22%3A%22Clicks%22%2C%22affDashStatsCurrEarn%22%3A%22Current%20earnings%22%2C%22affDashCommissionThreshold%22%3A%22Commission%20threshold%22%2C%22affDashStatsTotEarn%22%3A%22Total%20earnings%22%2C%22affDashStripeConnect%22%3A%22Connect%20bank%22%2C%22affDashStripeDisableTitle%22%3A%22Disconnect%20bank%22%2C%22affDashStripeDisablePrompt%22%3A%22Are%20you%20sure%20you%20want%20to%20disconnect%20your%20bank%20account%3F%22%2C%22affDashStripeDisconnectButton%22%3A%22Disconnect%22%2C%22affDashStripeEnabled%22%3A%22Bank%20enabled%22%2C%22affDashStripeAddress%22%3A%22Before%20you%20can%20connect%20your%20bank%2C%20please%20%3Ca%20href%3D%5C%22%2Faccount%2Faddresses%5C%22%3Eadd%20your%20address%3C%2Fa%3E%20to%20your%20account.%22%2C%22affStripeDashboard%22%3A%22Manage%20payouts%22%2C%22affDashAutoDiscountTooltip%22%3A%22Auto-applies%20discount%20code%22%2C%22affDashErrorInvalidPhone%22%3A%22Phone%20number%20invalid%22%2C%22affDashErrorDuplicatePhone%22%3A%22Phone%20number%20already%20exists%20in%20our%20system%22%2C%22affDashErrorInvalidEmail%22%3A%22Invalid%20email%22%2C%22affDashErrorInvalidEmailDomain%22%3A%22Email%20contains%20an%20invalid%20domain%20name%22%2C%22notifyReferSelf%22%3A%22You%20can't%20refer%20yourself%22%2C%22notifyLinkCreate%22%3A%22Link%20created%22%2C%22notifyCouponApplied%22%3A%22You%20were%20referred%20by%20%5BNAME%5D!%20Discount%20code%20applied%3A%20%5BCODE%5D%22%2C%22emailFooter%22%3A%22If%20you%20have%20any%20questions%2C%20reply%20to%20this%20email%20or%20contact%20us%20at%20%5BEMAIL%5D%22%2C%22emailWelcomeSubject%22%3A%22Affiliate%20account%20confirmation%22%2C%22emailWelcomeBody%22%3A%22%3Ch2%3EWelcome%20%5BFIRSTNAME%5D!%3C%2Fh2%3E%3Cp%3EWe've%20created%20your%20affiliate%20account.%20Click%20the%20button%20below%20to%20visit%20your%20dashboard.%3C%2Fp%3E%22%2C%22emailWelcomeStripeBody%22%3A%22%3Cbr%2F%3E%3Cp%3EMake%20sure%20to%20connect%20your%20bank%20account%20once%20you've%20logged%20in.%3C%2Fp%3E%22%2C%22emailWelcomeButton%22%3A%22Visit%20dashboard%22%2C%22emailSuspendedSubject%22%3A%22Affiliate%20account%20suspended%22%2C%22emailSuspendedBody%22%3A%22%3Ch2%3E%5BFIRSTNAME%5D%2C%20your%20affiliate%20account%20has%20been%20suspended.%3C%2Fh2%3E%3Cp%3EPlease%20contact%20support%20for%20more%20information.%3C%2Fp%3E%22%2C%22emailStripeInviteSubject%22%3A%22Connect%20your%20bank%20account%20for%20payouts!%22%2C%22emailStripeInviteBody%22%3A%22%3Ch2%3EHello%20%5BFIRSTNAME%5D!%3C%2Fh2%3EYou%20can%20now%20receive%20your%20commission%20payments%20directly%20to%20your%20bank%20account.%20Click%20the%20button%20below%20to%20visit%20your%20dashboard%20and%20sign%20up.%3C%2Fp%3E%22%2C%22emailStripeInviteButton%22%3A%22Visit%20dashboard%22%2C%22emailDiscountChangedSubject%22%3A%22%5BAction%20Required%5D%20Your%20referral%20discount%20code%20has%20been%20changed.%22%2C%22emailDiscountChangedBody%22%3A%22The%20discount%20code%20you%20use%20to%20make%20referrals%20has%20been%20changed%20from%20%3Cb%3E%5BOLDCODE%5D%3C%2Fb%3E%20to%20%3Cb%3E%5BNEWCODE%5D%3C%2Fb%3E.%20If%20you%20have%20your%20discount%20code%20listed%20anywhere%2C%20please%20make%20sure%20to%20update%20it.%22%2C%22invoiceCustomHtml%22%3A%22%3Ch3%3EHOW%20TO%20PAY%20THIS%20INVOICE%3C%2Fh3%3E%5Cn%3Cp%3EPay%20using%20the%20method%20of%20your%20choice.%3C%2Fp%3E%5Cn%3Cp%3E%5BPAYINFO%5D%3C%2Fp%3E%22%2C%22errorInvalidPhone%22%3A%22The%20phone%20number%20is%20not%20valid.%22%2C%22errorDuplicatePhone%22%3A%22The%20phone%20number%20already%20exists%20in%20our%20system.%22%2C%22errorInvalidEmail%22%3A%22The%20email%20address%20is%20not%20valid.%22%2C%22dateRangeOptionToday%22%3A%22Today%22%2C%22dateRangeOptionYesterday%22%3A%22Yesterday%22%2C%22dateRangeOptionLast7days%22%3A%22Last%207%20days%22%2C%22dateRangeOptionLast30days%22%3A%22Last%2030%20days%22%2C%22dateRangeOptionLast90days%22%3A%22Last%2090%20days%22%2C%22dateRangeOptionLastMonth%22%3A%22Last%20month%22%2C%22dateRangeOptionLastYear%22%3A%22Last%20year%22%2C%22dateRangeOptionWeekToDate%22%3A%22Week%20to%20date%22%2C%22dateRangeOptionMonthToDate%22%3A%22Month%20to%20date%22%2C%22dateRangeOptionYearToDate%22%3A%22Year%20to%20date%22%2C%22dateRangeOptionAllTime%22%3A%22All%20time%22%2C%22emailInviteBody%22%3A%22%3Cp%3EHi%20there%2C%3C%2Fp%3E%5Cn%3Cp%3EWelcome%20to%20the%20money%20making%20side%20of%20PEDALindustries.%3C%2Fp%3E%5Cn%3Cbr%3E%5Cn%3Cp%3EWe've%20created%20your%20affiliate%20code.%20Your%20account%20has%20your%20referral%20tools%20and%20statistics%20-%20all%20you%20have%20to%20do%20is%20activate%20it.%3C%2Fp%3E%5Cn%3Cbr%3E%5Cn%3Cp%3ENote%3A%20%20the%20code%20is%20not%20for%20team%20orders%2C%20this%20code%20is%20ONLY%20FOR%20STOCK%20designs.%3C%2Fp%3E%5Cn%3Cbr%3E%5Cn%3Cp%3EWhile%20we'd%20never%20make%20you%20any%20promises%2C%20we%20can%20share%20that%20successfull%20affiliates%20are%20making%20thousands%20of%20%24%20per%20year.%20%20The%20most%20successful%2C%20create%20a%20product%20review%20video%20on%20YT%20and%20share%20their%20promo%20code.%3C%2Fp%3E%5Cn%3Cbr%3E%5Cn%3Cp%3EI%20recommend%20you%20start%20your%20friends%20out%20on%20the%20RaceDay%20Bag%E2%84%A2%20page%3A%20%20https%3A%2F%2Fpedalindustries.com%2Fpages%2Fall-raceday-bags%3C%2Fp%3E%5Cn%3Cbr%3E%5Cn%3Cp%3EThe%20promo%20code%20is%20unique%20to%20you%2C%20and%20saves%20your%20peeps%2010%25%20on%20everything%20we%20sell...%20while%20paying%20you%2010%25%20of%20everything%20they%20purchase.%3C%2Fp%3E%5Cn%3Cbr%3E%5Cn%3Cp%3EWe%20run%20reports%20the%20second%20Tuesday%20of%20each%20month%20and%20pay%20you%20through%20PayPal.%20%20%3Cu%3EBe%20sure%20and%20send%20us%20your%20PayPal%20account%20info.%3C%2Fu%3E%3C%2Fp%3E%5Cn%3Cbr%3E%5Cn%3Cp%3EPing%20me%20if%20you%20need%20anything%20at%20all...%20you're%20awesome!%2C%20tb%3C%2Fp%3E%5Cn%5Cn**%20Get%20the%20code%2C%20share%20the%20mission%2C%20earn%20a%20commision%20**%22%2C%22emailInviteButton%22%3A%22Activate%20affiliate%20account%22%2C%22emailInviteSubject%22%3A%22Activate%20your%20affiliate%20account%22%7D%7D">
+        <div class="sa-pageContainer">
+            <h1 class="sa-PageTitle">{{ page.title }}</h1>
+            {% if customer %}
+                {{ page.content }}
+                <div id="sa-container" class="sa-mainContainer">
+                    {% if customer.metafields.SimpleAffiliate.affiliate-status-015c1f == "suspended" or customer.metafields.SimpleAffiliate.affiliate-status-015c1f == "deleted" %}
+                        
+        <div class="sa-signupStep">
+            <h2 class="sa-subHeader">Account disabled</h2>
+            <div class="sa-formRow sa-Polaris-Stack__Item">
+                <p>Your affiliate account was disabled. Please contact support if you need any help.</p>
+            </div>
+        </div>
+                    {% elsif customer.metafields.SimpleAffiliate.affiliate-status-015c1f == "active" or customer.metafields.SimpleAffiliate.affiliate-status-015c1f == "inactive" %}
+                        
+        <h2 class="sa-subHeader sa-affDashRewardTitle">Reward Status</h2>
+        <table class="sa-Table sa-affDashRewardTable">
+            <tr class="sa-Row sa-reward">
+                <td class="sa-rowTitle"><strong>Commission</strong></td>
+                <td class="sa-rowDiv">
+                    <span class="sa-rowContent">
+                        
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" class="sa-Polaris-Spinner sa-Polaris-Spinner--colorTeal sa-Polaris-Spinner--sizeSmall">
+        <path d="M15.542 1.487A21.507 21.507 0 0 0 .5 22c0 11.874 9.626 21.5 21.5 21.5 9.847 0 18.364-6.675 20.809-16.072a1.5 1.5 0 0 0-2.904-.756C37.803 34.755 30.473 40.5 22 40.5 11.783 40.5 3.5 32.217 3.5 22c0-8.137 5.3-15.247 12.942-17.65a1.5 1.5 0 1 0-.9-2.863z"/>
+    </svg>
+
+                    </span>
+                </td>
+            </tr>
+            <tr class="sa-Row sa-discount">
+                <td class="sa-rowTitle"><strong>Discount</strong></td>
+                <td class="sa-rowDiv">
+                    <span class="sa-rowContent">
+                        
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" class="sa-Polaris-Spinner sa-Polaris-Spinner--colorTeal sa-Polaris-Spinner--sizeSmall">
+        <path d="M15.542 1.487A21.507 21.507 0 0 0 .5 22c0 11.874 9.626 21.5 21.5 21.5 9.847 0 18.364-6.675 20.809-16.072a1.5 1.5 0 0 0-2.904-.756C37.803 34.755 30.473 40.5 22 40.5 11.783 40.5 3.5 32.217 3.5 22c0-8.137 5.3-15.247 12.942-17.65a1.5 1.5 0 1 0-.9-2.863z"/>
+    </svg>
+
+                    </span>
+                </td>
+            </tr>
+            
+        <tr class="sa-Row sa-payment-email">
+            <td class="sa-rowTitle"><strong>Payment email</strong></td>
+            <td class="sa-rowDiv">
+                <span class="sa-rowContent">
+                    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" class="sa-Polaris-Spinner sa-Polaris-Spinner--colorTeal sa-Polaris-Spinner--sizeSmall">
+        <path d="M15.542 1.487A21.507 21.507 0 0 0 .5 22c0 11.874 9.626 21.5 21.5 21.5 9.847 0 18.364-6.675 20.809-16.072a1.5 1.5 0 0 0-2.904-.756C37.803 34.755 30.473 40.5 22 40.5 11.783 40.5 3.5 32.217 3.5 22c0-8.137 5.3-15.247 12.942-17.65a1.5 1.5 0 1 0-.9-2.863z"/>
+    </svg>
+
+                </span>
+            </td>
+        </tr>
+            
+        <tr class="sa-Row sa-social-name">
+            <td class="sa-rowTitle"><strong>Social name</strong></td>
+            <td class="sa-rowDiv">
+                <span class="sa-rowContent">
+                    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" class="sa-Polaris-Spinner sa-Polaris-Spinner--colorTeal sa-Polaris-Spinner--sizeSmall">
+        <path d="M15.542 1.487A21.507 21.507 0 0 0 .5 22c0 11.874 9.626 21.5 21.5 21.5 9.847 0 18.364-6.675 20.809-16.072a1.5 1.5 0 0 0-2.904-.756C37.803 34.755 30.473 40.5 22 40.5 11.783 40.5 3.5 32.217 3.5 22c0-8.137 5.3-15.247 12.942-17.65a1.5 1.5 0 1 0-.9-2.863z"/>
+    </svg>
+
+                </span>
+            </td>
+        </tr>
+            
+        </table>
+        <h2 class="sa-subHeader sa-affDashStatsTitle">Statistics
+        <span>
+          <select id="sa-select-stats">
+            <option value="today" selected>Today</option><option value="yesterday">Yesterday</option><option value="last7days">Last 7 days</option><option value="last30days">Last 30 days</option><option value="last90days">Last 90 days</option><option value="lastmonth">Last month</option><option value="lastyear">Last year</option><option value="weektodate">Week to date</option><option value="monthtodate">Month to date</option><option value="yeartodate">Year to date</option><option value="alltime">All time</option>
+          </select>
+        </span>
+        </h2>        
+        <table class="sa-Table sa-affDashStatsTable">
+            <tr class="sa-Row sa-current-earnings">
+                <td class="sa-rowTitle"><strong>Current earnings</strong></td>
+                <td class="sa-rowDiv">
+                    <div class="sa-rowContent" style="display:inline;">
+                        
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" class="sa-Polaris-Spinner sa-Polaris-Spinner--colorTeal sa-Polaris-Spinner--sizeSmall">
+        <path d="M15.542 1.487A21.507 21.507 0 0 0 .5 22c0 11.874 9.626 21.5 21.5 21.5 9.847 0 18.364-6.675 20.809-16.072a1.5 1.5 0 0 0-2.904-.756C37.803 34.755 30.473 40.5 22 40.5 11.783 40.5 3.5 32.217 3.5 22c0-8.137 5.3-15.247 12.942-17.65a1.5 1.5 0 1 0-.9-2.863z"/>
+    </svg>
+
+                    </div>
+                </td>
+                
+            </tr>
+            <tr class="sa-Row sa-total-earnings">
+                <td class="sa-rowTitle"><strong>Total earnings</strong></td>
+                <td class="sa-rowDiv">
+                    <div class="sa-rowContent"">
+                        
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" class="sa-Polaris-Spinner sa-Polaris-Spinner--colorTeal sa-Polaris-Spinner--sizeSmall">
+        <path d="M15.542 1.487A21.507 21.507 0 0 0 .5 22c0 11.874 9.626 21.5 21.5 21.5 9.847 0 18.364-6.675 20.809-16.072a1.5 1.5 0 0 0-2.904-.756C37.803 34.755 30.473 40.5 22 40.5 11.783 40.5 3.5 32.217 3.5 22c0-8.137 5.3-15.247 12.942-17.65a1.5 1.5 0 1 0-.9-2.863z"/>
+    </svg>
+
+                    </div>
+                </td>
+            </tr>
+            <tr class="sa-Row">
+                <td class="sa-rowTitle"><strong>Referrals</strong></td>
+                <td class="sa-rowDiv">
+                    <div class="sa-rowContent"">
+                        
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" class="sa-Polaris-Spinner sa-Polaris-Spinner--colorTeal sa-Polaris-Spinner--sizeSmall">
+        <path d="M15.542 1.487A21.507 21.507 0 0 0 .5 22c0 11.874 9.626 21.5 21.5 21.5 9.847 0 18.364-6.675 20.809-16.072a1.5 1.5 0 0 0-2.904-.756C37.803 34.755 30.473 40.5 22 40.5 11.783 40.5 3.5 32.217 3.5 22c0-8.137 5.3-15.247 12.942-17.65a1.5 1.5 0 1 0-.9-2.863z"/>
+    </svg>
+
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <h2 class="sa-subHeader sa-affDashRefTitle">Referral Tools</h2>
+        <form class="sa-linkTable">     
+            <div class="sa-Polaris-DataTable">
+                <div class="sa-Polaris-DataTable__ScrollContainer">
+                    <table class="sa-Polaris-DataTable__Table">
+                        <thead>                       
+                            <tr>
+                                <th class="sa-tableHeader sa-Polaris-DataTable__Cell sa-Polaris-DataTable__Cell--verticalAlignMiddle sa-Polaris-DataTable__Cell--firstColumn sa-Polaris-DataTable__Cell--header" scope="col">Tool</th>
+                                <th class="sa-tableHeader sa-Polaris-DataTable__Cell sa-Polaris-DataTable__Cell--verticalAlignMiddle sa-Polaris-DataTable__Cell--header sa-Polaris-DataTable__Cell--numeric" scope="col">Clicks</th>
+                                <th class="sa-tableHeader sa-Polaris-DataTable__Cell sa-Polaris-DataTable__Cell--verticalAlignMiddle sa-Polaris-DataTable__Cell--header sa-Polaris-DataTable__Cell--numeric" scope="col">Sales</th>
+                                <th class="sa-tableHeader sa-Polaris-DataTable__Cell sa-Polaris-DataTable__Cell--verticalAlignMiddle sa-Polaris-DataTable__Cell--header sa-Polaris-DataTable__Cell" scope="col">Type</th>
+                                <th class="sa-tableHeader sa-Polaris-DataTable__Cell sa-Polaris-DataTable__Cell--verticalAlignMiddle sa-Polaris-DataTable__Cell--header sa-Polaris-DataTable__Cell" scope="col">Destination</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+        <tr class="sa-Polaris-DataTable__TableRow">
+            <th class="sa-Polaris-DataTable__Cell sa-Polaris-DataTable__Cell--verticalAlignMiddle sa-Polaris-DataTable__Cell--firstColumn" scope="row">
+        <div class="sa-linkWrapper">
+            <input class="sa-loadingInput" placeholder="Loading ..." readonly="readonly" >
+        </div></th>
+            <td class="sa-Polaris-DataTable__Cell sa-Polaris-DataTable__Cell--verticalAlignMiddle sa-Polaris-DataTable__Cell--numeric">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" class="sa-Polaris-Spinner sa-Polaris-Spinner--colorTeal sa-Polaris-Spinner--sizeSmall">
+        <path d="M15.542 1.487A21.507 21.507 0 0 0 .5 22c0 11.874 9.626 21.5 21.5 21.5 9.847 0 18.364-6.675 20.809-16.072a1.5 1.5 0 0 0-2.904-.756C37.803 34.755 30.473 40.5 22 40.5 11.783 40.5 3.5 32.217 3.5 22c0-8.137 5.3-15.247 12.942-17.65a1.5 1.5 0 1 0-.9-2.863z"/>
+    </svg>
+<input class="sa-affiliateHiddenInput"></td>
+            <td class="sa-Polaris-DataTable__Cell sa-Polaris-DataTable__Cell--verticalAlignMiddle sa-Polaris-DataTable__Cell--numeric">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" class="sa-Polaris-Spinner sa-Polaris-Spinner--colorTeal sa-Polaris-Spinner--sizeSmall">
+        <path d="M15.542 1.487A21.507 21.507 0 0 0 .5 22c0 11.874 9.626 21.5 21.5 21.5 9.847 0 18.364-6.675 20.809-16.072a1.5 1.5 0 0 0-2.904-.756C37.803 34.755 30.473 40.5 22 40.5 11.783 40.5 3.5 32.217 3.5 22c0-8.137 5.3-15.247 12.942-17.65a1.5 1.5 0 1 0-.9-2.863z"/>
+    </svg>
+</td>
+            <td class="sa-Polaris-DataTable__Cell sa-Polaris-DataTable__Cell--verticalAlignMiddle sa-Polaris-DataTable__Cell sa-Polaris-DataTable__Cell--badgeColumn">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" class="sa-Polaris-Spinner sa-Polaris-Spinner--colorTeal sa-Polaris-Spinner--sizeSmall">
+        <path d="M15.542 1.487A21.507 21.507 0 0 0 .5 22c0 11.874 9.626 21.5 21.5 21.5 9.847 0 18.364-6.675 20.809-16.072a1.5 1.5 0 0 0-2.904-.756C37.803 34.755 30.473 40.5 22 40.5 11.783 40.5 3.5 32.217 3.5 22c0-8.137 5.3-15.247 12.942-17.65a1.5 1.5 0 1 0-.9-2.863z"/>
+    </svg>
+</td>                     
+            <td class="sa-Polaris-DataTable__Cell sa-Polaris-DataTable__Cell--verticalAlignMiddle sa-Polaris-DataTable__Cell sa-Polaris-DataTable__Cell--destinationColumn">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" class="sa-Polaris-Spinner sa-Polaris-Spinner--colorTeal sa-Polaris-Spinner--sizeSmall">
+        <path d="M15.542 1.487A21.507 21.507 0 0 0 .5 22c0 11.874 9.626 21.5 21.5 21.5 9.847 0 18.364-6.675 20.809-16.072a1.5 1.5 0 0 0-2.904-.756C37.803 34.755 30.473 40.5 22 40.5 11.783 40.5 3.5 32.217 3.5 22c0-8.137 5.3-15.247 12.942-17.65a1.5 1.5 0 1 0-.9-2.863z"/>
+    </svg>
+</td>
+        </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th class="sa-Polaris-DataTable__Cell sa-Polaris-DataTable__Cell--verticalAlignTop sa-Polaris-DataTable__Cell--firstColumn sa-Polaris-DataTable__Cell--total" scope="row">Totals</th>
+                                <td style="text-align:center" class="sa-Polaris-DataTable__Cell sa-Polaris-DataTable__Cell--verticalAlignTop sa-Polaris-DataTable__Cell--total sa-Polaris-DataTable__Cell--numeric">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" class="sa-Polaris-Spinner sa-Polaris-Spinner--colorTeal sa-Polaris-Spinner--sizeSmall">
+        <path d="M15.542 1.487A21.507 21.507 0 0 0 .5 22c0 11.874 9.626 21.5 21.5 21.5 9.847 0 18.364-6.675 20.809-16.072a1.5 1.5 0 0 0-2.904-.756C37.803 34.755 30.473 40.5 22 40.5 11.783 40.5 3.5 32.217 3.5 22c0-8.137 5.3-15.247 12.942-17.65a1.5 1.5 0 1 0-.9-2.863z"/>
+    </svg>
+</td>
+                                <td style="text-align:center" class="sa-Polaris-DataTable__Cell sa-Polaris-DataTable__Cell--verticalAlignTop sa-Polaris-DataTable__Cell--total sa-Polaris-DataTable__Cell--numeric">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" class="sa-Polaris-Spinner sa-Polaris-Spinner--colorTeal sa-Polaris-Spinner--sizeSmall">
+        <path d="M15.542 1.487A21.507 21.507 0 0 0 .5 22c0 11.874 9.626 21.5 21.5 21.5 9.847 0 18.364-6.675 20.809-16.072a1.5 1.5 0 0 0-2.904-.756C37.803 34.755 30.473 40.5 22 40.5 11.783 40.5 3.5 32.217 3.5 22c0-8.137 5.3-15.247 12.942-17.65a1.5 1.5 0 1 0-.9-2.863z"/>
+    </svg>
+</td>
+                                <td class="sa-Polaris-DataTable__Cell sa-Polaris-DataTable__Cell--verticalAlignTop sa-Polaris-DataTable__Cell--total"></td>
+                                <td class="sa-Polaris-DataTable__Cell sa-Polaris-DataTable__Cell--verticalAlignTop sa-Polaris-DataTable__Cell--total"></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                    <button type="button" id="sa-btn-new-link" disabled class="sa-Polaris-Button sa-affiliateAddLinkBtn">New link</button>                    
+                </div>
+            </div>
+        </form>
+                    {% elsif customer.metafields.SimpleAffiliate.affiliate-status-015c1f == "invited" %}
+                        <div class="sa-formLoading"><div class="sa-loadingspinner"></div></div>
+                    {% elsif customer.metafields.SimpleAffiliate.affiliate-status-015c1f == "pending" or customer.metafields.SimpleAffiliate.affiliate-status-015c1f == "shadowbanned" %}
+                        
+        <div class="sa-signupStep">
+            <h2 class="sa-subHeader">Pending approval</h2>
+            <div class="sa-formRow sa-Polaris-Stack__Item">
+                <p>We are reviewing your application. You will receive an email as soon as you are approved.</p>
+            </div>
+        </div>
+                    {% else %}
+                        
+      <div class="sa-signupStep">
+          <h2 class="sa-subHeader">Signup form</h2>
+          <label class="sa-formDescription">Please provide the following information to get started as an affiliate. You will receive payouts to your payment email.</label>
+          <div class="sa-affiliateForm">
+              <form id="sa-signup-form">
+                  
+                  
+            <div class="sa-formRow"> 
+                <input id="sa-payment-details-input" type="text" class="sa-formInput"  value="{{ customer.email }}" placeholder="Payment email">
+                <label class="sa-formLabel">Payment email</label>
+            </div>
+                  
+        <div class="sa-formRow"> 
+            <input id="sa-social-name-input" type="text" class="sa-formInput"  placeholder="Example: @instagram_username" value="">
+            <label class="sa-formLabel">Social name</label>
+        </div>
+                  
+        <div class="sa-formRow"> 
+            <input id="sa-phone-input" type="text" class="sa-formInput"  placeholder="Phone number" value="{{ customer.phone }}">
+            <label class="sa-formLabel">Phone number</label>
+        </div>
+                  
+                  
+                  
+                  
+                  <button style="position:relative;" class="sa-Polaris-Button btn--small sa-signupBtn"  type="submit" id="sa-signup-submit-button">
+                      <span class="sa-BtnSubmitText">Submit</span>
+                  </button>
+              </form>
+          </div>
+      </div>
+                    {% endif %}
+                </div>
+                <div id="sa-modal"></div>
+            {% else %}
+                <div id="sa-container" class="sa-mainContainer"></div>
+                <div id="sa-modal">
+        <div id="sa-modal-container" class="sa-Polaris-Modal-Dialog__Container" style="display:flex">
+            <div>
+                <div class="sa-Polaris-Modal-Dialog__Modal" role="dialog" tabindex="-1">
+                    <div class="sa-Polaris-Modal-Header">
+                        <div class="sa-Polaris-Modal-Header__Title">
+                            <h2 class="sa-Polaris-DisplayText sa-Polaris-DisplayText--sizeSmall sa-modal-header-inner"><span>Log in required</span></h2>
+                        </div>
+                    </div>
+                    <div class="sa-Polaris-Modal__BodyWrapper">
+                        <div class="sa-Polaris-Modal__Body sa-Polaris-Scrollable sa-Polaris-Scrollable--vertical">
+                            <section class="sa-Polaris-Modal-Section">
+                                <div class="sa-Polaris-TextContainer">
+                                    <p>You need to be logged in to access your affiliate dashboard. Please log in to an existing account, or register a new one to continue.</p>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <div class="sa-Polaris-Modal-Footer">
+                        <div class="sa-Polaris-Modal-Footer__FooterContent">
+                            <div class="sa-Polaris-Stack sa-Polaris-Stack--alignmentCenter">
+                                <div class="sa-Polaris-Stack__Item">
+                                    <div id="sa-modal-buttons" class="sa-Polaris-ButtonGroup">
+                                        <div class="sa-Polaris-ButtonGroup__Item"><a id="sa-modal-button-login" href="/account/login?return_url=%2Fpages%2Faffiliate" class="sa-Polaris-Button">Log in</a></div><div class="sa-Polaris-ButtonGroup__Item"><a id="sa-modal-button-register" href="#" class="sa-Polaris-Button">Register</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="sa-Polaris-Modal__Backdrop"></div></div>
+            {% endif %}
+            <script async="async" src="https://app.simple-affiliate.com/i/customer-frontend-60e6e337.js"></script>
+            <script>(function(m){if(m) document.body.appendChild(m)})(document.getElementById("sa-modal"))</script>
+        </div>

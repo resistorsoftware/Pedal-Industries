@@ -1,0 +1,128 @@
+{%- style -%}
+  .newsletter-{{ section.id }} {
+    background-color: {{ section.settings.color_background }};
+    color: {{ section.settings.color_text }};
+  }
+
+  .newsletter-{{ section.id }} .input-group-btn {
+    background-color: {{ section.settings.color_background }};
+  }
+{%- endstyle -%}
+
+<div class="newsletter-section newsletter-{{ section.id }}{% if section.settings.color_background == settings.color_body_bg %} newsletter-section--with-divider{% endif %}">
+  <div class="page-width text-center">
+    {%- for block in section.blocks -%}
+      <div class="theme-block" {{ block.shopify_attributes }}>
+        {%- case block.type -%}
+          {%- when '@app' -%}
+            {% render block %}
+          {%- when 'title' -%}
+            {%- if block.settings.icon_enable or block.settings.title != blank -%}
+              {%- if block.settings.icon_enable -%}
+                <span class="icon icon-email" role="presentation">
+                  <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-email" viewBox="0 0 64 64"><path d="M63 52H1V12h62zM1 12l25.68 24h9.72L63 12M21.82 31.68L1.56 51.16m60.78.78L41.27 31.68"/></svg>
+                </span>
+              {%- endif -%}
+              {%- if block.settings.title != blank -%}
+                <h2 class="h3" {{ block.shopify_attributes }}>{{ block.settings.title | escape }}</h2>
+              {% endif %}
+            {% endif %}
+          {%- when 'text' -%}
+            {% if block.settings.text != blank %}
+              <div class="rte" {{ block.shopify_attributes }}>{{ block.settings.text }}</div>
+            {% endif %}
+          {%- when 'form' -%}
+            {%- render 'newsletter-form', block: block, section_id: section.id, snippet_context: 'section' -%}
+          {%- when 'share_buttons' -%}
+            {%- render 'social-sharing', block: block -%}
+        {%- endcase -%}
+      </div>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.newsletter.name",
+  "max_blocks": 6,
+  "blocks": [
+    {
+      "type": "@app"
+    },
+    {
+      "type": "title",
+      "name": "t:sections.newsletter.blocks.title.name",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "t:sections.newsletter.blocks.title.settings.title.label",
+          "default": "Sign up and save"
+        },
+        {
+          "type": "checkbox",
+          "id": "icon_enable",
+          "label": "t:sections.newsletter.blocks.title.settings.icon_enable.label",
+          "default": true
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "t:sections.newsletter.blocks.text.name",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "t:sections.newsletter.blocks.text.settings.text.label",
+          "default": "<p>Subscribe to get special offers, free giveaways, and once-in-a-lifetime deals.</p>"
+        }
+      ]
+    },
+    {
+      "type": "form",
+      "name": "t:sections.newsletter.blocks.form.name",
+      "limit": 1
+    },
+    {
+      "type": "share_buttons",
+      "name": "t:sections.newsletter.blocks.share_buttons.name",
+      "limit": 1
+    }
+  ],
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.newsletter.settings.content"
+    },
+    {
+      "type": "color",
+      "id": "color_background",
+      "label": "t:sections.newsletter.settings.color_background.label",
+      "default": "#f9f9f9"
+    },
+    {
+      "type": "color",
+      "id": "color_text",
+      "label": "t:sections.newsletter.settings.color_text.label",
+      "default": "#1c1d1d"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.newsletter.presets.email_signup.name",
+      "blocks": [
+        {
+          "type": "title"
+        },
+        {
+          "type": "text"
+        },
+        {
+          "type": "form"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

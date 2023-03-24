@@ -1,0 +1,194 @@
+{%- liquid
+  assign isEmpty = true
+
+  if section.blocks.size > 0
+    assign isEmpty = false
+  endif
+-%}
+
+{%- if section.settings.divider -%}<div class="section--divider">{%- endif -%}
+
+<div class="page-width">
+  {%- if section.settings.title != blank -%}
+    <div class="section-header">
+      <h2 class="section-header__title">{{ section.settings.title }}</h2>
+    </div>
+  {% endif %}
+
+  <div class="grid{% if section.settings.enable_gutter %} grid--small-gutters{%else%} grid--no-gutters{% endif %}">
+
+    {%- for block in section.blocks -%}
+      {%- liquid
+        assign collection = collections[block.settings.collection]
+        case block.settings.size
+          when 'square-small'
+            assign grid_item_width = 'medium-up--one-quarter small--one-half collection--square-small'
+          when 'wide'
+            assign grid_item_width = 'medium-up--one-half collection--wide'
+          when 'tall'
+            assign grid_item_width = 'medium-up--one-quarter small--one-half collection--tall'
+          when 'square-large'
+            assign grid_item_width = 'medium-up--one-half collection--square-large'
+        endcase
+        assign background_position = block.settings.focal_point
+      -%}
+      {%- render 'collection-grid-item', block: block, collection: collection, grid_item_width: grid_item_width, background_position: background_position -%}
+    {%- endfor -%}
+
+    {% if isEmpty %}
+      <div class="page-width">
+        <div class="grid">
+          <div class="grid__item">
+            <div class="rte">
+              {{ 'home_page.onboarding.no_content' | t }}
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
+  </div>
+</div>
+
+{%- if section.settings.divider -%}</div>{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:sections.featured-collections.name",
+  "class": "index-section",
+  "max_blocks": 15,
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:sections.featured-collections.settings.title.label",
+      "default": "Collection list"
+    },
+    {
+      "type": "checkbox",
+      "id": "divider",
+      "label": "t:sections.featured-collections.settings.divider.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_gutter",
+      "label": "t:sections.featured-collections.settings.enable_gutter.label",
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.featured-collections.presets.collection_list.name",
+      "blocks": [
+        {
+          "type": "collection",
+          "settings": {
+            "size": "wide"
+          }
+        },
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection",
+          "settings": {
+            "size": "wide"
+          }
+        }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "t:sections.featured-collections.blocks.collection.name",
+      "settings": [
+        {
+          "id": "collection",
+          "type": "collection",
+          "label": "t:sections.featured-collections.blocks.collection.settings.collection.label"
+        },
+        {
+          "type": "select",
+          "id": "focal_point",
+          "label": "t:sections.featured-collections.blocks.collection.settings.focal_point.label",
+          "info": "t:sections.featured-collections.blocks.collection.settings.focal_point.info",
+          "default": "center center",
+          "options": [
+            {
+              "value": "20% 0",
+              "label": "t:sections.featured-collections.blocks.collection.settings.focal_point.options.20_0.label"
+            },
+            {
+              "value": "top center",
+              "label": "t:sections.featured-collections.blocks.collection.settings.focal_point.options.top_center.label"
+            },
+            {
+              "value": "80% 0",
+              "label": "t:sections.featured-collections.blocks.collection.settings.focal_point.options.80_0.label"
+            },
+            {
+              "value": "20% 50%",
+              "label": "t:sections.featured-collections.blocks.collection.settings.focal_point.options.20_50.label"
+            },
+            {
+              "value": "center center",
+              "label": "t:sections.featured-collections.blocks.collection.settings.focal_point.options.center_center.label"
+            },
+            {
+              "value": "80% 50%",
+              "label": "t:sections.featured-collections.blocks.collection.settings.focal_point.options.80_50.label"
+            },
+            {
+              "value": "20% 100%",
+              "label": "t:sections.featured-collections.blocks.collection.settings.focal_point.options.20_100.label"
+            },
+            {
+              "value": "bottom center",
+              "label": "t:sections.featured-collections.blocks.collection.settings.focal_point.options.bottom_center.label"
+            },
+            {
+              "value": "80% 100%",
+              "label": "t:sections.featured-collections.blocks.collection.settings.focal_point.options.80_100.label"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "size",
+          "label": "t:sections.featured-collections.blocks.collection.settings.size.label",
+          "default": "square-small",
+          "options": [
+            {
+              "label": "t:sections.featured-collections.blocks.collection.settings.size.options.square-small.label",
+              "value": "square-small"
+            },
+            {
+              "label": "t:sections.featured-collections.blocks.collection.settings.size.options.wide.label",
+              "value": "wide"
+            },
+            {
+              "label": "t:sections.featured-collections.blocks.collection.settings.size.options.tall.label",
+              "value": "tall"
+            },
+            {
+              "label": "t:sections.featured-collections.blocks.collection.settings.size.options.square-large.label",
+              "value": "square-large"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

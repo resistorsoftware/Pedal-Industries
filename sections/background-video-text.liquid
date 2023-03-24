@@ -1,0 +1,185 @@
+{%- style -%}
+  @media screen and (max-width: 768px) {
+    .background-media-text--{{ section.id }} {
+      background: {{ section.settings.color_border }};
+    }
+  }
+{%- endstyle -%}
+
+<div
+  data-section-id="{{ section.id }}"
+  data-section-type="video-section"
+  class="video-parent-section background-media-text background-media-text--{{ section.id }} background-media-text--{{ section.settings.height }}"
+  data-aos="background-media-text__animation">
+
+  <div class="background-media-text__video">
+
+    {%- if section.settings.video_url contains 'youtube.com/watch' -%}
+      {%- assign video_id = section.settings.video_url | split: 'v=' -%}
+      {%- assign video_id = video_id[1] | split: '&' | first -%}
+      <div
+        id="YouTubeVideo-{{ section.id }}"
+        class="video-div"
+        data-type="youtube"
+        data-video-id="{{ video_id }}"></div>
+    {%- endif -%}
+
+    {%- if section.settings.video_url contains 'youtu.be/' -%}
+      {%- assign video_id = section.settings.video_url | split: '.be/' -%}
+      {%- assign video_id = video_id[1] | split: '&' | first -%}
+      <div
+        id="YouTubeVideo-{{ section.id }}"
+        class="video-div"
+        data-type="youtube"
+        data-video-id="{{ video_id }}"></div>
+    {%- endif -%}
+
+    {%- if section.settings.video_url contains 'vimeo.com' -%}
+      {%- assign video_id = section.settings.video_url | split: '.com/' -%}
+      {%- assign video_id = video_id[1] | split: '/' | first -%}
+      <div
+        id="Vimeo-{{ section.id }}"
+        class="video-div"
+        data-type="vimeo"
+        data-video-id="{{ video_id }}"></div>
+    {%- endif -%}
+
+    {%- if section.settings.video_url contains '.mp4' or section.settings.video_url contains '.MP4' -%}
+      <video
+        id="Mp4Video-{{ section.id }}"
+        class="video-div"
+        data-type="mp4"
+        src="{{ section.settings.video_url }}"
+        loop muted playsinline autoplay></video>
+    {%- endif -%}
+
+  </div>
+
+  {%- if section.settings.subtitle != blank or section.settings.title != blank or section.settings.text != blank -%}
+    <div class="background-media-text__inner">
+      <div class="background-media-text__aligner background-media-text--{{ section.settings.layout }}">
+        <div class="animation-cropper">
+          <div class="animation-contents">
+            <div class="background-media-text__text larger-text">
+              {%- if section.settings.subtitle -%}
+                <p class="subtitle">{{ section.settings.subtitle }}</p>
+              {%- endif -%}
+              {%- if section.settings.title != blank -%}
+                <h2 class="h3">{{ section.settings.title | escape }}</h2>
+              {%- endif -%}
+              {%- if section.settings.text != blank -%}
+                <div class="rte background-media-text__subtext">{{ section.settings.text }}</div>
+              {%- endif -%}
+
+              {%- if section.settings.button_label != blank -%}
+                {%- assign link_href = section.settings.button_link -%}
+                {%- if section.settings.button_link == blank -%}
+                  {%- assign link_href = section.settings.video_url -%}
+                {%- endif -%}
+
+                {%- assign youtube_video_link = false -%}
+                {%- if link_href contains 'youtube.com/watch' or link_href contains 'youtu.be/' -%}
+                  {%- assign youtube_video_link = true -%}
+                {%- endif -%}
+
+                <a href="{{ link_href }}" class="btn js-no-transition{% if youtube_video_link %} btn--no-animate{% endif %}">
+                  {%- if youtube_video_link -%}
+                    <span style="padding-right: 5px;">
+                      <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-play" viewBox="18.24 17.35 24.52 28.3"><path fill="#323232" d="M22.1 19.151v25.5l20.4-13.489-20.4-12.011z"/></svg>
+                    </span>
+                  {%- endif -%}
+                  {{ section.settings.button_label }}
+                </a>
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
+</div>
+
+<div class="background-media-text__spacer background-media-text--{{ section.settings.height }}"></div>
+
+{% schema %}
+{
+  "name": "t:sections.background-video-text.name",
+  "class": "index-section--flush",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "t:sections.background-video-text.settings.subtitle.label",
+      "default": "Impressive"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:sections.background-video-text.settings.title.label",
+      "default": "Large video with text box"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "t:sections.background-video-text.settings.text.label",
+      "default": "<p>Pair large text with a full-width video to showcase your brand's lifestyle video or to describe and showcase an important detail of your products.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "t:sections.background-video-text.settings.button_label.label"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "t:sections.background-video-text.settings.button_link.label",
+      "info": "t:sections.background-video-text.settings.button_link.info"
+    },
+    {
+      "type": "text",
+      "id": "video_url",
+      "label": "t:sections.background-video-text.settings.video_url.label",
+      "default": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+      "info": "t:sections.background-video-text.settings.video_url.info"
+    },
+    {
+      "type": "color",
+      "id": "color_border",
+      "label": "t:sections.background-video-text.settings.color_border.label",
+      "info": "t:sections.background-video-text.settings.color_border.info",
+      "default": "#f4f4f4"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "t:sections.background-video-text.settings.layout.label",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:sections.background-video-text.settings.layout.options.left.label"
+        },
+        {
+          "value": "right",
+          "label": "t:sections.background-video-text.settings.layout.options.right.label"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "height",
+      "label": "t:sections.background-video-text.settings.height.label",
+      "default": 550,
+      "min": 450,
+      "max": 750,
+      "step": 100,
+      "unit": "px"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.background-video-text.presets.large_video_with_text_box.name"
+    }
+  ]
+}
+{% endschema %}

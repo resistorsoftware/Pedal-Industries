@@ -1,0 +1,104 @@
+<div data-section-id="{{ section.id }}" data-section-type="collection-template">
+{%- paginate search.results by 12 -%}
+
+  <div class="page-width page-content">
+
+    {%- render 'breadcrumbs' -%}
+    {%- render 'collection-sidebar', section: section, collection: search -%}
+
+    <header class="section-header">
+      <h1 class="section-header__title">
+        {{ 'general.search.title' | t }}
+      </h1>
+    </header>
+
+    {%- render 'search-bar', search_btn_style: 'btn', search_bar_location: 'search-bar--page' -%}
+
+    {%- if search.performed -%}
+
+      <hr class="hr--medium">
+
+      <div id="CollectionAjaxContent" data-section-id="{{ section.id }}" data-section-type="collection-template">
+        <h2>
+          {{ 'general.search.result_count' | t: count: search.results_count }}
+        </h2>
+        {%- if search.results_count == 0 -%}
+          {{ 'general.search.no_results_html' | t: terms: search.terms | replace: '*', '' }}
+        {%- else -%}
+          {% render 'collection-filters',
+            collection: search,
+            enable_sort: section.settings.enable_sort,
+            collection_tags_style: section.settings.collection_tags_style
+          %}
+
+          {% render 'collection-grid',
+            collection: search,
+            items: search.results,
+            mobile_flush_grid: section.settings.mobile_flush_grid,
+            quick_shop_enable: settings.quick_shop_enable,
+            per_row: section.settings.per_row
+          %}
+        {%- endif -%}
+      </div>
+
+      {%- if paginate.pages > 1 -%}
+        {%- render 'pagination', paginate: paginate -%}
+      {%- endif -%}
+
+    {%- endif -%}
+  </div>
+
+{%- endpaginate -%}
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.main-search.name",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:sections.main-search.settings.header_filtering_and_sorting"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_sidebar",
+      "label": "t:sections.main-search.settings.enable_sidebar.label",
+      "default": true,
+      "info": "t:sections.main-search.settings.enable_sidebar.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "collapsed",
+      "label": "t:sections.main-search.settings.collapsed.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_color_swatches",
+      "label": "t:sections.main-search.settings.enable_color_swatches.label",
+      "info": "t:sections.main-search.settings.enable_color_swatches.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_sort",
+      "label": "t:sections.main-search.settings.enable_sort.label",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "per_row",
+      "label": "t:sections.main-search.settings.per_row.label",
+      "default": 4,
+      "min": 1,
+      "max": 5,
+      "step": 1
+    },
+    {
+      "type": "checkbox",
+      "id": "mobile_flush_grid",
+      "label": "t:sections.main-search.settings.mobile_flush_grid.label",
+      "default": false
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,22 @@
+{% if block.settings.reminder_label != blank %}
+  <newsletter-reminder
+    class="modal--square"
+    data-section-id="{{ section.id }}"
+    data-enabled="false"
+    data-delay-days="{{ section.settings.popup_days }}"
+    data-delay-seconds="{{ section.settings.popup_seconds }}"
+    {{ block.shopify_attributes }}
+  >
+    <div class="newsletter-reminder__content">
+
+      <div class="newsletter-reminder__message h3" data-message>
+        {{ block.settings.reminder_label }}
+      </div>
+    </div>
+
+    <button type="button" data-close-button class="modal__close js-modal-close text-link">
+      <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-close" viewBox="0 0 64 64"><path d="M19 17.61l27.12 27.13m0-27.12L19 44.74"/></svg>
+      <span class="icon__fallback-text">{{ 'general.accessibility.close_modal' | t | json }}</span>
+    </button>
+  </newsletter-reminder>
+{% endif %}

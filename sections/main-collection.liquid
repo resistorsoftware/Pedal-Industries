@@ -1,0 +1,274 @@
+<div
+  id="CollectionSection"
+  data-section-id="{{ section.id }}"
+  data-section-type="collection-template"
+  {% if section.settings.parallax %}data-parallax="true"{% endif %}>
+
+  {%- if section.settings.collection_image_enable and collection.image -%}
+
+    {%- style -%}
+    .collection-hero {
+      height: {{ section.settings.collection_image_height }}px;
+    }
+    @media screen and (max-width: 768px) {
+      .collection-hero {
+        height: {{ section.settings.collection_image_height | times: 0.6 }}px;
+      }
+    }
+    {%- endstyle -%}
+
+    <div class="collection-hero">
+
+      {%- if section.settings.parallax -%}
+        <parallax-image class="parallax-container">
+          <div class="parallax-image" data-movement="15%" data-parallax-image data-angle="{{ section.settings.parallax_direction }}">
+      {%- endif -%}
+
+        {% render 'image-element'
+          img: collection.image,
+          img_width: 2400,
+          classes: 'collection-hero__image image-fit',
+          alt: collection.image.alt,
+          preload: true,
+          loading: 'eager',
+          sizes: '100%'
+        %}
+
+      {%- if section.settings.parallax -%}
+          </div>
+        </parallax-image>
+      {%- endif -%}
+
+      <div class="collection-hero__content">
+        <div class="page-width">
+          <header class="section-header section-header--hero">
+            <h1 class="section-header__title section-header__title--medium">
+              <div class="animation-cropper">
+                <div class="animation-contents collection-title">
+                  {{ collection.title }}
+                </div>
+              </div>
+            </h1>
+          </header>
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
+
+  <div class="page-width page-content">
+    {%- render 'breadcrumbs' -%}
+    {%- render 'collection-sidebar', section: section -%}
+
+    {%- unless section.settings.collection_image_enable and collection.image -%}
+      <header class="section-header">
+        <h1 class="section-header__title collection-title">
+          {{ collection.title }}
+        </h1>
+      </header>
+    {%- endunless -%}
+
+    {% render 'collection-filters',
+      collection: collection,
+      enable_sort: section.settings.enable_sort,
+      collection_tags_style: section.settings.collection_tags_style
+    %}
+
+    {%- for block in section.blocks -%}
+      {%- assign block_index = forloop.index -%}
+
+      {%- case block.type -%}
+      {%- when 'collection_description' -%}
+        {%- if collection.description != blank -%}
+          {%- unless forloop.first -%}
+            <hr class="hr--clear hr--medium" {{ block.shopify_attributes }}>
+          {%- endunless -%}
+
+          <div class="collection-description rte" {{ block.shopify_attributes }}>
+            <div class="enlarge-text">
+              {{ collection.description }}
+            </div>
+          </div>
+
+          {%- unless forloop.last -%}
+            <hr class="hr--clear hr--small" {{ block.shopify_attributes }}>
+          {%- endunless -%}
+        {%- endif -%}
+      {%- when 'product_grid' -%}
+        {%- liquid
+          assign per_row = block.settings.per_row
+          assign paginate_by = per_row | times: 5
+          if block.settings.collection_subnav_style == 'inline'
+            assign paginate_by = paginate_by | minus: 1
+          endif
+        -%}
+
+        {%- paginate collection.products by paginate_by -%}
+
+        <div id="CollectionAjaxResult" {{ block.shopify_attributes }}>
+          <div id="CollectionAjaxContent">
+
+            {% render 'collection-grid',
+              collection: collection,
+              items: collection.products,
+              collection_subnav_style: block.settings.collection_subnav_style,
+              mobile_flush_grid: block.settings.mobile_flush_grid,
+              quick_shop_enable: settings.quick_shop_enable,
+              per_row: block.settings.per_row
+            %}
+
+            {%- if paginate.pages > 1 -%}
+              {%- render 'pagination', paginate: paginate -%}
+            {%- endif -%}
+
+          </div>
+        </div>
+
+        {%- endpaginate -%}
+      {%- endcase -%}
+    {%- endfor -%}
+  </div>
+</div>
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "CollectionPage",
+    {% if collection.description != blank %}
+      "description": {{ collection.description | strip_html | json }},
+    {% endif %}
+    {% if page_image %}
+      {% assign image_size = page_image.width | append: 'x' %}
+      "image": {
+        "@type": "ImageObject",
+        "height": {{ page_image.height | json }},
+        "url": {{ page_image | img_url: image_size | prepend: "https:" | json }},
+        "width": {{ page_image.width | json }}
+      },
+    {% endif %}
+    "name": {{ collection.title | json }}
+  }
+</script>
+
+{% schema %}
+{
+  "name": "t:sections.main-collection.name",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:sections.main-collection.settings.header_image"
+    },
+    {
+      "type": "checkbox",
+      "id": "collection_image_enable",
+      "label": "t:sections.main-collection.settings.collection_image_enable.label",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "collection_image_height",
+      "label": "t:sections.main-collection.settings.collection_image_height.label",
+      "default": 550,
+      "min": 350,
+      "max": 750,
+      "step": 100,
+      "unit": "px"
+    },
+    {
+      "type": "checkbox",
+      "id": "parallax",
+      "label": "t:sections.main-collection.settings.parallax.label",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "parallax_direction",
+      "label": "t:sections.background-image-text.settings.parallax_direction.label",
+      "default": "top",
+      "options": [
+        {
+          "value": "top",
+          "label": "t:sections.background-image-text.settings.parallax_direction.options.top.label"
+        },
+        {
+          "value": "left",
+          "label": "t:sections.background-image-text.settings.parallax_direction.options.left.label"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:sections.main-collection.settings.header_filtering_and_sorting"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_sidebar",
+      "label": "t:sections.main-collection.settings.enable_sidebar.label",
+      "default": true,
+      "info": "t:sections.main-collection.settings.enable_sidebar.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "collapsed",
+      "label": "t:sections.main-collection.settings.collapsed.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_color_swatches",
+      "label": "t:sections.main-collection.settings.enable_color_swatches.label",
+      "info": "t:sections.main-collection.settings.enable_color_swatches.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_sort",
+      "label": "t:sections.main-collection.settings.enable_sort.label",
+      "default": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection_description",
+      "name": "t:sections.main-collection.blocks.collection_description.name",
+      "limit": 1
+    },
+    {
+      "type": "product_grid",
+      "name": "t:sections.main-collection.blocks.products.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "select",
+          "id": "collection_subnav_style",
+          "label": "t:sections.main-collection.blocks.products.settings.collection_subnav_style.label",
+          "default": "inline",
+          "options": [
+            {
+              "value": "none",
+              "label": "t:sections.main-collection.blocks.products.settings.collection_subnav_style.options.none.label"
+            },
+            {
+              "value": "inline",
+              "label": "t:sections.main-collection.blocks.products.settings.collection_subnav_style.options.inline.label"
+            }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "per_row",
+          "label": "t:sections.main-collection.blocks.products.settings.per_row.label",
+          "default": 4,
+          "min": 1,
+          "max": 5,
+          "step": 1
+        },
+        {
+          "type": "checkbox",
+          "id": "mobile_flush_grid",
+          "label": "t:sections.main-collection.blocks.products.settings.mobile_flush_grid.label",
+          "default": false
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,176 @@
+{% capture form_id %}AddToCartForm-{{ section_id }}{% endcapture %}
+{% form 'product', product, id: form_id, class: 'product-single__form' %}
+  {% unless product.has_only_default_variant %}
+    {%- for option in product.options_with_values -%}
+
+      {%- liquid
+        if settings.product_color_swatches
+          assign is_color = false
+          assign color_option_index = 0
+          assign swatch_trigger = 'products.general.color_swatch_trigger' | t | downcase
+          assign color_option_index = forloop.index0
+          assign downcased_option = option.name | downcase
+          if downcased_option contains swatch_trigger
+            assign is_color = true
+          elsif swatch_trigger == 'color' and downcased_option contains 'colour'
+            assign is_color = true
+          endif
+        endif
+      -%}
+
+      {% if settings.variant_type == 'button' %}
+        {%- render 'variant-button-custom',
+          section_id: section_id,
+          option: option,
+          forloop: forloop,
+          is_color: is_color,
+          color_option_index: color_option_index
+        -%}
+      {% else %}
+        {%- render 'variant-dropdown-custom,',
+          section_id: section_id,
+          option: option,
+          forloop: forloop
+        -%}
+      {% endif %}
+
+    {%- endfor -%}
+  {% endunless %}
+
+  <select name="id" id="ProductSelect-{{ section_id }}" data-product-select class="product-single__variants no-js ait">
+    {%- for variant in product.variants -%}
+      {% if variant.available %}
+        <option {% if variant == product.selected_or_first_available_variant %}
+          selected="selected" {% endif %}
+           data-option-price="{{ variant.price | money }}" 
+          value="{{ variant.id }}">
+          {{ variant.title }} - {{ variant.price | money_with_currency }}
+        </option>
+      {% else %}
+        <option disabled="disabled">
+          {{ variant.title }} - {{ 'products.product.sold_out' | t }}
+        </option>
+      {% endif %}
+    {%- endfor -%}
+  </select>
+  {% if settings.quantity_enable %}
+    <div class="product__quantity product__quantity--{{ settings.variant_type }}">
+      <label for="Quantity-{{ section_id }}">{{ 'products.product.quantity' | t }}</label>
+      {%- render 'quantity-input-custom', id: section_id, qty: 1, min: 1 -%}
+    </div>
+  {% endif %}
+{% assign custom_product = all_products["custom-name"] %}
+<div class="product-custom-name">
+  <div class="product-custom-name-product" id="add-my-name">
+    <label for="custom-name-check"><input type="checkbox" name="custom-name-check" data-id="{{ custom_product.selected_or_first_available_variant.id }}" value="{{ custom_product.selected_or_first_available_variant.id }}" id="custom-name-check">Click here to add custom name for only <span class="custom-name-price">{{ custom_product.selected_or_first_available_variant.price | money_with_currency }}</span>
+    <div class="line-item-property__field" id="dynamic-names"></div>
+    </label>
+  </div>
+  <div id="add-my-name-expand" style="display:none">
+    <div class="line-item-property__field ">
+      <input id="custom-name" placeholder="Please, type all the names separated by a comma" type="textarea" name="properties[Custom Name]" onkeyup="this.value = this.value.toUpperCase();" style="width: 100%;" />
+    </div>
+    <ul class="terms">
+      <li>Your name will appear exactly as you’ve typed it.
+      </li>
+      <li><b>BAGS :</b> Your name will print on the SIDE HANDLE and the TOP CENTER panel.</li>
+      <li><b>JERSEYS :</b> Your name will print on jersey side panels.</li>
+      <li><b>BIBS :</b> Your name will print on BUTT panel.</li>
+      <li><b>CALENDARS :</b> Your name will replace "MY".</li>
+    </ul>
+    <div class="custom-img-box">
+      <img class="custom-bag-img" src="{{ 'custom-bag-1.jpeg' | asset_url }}" />
+      <img class="custom-bag-img" src="{{ 'custom-bag-2.jpeg' | asset_url }}" />
+    </div>
+  </div>
+</div>
+
+  {%- assign enable_dynamic_buttons = false -%}
+  {% if settings.enable_payment_button and template != 'product.preorder' %}
+    {%- assign enable_dynamic_buttons = true -%}
+  {% endif %}
+{% comment %}
+  {% if enable_dynamic_buttons %}
+    <div class="payment-buttons">
+  {% endif %}
+{% endcomment %}
+    {%- liquid
+      assign default_text = 'products.product.add_to_cart' | t
+      assign button_text = 'products.product.add_to_cart' | t
+      if template == 'product.preorder'
+        assign default_text = 'products.product.preorder' | t
+        assign button_text = 'products.product.preorder' | t
+      endif
+      unless current_variant.available
+        assign button_text = 'products.product.sold_out' | t
+      endunless
+    -%}
+
+    <button
+      {% if product.empty? %}type="button"{% else %}type="submit"{% endif %}
+      name="add"
+      id="AddToCart-{{ section_id }}"
+      data-add-to-cart
+      class="btn btn--full aitAddtoCart add-to-cart custom-name"
+      {% unless current_variant.available %} disabled="disabled"{% endunless %}>
+      <span id="AddToCartText-{{ section_id }}" data-default-text="{{ default_text }}" data-add-to-cart-text>
+        {{ button_text }}
+      </span>
+    </button>
+{% comment %}
+    {% if enable_dynamic_buttons %}
+      {{ form | payment_button }}
+    {% endif %}
+  {% if enable_dynamic_buttons %}
+    </div>
+  {% endif %}
+{% endcomment %}
+
+  <textarea id="VariantsJson-{{ section_id }}" class="hide" aria-hidden="true" aria-label="Product JSON" data-variant-json>
+    {{ product.variants | json }}
+  </textarea>
+  {% if product.options.size > 1 %}
+    <textarea id="CurrentVariantJson-{{ section_id }}" class="hide" aria-hidden="true" aria-label="Variant JSON" data-current-variant-json>
+      {{ current_variant | json }}
+    </textarea>
+  {% endif %}
+{% endform %}
+
+<script>
+/*  
+  function createList(spacecrafts){
+  var listView=document.createElement('ul');
+  for(var i=0;i<spacecrafts.length;i++)
+  {
+      var listViewItem=document.createElement('li');
+      listViewItem.appendChild(document.createTextNode(spacecrafts[i].toUpperCase()));
+      listView.appendChild(listViewItem);
+  }
+  return listView;
+  }
+*/
+
+  /*
+  document.querySelector('#custom-name').addEventListener('change', function() {
+    var currQty = document.querySelector('.js-qty__num').value;
+	var currNames = this.value.split(',').length;
+	if (currQty < currNames){
+	alert(`Please, type in no more than ${currQty} names`);
+	} else if (currQty > currNames) {
+	alert(`Please, type in more ${currQty-currNames} names`);
+	} else{}
+  });
+*/
+  document.querySelector('#custom-name').addEventListener('focusout', function() {
+    var currQty = document.querySelector('.js-qty__num').value;
+	var currNames = this.value.split(',').length;
+	if (currQty < currNames){
+	alert(`Please, type in no more than ${currQty} names`);
+	} else if (currQty > currNames) {
+	alert(`Please, type in more ${currQty-currNames} names`);
+	} else {
+      
+    }
+  });
+  
+</script>

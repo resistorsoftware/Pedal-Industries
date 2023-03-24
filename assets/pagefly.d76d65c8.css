@@ -1,0 +1,41 @@
+/* PageFly Element Styles */
+					.lgZhBD.pf-editor-section::before, .lgZhBD.pf-editor-section::after { content: ""; display: block; position: absolute; left: 0px; right: 0px; width: 100%; height: 10px; }
+.lgZhBD.pf-editor-section::before { top: -10px; }
+.lgZhBD.pf-editor-section::after { bottom: -10px; }
+.lgZhBD__parallax { position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; overflow: hidden; pointer-events: none; }
+.lgZhBD { padding: 15px 0px; position: relative; }
+.lgZhBD .sc-dliRfk { position: relative; }
+.lgZhBD[data-container="true"] .sc-dliRfk { padding: 0px 15px; width: 100%; margin: auto; }
+.lgZhBD .pf-parallax__img { text-indent: -10000px; position: absolute; object-fit: cover; top: 0px; left: 0px; width: 100%; height: 100%; }
+.ciNxzc { margin: 0px -15px; }
+.BcUQo { position: relative; }
+.BcUQo.pf-editor-col::before, .BcUQo.pf-editor-col::after { content: ""; display: block; position: absolute; top: 0px; bottom: 0px; width: 10px; }
+.BcUQo.pf-editor-col::before { left: -10px; }
+.BcUQo.pf-editor-col::after { right: -10px; }
+.bLbPLR > span:last-child { line-height: inherit; display: block; }
+.bLbPLR[class*="dropcap--"] > span:first-child { display: block; margin-right: 10px; float: left; width: 50px; height: 50px; line-height: 50px; }
+.bLbPLR[class*="dropcap--"]:not(.dropcap--none) > span:first-child { margin-right: 20px; text-align: center; }
+.bLbPLR.dropcap--none > span:first-child { text-align: inherit; border-radius: 0px; line-height: 1 !important; width: auto !important; height: auto !important; background: none !important; }
+.bLbPLR.dropcap--circle > span:first-child { border-radius: 100%; }
+.bLbPLR:not([class*="dropcap--"]) > span { margin-right: 0px !important; }
+.bLbPLR ol, .bLbPLR ul { list-style-position: inside; }
+.bLbPLR blockquote { font-size: inherit; }
+.uIbp { display: inline-block; }
+.uIbp { vertical-align: baseline; word-break: break-word; }
+.uIbp:focus { outline: none; }
+					/* PageFly Styles */
+					
+@media all {
+	[data-pf-type="Paragraph"].pf-19d60511 {
+		font-family: Lato;
+		 letter-spacing: 1px;
+		 text-align: left;
+		 line-height: 1.25;
+	}
+	[data-pf-type="Paragraph"].pf-e31d20f0 {
+		font-family: Lato;
+		 letter-spacing: 1px;
+		 text-align: left;
+		 line-height: 1.25;
+	}
+}
