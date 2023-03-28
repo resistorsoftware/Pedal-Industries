@@ -656,6 +656,7 @@
                         }
                         
                         if( (gkt.state.page_type == "cart" || "product" === gkt.state.page_type) && 
+                            gkt.settings.rewardCampaigns &&
                             gkt.settings.rewardCampaigns.status == "ACTIVE" &&
                             gkt.settings.rewardCampaigns.campaignData &&
                             gkt.settings.rewardCampaigns.campaignData.freeGiftcardProduct &&
