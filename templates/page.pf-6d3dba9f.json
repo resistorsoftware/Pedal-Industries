@@ -4,9 +4,15 @@
       "type": "pf-6d3dba9f",
       "settings": {
       }
+    },
+    "pf-6d3dba9f": {
+      "type": "pf-6d3dba9f",
+      "settings": {
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "pf-6d3dba9f"
   ]
 }
