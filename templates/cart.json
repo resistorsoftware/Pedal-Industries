@@ -1,5 +1,34 @@
 {
   "sections": {
+    "bf8eb0ee-e8b9-48ca-af87-6e60c2a6071a": {
+      "type": "advanced-content",
+      "blocks": {
+        "template--16703860932863__bf8eb0ee-e8b9-48ca-af87-6e60c2a6071a-168020431958c116fd-0": {
+          "type": "image",
+          "settings": {
+            "link": "",
+            "width": "50%",
+            "alignment": "center"
+          }
+        },
+        "template--16703860932863__bf8eb0ee-e8b9-48ca-af87-6e60c2a6071a-168020431958c116fd-1": {
+          "type": "liquid",
+          "settings": {
+            "code": "<h2>Custom content<\/h2><p>Use this advanced section to build your own layouts or to add custom HTML, Liquid, or scripts.<\/p>",
+            "width": "50%",
+            "alignment": "center"
+          }
+        }
+      },
+      "block_order": [
+        "template--16703860932863__bf8eb0ee-e8b9-48ca-af87-6e60c2a6071a-168020431958c116fd-0",
+        "template--16703860932863__bf8eb0ee-e8b9-48ca-af87-6e60c2a6071a-168020431958c116fd-1"
+      ],
+      "settings": {
+        "full_width": false,
+        "space_around": true
+      }
+    },
     "main": {
       "type": "main-cart",
       "settings": {
@@ -37,6 +66,7 @@
     }
   },
   "order": [
+    "bf8eb0ee-e8b9-48ca-af87-6e60c2a6071a",
     "main",
     "featured-collection",
     "1680204232c38e34fb"
