@@ -34,17 +34,6 @@
       "settings": {
       }
     },
-    "featured-collection": {
-      "type": "featured-collection",
-      "settings": {
-        "title": "Popular picks",
-        "home_featured_products": "",
-        "per_row": 4,
-        "rows": 1,
-        "view_all": true,
-        "divider": false
-      }
-    },
     "1680204232c38e34fb": {
       "type": "apps",
       "blocks": {
@@ -63,12 +52,23 @@
         "full_width": false,
         "space_around": true
       }
+    },
+    "featured-collection": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Popular picks",
+        "home_featured_products": "",
+        "per_row": 4,
+        "rows": 1,
+        "view_all": true,
+        "divider": false
+      }
     }
   },
   "order": [
     "bf8eb0ee-e8b9-48ca-af87-6e60c2a6071a",
     "main",
-    "featured-collection",
-    "1680204232c38e34fb"
+    "1680204232c38e34fb",
+    "featured-collection"
   ]
 }
