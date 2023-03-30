@@ -1,1 +1,44 @@
-{"sections":{"main":{"type":"main-cart","settings":{}},"featured-collection":{"type":"featured-collection","settings":{"title":"Popular picks"}}},"order":["main","featured-collection"]}
+{
+  "sections": {
+    "main": {
+      "type": "main-cart",
+      "settings": {
+      }
+    },
+    "featured-collection": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Popular picks",
+        "home_featured_products": "",
+        "per_row": 4,
+        "rows": 1,
+        "view_all": true,
+        "divider": false
+      }
+    },
+    "1680204232c38e34fb": {
+      "type": "apps",
+      "blocks": {
+        "875dcd0c-30af-4b61-8754-d6ce8ea2e32d": {
+          "type": "shopify:\/\/apps\/pedal-industries-localhost\/blocks\/insurance\/7e767a35-f1a0-4385-aa25-a62b2e722715",
+          "settings": {
+            "heading": "Pedal Insurance",
+            "description": "Add peace of mind to your shipment!"
+          }
+        }
+      },
+      "block_order": [
+        "875dcd0c-30af-4b61-8754-d6ce8ea2e32d"
+      ],
+      "settings": {
+        "full_width": false,
+        "space_around": true
+      }
+    }
+  },
+  "order": [
+    "main",
+    "featured-collection",
+    "1680204232c38e34fb"
+  ]
+}
