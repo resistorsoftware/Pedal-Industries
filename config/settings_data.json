@@ -41,7 +41,7 @@
     "variant_type": "button",
     "quick_shop_enable": true,
     "enable_swatches": false,
-    "cart_type": "drawer",
+    "cart_type": "page",
     "cart_icon": "cart",
     "cart_notes_enable": true,
     "favicon": "shopify:\/\/shop_images\/wolf_only.webp",
