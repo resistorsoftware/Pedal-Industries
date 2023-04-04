@@ -24,9 +24,9 @@
 
       <div data-products>
         {%- for item in cart.items -%}
-          {%  if item.product.handle != "pedal-insurance" %}
+          
             {%- render 'cart-item', product: item -%}
-          {% endif %}
+          
         {%- endfor -%}
       </div>
 
