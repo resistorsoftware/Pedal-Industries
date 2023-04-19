@@ -90,13 +90,14 @@
                             		var new_suby = data.total_price;
                             		var cur_suby = document.querySelector("[data-subtotal]");
                             		cur_suby.innerHTML = theme.Currency.formatMoney(new_suby, theme.settings.moneyFormat);
-                            		})
-                                    document.querySelector(`[data-key^="{{ product.variant.id }}"]`).remove();
-                                    document.dispatchEvent(new CustomEvent("cart:updated", {
+          document.dispatchEvent(new CustomEvent("cart:updated", {
                                                             detail: {
                                                               cart: data
                                                             }
                                                           }));
+                            		})
+                                    document.querySelector(`[data-key^="{{ product.variant.id }}"]`).remove();
+                                    
                                     return false;
                                   },
                               error: function(){
