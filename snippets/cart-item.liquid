@@ -30,7 +30,7 @@
         {{ product.product.title }}
       </a>
 
-      {%- unless product.product.has_only_default_variant  or product.handle == "pedal-insurance" -%}
+      {%- unless product.product.has_only_default_variant  or product.product.handle == "pedal-insurance" -%}
         <div class="cart__variant-meta">
           {{ product.variant.title }}
         </div>
