@@ -94,7 +94,7 @@
                                     document.querySelector(`[data-key^="{{ product.variant.id }}"]`).remove();
                                     document.dispatchEvent(new CustomEvent("cart:updated", {
                                                             detail: {
-                                                              cart: cartContents
+                                                              cart: data
                                                             }
                                                           }));
                                     return false;
