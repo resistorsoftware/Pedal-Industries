@@ -12,12 +12,8 @@
 {% if collection %}{% if collection.id == 480193380587 %}{% assign easylockdownLockedContent = true %}{% endif %}{% endif %}
 {% endif %}
 {% if easylockdownLockedContent %}
-{% unless customer %}
-{% assign easylockdownON = true %}
-{% capture easylockdownPage404Title %}Page not found{% endcapture %}
-{% capture easylockdownPage404Message %}<p>Sorry, we couldn't find this page.</p>{% endcapture %}
-{% capture easylockdownRedirectURL %}login{% endcapture %}
-{% endunless %}
+{% assign easylockdownPasswordProtectedContent = true %}
+<script type='text/javascript'>easylockdown.routeListByAuth.can.push({aid: '97990', ah: '907746b91ab8f13fed298dfb9005d95b4c24a7478a1fe972db0ee1eef138b2f6l907746b91ab8f13fed298dfb9005d95b4c24a7478a1fe972db0ee1eef138b2f6l3ed1eb7d1ae567b89901cf2772738ee9d3862a1dd4700a206ff131b27e74dd86', pn: '', pp: 'Password', lt: '315360000'});</script>
 {% endif %}
 {% endunless %}
 
