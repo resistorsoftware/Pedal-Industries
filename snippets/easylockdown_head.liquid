@@ -12,12 +12,8 @@
 {% if collection %}{% if collection.id == 480337461483 %}{% assign easylockdownLockedContent = true %}{% endif %}{% endif %}
 {% endif %}
 {% if easylockdownLockedContent %}
-{% unless customer %}
-{% assign easylockdownON = true %}
-{% capture easylockdownPage404Title %}Page not found{% endcapture %}
-{% capture easylockdownPage404Message %}<p>Sorry, we couldn't find this page.</p>{% endcapture %}
-{% capture easylockdownRedirectURL %}login{% endcapture %}
-{% endunless %}
+{% assign easylockdownPasswordProtectedContent = true %}
+<script type='text/javascript'>easylockdown.routeListByAuth.can.push({aid: '98358', ah: '5bf7d99e986dc2633f81e88d44d8523e60a8392b7c3326c6e47e997b2562741e', pn: '', pp: 'Password', lt: '315360000'});</script>
 {% endif %}
 {% endunless %}
 
