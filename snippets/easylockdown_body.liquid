@@ -11,9 +11,10 @@
 
   <script type="text/javascript" id='easylockdown-helper'>
     if( typeof easylockdown == 'object' ) easylockdown.clientContentToggle({% unless easylockdownHiddenPurchase %}true{% endunless %});
-    else { for(var blocks=document.querySelectorAll("div.easylockdown-content, #easylockdown-password-form, #easylockdown-hpbtn-style, .easylockdown-auto-hl-styles, .easylockdown-custom-hl-styles"),i=0;i<blocks.length;i++)blocks[i].remove();try{document.getElementById("easylockdown404").removeAttribute("style")}catch(a){}try{document.querySelector(".easylockdown-title-404").innerHTML="Page not found"}catch(a){}try{document.querySelector(".easylockdown-message-404").innerHTML="<p>Sorry, we couldn't find this page.</p>"}catch(a){}; }
+    else { for(var blocks=document.querySelectorAll("div.easylockdown-content, #easylockdown-password-form, #easylockdown-hpbtn-style, .easylockdown-auto-hl-styles, .easylockdown-custom-hl-styles"),_easylockdownElementIndex=0;_easylockdownElementIndex<blocks.length;_easylockdownElementIndex++)blocks[_easylockdownElementIndex].remove();try{document.getElementById("easylockdown404").removeAttribute("style")}catch(a){}try{document.querySelector(".easylockdown-title-404").innerHTML="Page not found"}catch(a){}try{document.querySelector(".easylockdown-message-404").innerHTML="<p>Sorry, we couldn't find this page.</p>"}catch(a){}; }
   </script>
 {% endif %}
+
 {% else %}
 {{ content_for_layout }}
 {% endunless %}
