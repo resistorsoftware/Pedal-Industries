@@ -7,6 +7,18 @@
 {% unless easylockdownON or easylockdownSuperPage or template == 'customers/register' %}
 {% assign easylockdownLockedContent = false %}
 {% assign easylockdownHiddenContent = false %}
+{% if collection and template contains "collection" %}
+{% if collection.id == 227946430625 %}{% assign easylockdownLockedContent = true %}{% endif %}
+{% endif %}
+{% if easylockdownLockedContent %}
+{% assign easylockdownPasswordProtectedContent = true %}
+<script type='text/javascript'> if(typeof easylockdown == 'object') { easylockdown.routeListByAuth.can.push({aid: '99077', ah: 'f7af310b4d5b9e6d9be16df6c94e423cb38d1a2def6ba72847b599ee9eeaafc7lf7af310b4d5b9e6d9be16df6c94e423cb38d1a2def6ba72847b599ee9eeaafc7', pn: '<p>See Ryan Miller For Password</p>', pp: 'Password', lt: '315360000'});}</script>
+{% endif %}
+{% endunless %}
+
+{% unless easylockdownON or easylockdownSuperPage or template == 'customers/register' %}
+{% assign easylockdownLockedContent = false %}
+{% assign easylockdownHiddenContent = false %}
 {% if template contains "collection" or template contains "product" %}
 {% if product.collections %}{% for c in product.collections %}{% if c.id == 480337461483 %}{% assign easylockdownLockedContent = true %}{% break %}{% endif %}{% endfor %}{% endif %}
 {% if collection %}{% if collection.id == 480337461483 %}{% assign easylockdownLockedContent = true %}{% endif %}{% endif %}
