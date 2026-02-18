@@ -74,7 +74,7 @@
 
             <div class="product-recommendations">
               <div class="product-single__related grid grid--uniform" data-aos="overflow__animation">
-                {%- for product in related_collection.products limit: number_of_products -%}
+                {%- for product in related_collection.products limit: number_of_products -%}{% comment %}EasylockdownFilterBegin{% endcomment %}{% capture easylockdownFilter %}{% render 'easylockdown_filter_collection' with product, easylockdownRender: true, easylockdownItemSelectorOff: easylockdownItemSelectorOff %}{% endcapture %}{% assign easylockdownFilter = easylockdownFilter | strip %}{% if easylockdownFilter == 'continue' %}{% continue %}{% else %}{{ easylockdownFilter }}{% endif %}{% comment %}EasylockdownFilterEnd{% endcomment %}
                   {%- render 'product-grid-item', product: product, grid_item_width: grid_item_width, per_row: number_of_products -%}
                 {%- endfor -%}
               </div>

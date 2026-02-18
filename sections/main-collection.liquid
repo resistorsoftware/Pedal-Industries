@@ -73,7 +73,7 @@
       collection_tags_style: section.settings.collection_tags_style
     %}
 
-    {%- for block in section.blocks -%}
+    {%- for block in section.blocks -%}{% comment %}EasylockdownFilterBegin{% endcomment %}{% capture easylockdownFilter %}{% render 'easylockdown_filter_collection' with block, easylockdownRender: true, easylockdownItemSelectorOff: easylockdownItemSelectorOff %}{% endcapture %}{% assign easylockdownFilter = easylockdownFilter | strip %}{% if easylockdownFilter == 'continue' %}{% continue %}{% else %}{{ easylockdownFilter }}{% endif %}{% comment %}EasylockdownFilterEnd{% endcomment %}
       {%- assign block_index = forloop.index -%}
 
       {%- case block.type -%}
