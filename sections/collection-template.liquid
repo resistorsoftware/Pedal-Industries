@@ -272,7 +272,7 @@
             {%- endif -%}
           {%- endif -%}
 
-          {%- for product in collection.products -%}
+          {%- for product in collection.products -%}{% comment %}EasylockdownFilterBegin{% endcomment %}{% capture easylockdownFilter %}{% render 'easylockdown_filter_collection' with product, easylockdownRender: true, easylockdownItemSelectorOff: easylockdownItemSelectorOff %}{% endcapture %}{% assign easylockdownFilter = easylockdownFilter | strip %}{% if easylockdownFilter == 'continue' %}{% continue %}{% else %}{{ easylockdownFilter }}{% endif %}{% comment %}EasylockdownFilterEnd{% endcomment %}
             {%- render 'product-grid-item'
               product: product,
               grid_item_width: grid_item_width,
@@ -290,7 +290,7 @@
         {%- endif -%}
 
         {%- if settings.quick_shop_enable -%}
-          {%- for product in collection.products -%}
+          {%- for product in collection.products -%}{% comment %}EasylockdownFilterBegin{% endcomment %}{% capture easylockdownFilter %}{% render 'easylockdown_filter_collection' with product, easylockdownRender: true, easylockdownItemSelectorOff: easylockdownItemSelectorOff %}{% endcapture %}{% assign easylockdownFilter = easylockdownFilter | strip %}{% if easylockdownFilter == 'continue' %}{% continue %}{% else %}{{ easylockdownFilter }}{% endif %}{% comment %}EasylockdownFilterEnd{% endcomment %}
             {%- render 'quick-shop-modal', product: product -%}
           {%- endfor -%}
         {%- endif -%}
