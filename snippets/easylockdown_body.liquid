@@ -31,9 +31,13 @@
         if(elContent) {
           elContent.removeAttribute('style');
         }
+        var elStyle = document.getElementById('easylockdown-plugin-style');
+        if(elStyle) {
+          elStyle.remove();
+        }
         console.info("EasyLockdown is not loaded");
         }
-      }, 150);
+      }, 350);
     });
   </script>
 {% endif %}
